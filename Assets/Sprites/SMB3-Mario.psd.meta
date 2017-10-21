@@ -1,0 +1,790 @@
+fileFormatVersion: 2
+guid: bfc6b751162ee480cb9fda05534b9205
+timeCreated: 1493740381
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: mario_small_idle
+    21300002: mario_small_walking
+    21300004: mario_small_stopping
+    21300006: mario_small_jumping
+    21300008: mario_small_entering_pipe
+    21300010: mario_small_dead
+    21300012: mario_small_picking_item
+    21300014: mario_small_walking_item
+    21300016: mario_small_kicking_item
+    21300018: mario_small_preparing_fly_0
+    21300020: mario_small_preparing_fly_1
+    21300022: mario_small_flying
+    21300024: mario_big_idle
+    21300026: mario_big_walking
+    21300028: mario_big_running
+    21300030: mario_big_stopping
+    21300032: mario_big_jumping
+    21300034: mario_big_entering_pipe
+    21300036: mario_big_crouching
+    21300038: mario_big_picking_item
+    21300040: mario_big_walking_item
+    21300042: mario_big_running_item
+    21300044: mario_big_kicking_item
+    21300046: mario_big_preparing_fly_0
+    21300048: mario_big_preparing_fly_1
+    21300050: mario_big_preparing_fly_2
+    21300052: mario_big_flying
+    21300054: mario_racoon_idle
+    21300056: mario_racoon_walking
+    21300058: mario_racoon_running
+    21300060: mario_racoon_stopping
+    21300062: mario_racoon_jumping
+    21300064: mario_racoon_entering_pipe
+    21300066: mario_racoon_crouching
+    21300068: mario_racoon_picking_item
+    21300070: mario_racoon_walking_item
+    21300072: mario_racoon_running_item
+    21300074: mario_racoon_kicking_item
+    21300076: mario_racoon_preparing_fly_0
+    21300078: mario_racoon_preparing_fly_1
+    21300080: mario_racoon_preparing_fly_2
+    21300082: mario_racoon_flying_0
+    21300084: mario_racoon_flying_1
+    21300086: mario_racoon_flying_2
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 20
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 8192
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 8192
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: iPhone
+    maxTextureSize: 8192
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: tvOS
+    maxTextureSize: 8192
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 8192
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Tizen
+    maxTextureSize: 8192
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: WebGL
+    maxTextureSize: 8192
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Samsung TV
+    maxTextureSize: 8192
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: mario_small_idle
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 111
+        width: 12
+        height: 15
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mario_small_walking
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 111
+        width: 15
+        height: 16
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mario_small_stopping
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 111
+        width: 14
+        height: 16
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mario_small_jumping
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 111
+        width: 16
+        height: 16
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mario_small_entering_pipe
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 111
+        width: 16
+        height: 16
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mario_small_dead
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 111
+        width: 16
+        height: 16
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mario_small_picking_item
+      rect:
+        serializedVersion: 2
+        x: 273
+        y: 111
+        width: 14
+        height: 16
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mario_small_walking_item
+      rect:
+        serializedVersion: 2
+        x: 305
+        y: 111
+        width: 15
+        height: 16
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mario_small_kicking_item
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 111
+        width: 16
+        height: 16
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mario_small_preparing_fly_0
+      rect:
+        serializedVersion: 2
+        x: 401
+        y: 111
+        width: 16
+        height: 16
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mario_small_preparing_fly_1
+      rect:
+        serializedVersion: 2
+        x: 432
+        y: 111
+        width: 16
+        height: 16
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mario_small_flying
+      rect:
+        serializedVersion: 2
+        x: 496
+        y: 111
+        width: 16
+        height: 16
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mario_big_idle
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 63
+        width: 14
+        height: 27
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mario_big_walking
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 63
+        width: 16
+        height: 27
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mario_big_running
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 63
+        width: 16
+        height: 26
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mario_big_stopping
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 63
+        width: 16
+        height: 28
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mario_big_jumping
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 63
+        width: 16
+        height: 26
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mario_big_entering_pipe
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 63
+        width: 16
+        height: 27
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mario_big_crouching
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 63
+        width: 14
+        height: 18
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mario_big_picking_item
+      rect:
+        serializedVersion: 2
+        x: 273
+        y: 63
+        width: 14
+        height: 27
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mario_big_walking_item
+      rect:
+        serializedVersion: 2
+        x: 305
+        y: 63
+        width: 15
+        height: 27
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mario_big_running_item
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 63
+        width: 16
+        height: 26
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mario_big_kicking_item
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 63
+        width: 21
+        height: 27
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mario_big_preparing_fly_0
+      rect:
+        serializedVersion: 2
+        x: 397
+        y: 63
+        width: 19
+        height: 27
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mario_big_preparing_fly_1
+      rect:
+        serializedVersion: 2
+        x: 429
+        y: 63
+        width: 19
+        height: 27
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mario_big_preparing_fly_2
+      rect:
+        serializedVersion: 2
+        x: 461
+        y: 63
+        width: 19
+        height: 26
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mario_big_flying
+      rect:
+        serializedVersion: 2
+        x: 496
+        y: 63
+        width: 19
+        height: 26
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mario_racoon_idle
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 15
+        width: 21
+        height: 28
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mario_racoon_walking
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 15
+        width: 22
+        height: 28
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mario_racoon_running
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 15
+        width: 23
+        height: 27
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mario_racoon_stopping
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 15
+        width: 16
+        height: 30
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mario_racoon_jumping
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 15
+        width: 23
+        height: 27
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mario_racoon_entering_pipe
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 15
+        width: 16
+        height: 28
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mario_racoon_crouching
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 15
+        width: 22
+        height: 18
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mario_racoon_picking_item
+      rect:
+        serializedVersion: 2
+        x: 266
+        y: 15
+        width: 21
+        height: 28
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mario_racoon_walking_item
+      rect:
+        serializedVersion: 2
+        x: 298
+        y: 15
+        width: 22
+        height: 28
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mario_racoon_running_item
+      rect:
+        serializedVersion: 2
+        x: 329
+        y: 15
+        width: 23
+        height: 27
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mario_racoon_kicking_item
+      rect:
+        serializedVersion: 2
+        x: 367
+        y: 15
+        width: 22
+        height: 28
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mario_racoon_preparing_fly_0
+      rect:
+        serializedVersion: 2
+        x: 392
+        y: 15
+        width: 24
+        height: 28
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mario_racoon_preparing_fly_1
+      rect:
+        serializedVersion: 2
+        x: 424
+        y: 15
+        width: 24
+        height: 28
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mario_racoon_preparing_fly_2
+      rect:
+        serializedVersion: 2
+        x: 456
+        y: 15
+        width: 24
+        height: 27
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mario_racoon_flying_0
+      rect:
+        serializedVersion: 2
+        x: 491
+        y: 15
+        width: 24
+        height: 27
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mario_racoon_flying_1
+      rect:
+        serializedVersion: 2
+        x: 523
+        y: 15
+        width: 24
+        height: 27
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mario_racoon_flying_2
+      rect:
+        serializedVersion: 2
+        x: 555
+        y: 14
+        width: 24
+        height: 28
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    outline: []
+    physicsShape: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
