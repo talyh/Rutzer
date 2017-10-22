@@ -5,7 +5,6 @@ using UnityEditor;
 
 public class BuildMenu
 {
-
     [MenuItem("Build/iOS/Dev")]
     public static void BuildIOSDev()
     {
@@ -28,12 +27,12 @@ public class BuildMenu
         BuildPlayerOptions options = new BuildPlayerOptions();
         options.locationPathName = buildPath;
         options.options = devBuild ? BuildOptions.Development : BuildOptions.None;
-        options.target = BuildTarget.iOS;
+        options.target = target;
         options.scenes = new string[] { "Assets/Scenes/Game.unity" };
 
         // trigger the build process
-        Debug.Log("Building to " + buildPath);
+        Debug.Log(string.Format("Building to {0}", buildPath));
         BuildPipeline.BuildPlayer(options);
-        Debug.Log("iOS Build Complete");
+        Debug.Log(string.Format("{0}{1} Build Complete", target, devBuild ? "Dev" : "Rel"));
     }
 }
