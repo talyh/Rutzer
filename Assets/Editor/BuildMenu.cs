@@ -12,18 +12,18 @@ public class BuildMenu
         BuildIOS(true);
     }
 
-    [MenuItem("Build/iOS/Rel")]
+    [MenuItem("Build/iOS/Rel")]
     public static void BuildIOSRel()
     {
         BuildIOS();
     }
 
-    [MenuItem("Build/iOS/All")]
-    public static void BuildIOSAll()
-    {
-        BuildIOS();
-        BuildIOS(true);
-    }
+    [MenuItem("Build/iOS/All")]
+    public static void BuildIOSAll()
+    {
+        BuildIOS();
+        BuildIOS(true);
+    }
 
     static void BuildIOS(bool devBuild = false)
     {
@@ -32,23 +32,23 @@ public class BuildMenu
 
     // Build for Android
     [MenuItem("Build/Android/Dev")]
-    static void BuildAndroidDev()
+    static void BuildAndroidDev()
     {
         BuildAndroid(true);
     }
 
-    [MenuItem("Build/Android/Rel")]
-    static void BuildAndroidRel()
+    [MenuItem("Build/Android/Rel")]
+    static void BuildAndroidRel()
     {
         BuildAndroid();
     }
 
-    [MenuItem("Build/Android/All")]
-    public static void BuildAndroidAll()
-    {
-        BuildAndroid();
-        BuildAndroid(true);
-    }
+    [MenuItem("Build/Android/All")]
+    public static void BuildAndroidAll()
+    {
+        BuildAndroid();
+        BuildAndroid(true);
+    }
 
     static void BuildAndroid(bool devBuild = false)
     {
@@ -58,18 +58,19 @@ public class BuildMenu
 
     // Build for All Target Platforms
     [MenuItem("Build/All")]
-    public static void BuildAll()
-    {
-        BuildIOSAll();
-        BuildAndroidAll();
-    }
+    public static void BuildAll()
+    {
+        BuildIOSAll();
+        BuildAndroidAll();
+    }
 
     static void Build(BuildTarget target, bool devBuild = false)
     {
         // determine relative path to help determine where to build to
         string pathToAssets = Application.dataPath;
         string pathToProject = pathToAssets.Replace("/Assets", "");
-        string buildPath = string.Format("{0}/Builds/{1}/{2}/InfiniteRunner{3}", pathToProject, target, devBuild ? "Dev" : "Rel", 1); // TODO append release control
+        string currentTime = System.DateTime.Now.ToString("yyyy'-'MM'-'dd'-'HH'-'mm'-'ss");
+        string buildPath = string.Format("{0}/Builds/InfiniteRunner_{1}_{2}_{3}", pathToProject, target, devBuild ? "Dev" : "Rel", currentTime);
 
         // configure the options for the build
         BuildPlayerOptions options = new BuildPlayerOptions();
