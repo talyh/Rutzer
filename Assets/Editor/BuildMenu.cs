@@ -29,7 +29,7 @@ public class BuildMenu
         options.locationPathName = buildPath;
         options.options = devBuild ? BuildOptions.Development : BuildOptions.None;
         options.target = BuildTarget.iOS;
-        options.scenes = new string[] { "Assets/Platform/Scenes/SinglePlatform.unity" };
+        options.scenes = new string[] { "Assets/Scenes/Game.unity" };
 
         // trigger the build process
         Debug.Log("Building to " + buildPath);
