@@ -1,0 +1,6 @@
+Key,Type,Value
+speed,float,50
+jumpForce, float, 50
+damage,int,50
+health,int,500
+pointsPerSecond,int,10

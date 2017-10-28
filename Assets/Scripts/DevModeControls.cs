@@ -11,4 +11,12 @@ public class DevModeControls : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    void Start()
+    {
+        GameData.Constants.Initialize();
+
+        Debug.Log(string.Format("speed: {0}", GameData.Constants.GetConstant<float>("speed")));
+    }
+
 }
