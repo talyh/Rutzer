@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace GameData
-{    
+{
     public static class Constants
     {
         private const string STRING_KEY = "string";
@@ -13,7 +13,7 @@ namespace GameData
         private static Dictionary<string, object> constants = new Dictionary<string, object>();
 
         public static void Initialize()
-        {          
+        {
             Debug.Log("GameData.Constants is initializing");
 
             TextAsset data = Resources.Load<TextAsset>("Constants");
@@ -24,9 +24,9 @@ namespace GameData
             {
                 string[] columns = rows[i].Split(',');
 
-                string key = columns[0];
-                string type = columns[1];
-                string value = columns[2];
+                string key = columns[0].Trim();
+                string type = columns[1].Trim();
+                string value = columns[2].Trim();
 
                 if (type == INT_KEY)
                 {
