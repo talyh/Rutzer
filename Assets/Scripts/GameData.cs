@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace GameData
-{
+{    
     public static class Constants
     {
-        // private static Dictionary<string, int> int_constants = new Dictionary<string, int>();
-        // private static Dictionary<string, float> float_constants = new Dictionary<string, float>();
-        // private static Dictionary<string, string> string_constants = new Dictionary<string, string>();
+        private const string STRING_KEY = "string";
+        private const string INT_KEY = "int";
+        private const string FLOAT_KEY = "float";
 
         private static Dictionary<string, object> constants = new Dictionary<string, object>();
 
         public static void Initialize()
-        {
+        {          
             Debug.Log("GameData.Constants is initializing");
 
             TextAsset data = Resources.Load<TextAsset>("Constants");
@@ -28,12 +28,11 @@ namespace GameData
                 string type = columns[1];
                 string value = columns[2];
 
-                if (type == "int")
+                if (type == INT_KEY)
                 {
                     int iValue;
                     if (int.TryParse(value, out iValue))
                     {
-                        // int_constants.Add(key, iValue);
                         constants.Add(key, iValue);
                     }
                     else
@@ -41,12 +40,11 @@ namespace GameData
                         Debug.LogError(string.Format("Couldn't parse data for {0}", key));
                     }
                 }
-                else if (type == "float")
+                else if (type == FLOAT_KEY)
                 {
                     float fValue;
                     if (float.TryParse(value, out fValue))
                     {
-                        // float_constants.Add(key, fValue);
                         constants.Add(key, fValue);
                     }
                     else
@@ -54,37 +52,15 @@ namespace GameData
                         Debug.LogError(string.Format("Couldn't parse data for {0}", key));
                     }
                 }
-                else if (type == "string")
+                else if (type == STRING_KEY)
                 {
-                    // string_constants.Add(key, value);
                     constants.Add(key, value);
                 }
                 else
                 {
-                    Debug.LogError("Couldn't resolve constant type");
+                    Debug.LogError(string.Format("Couldn't resolve constant type for {0}", key));
                 }
             }
-
-            // Debug.Log("INTS");
-            // foreach (KeyValuePair<string, int> value in int_constants)
-            // {
-            //     Debug.Log(value);
-            // }
-            // Debug.Log("FLOATS");
-            // foreach (KeyValuePair<string, float> value in float_constants)
-            // {
-            //     Debug.Log(value);
-            // }
-            // Debug.Log("STRINGS");
-            // foreach (KeyValuePair<string, string> value in string_constants)
-            // {
-            //     Debug.Log(value);
-            // }
-            // Debug.Log("CONSTANTS");
-            // foreach (KeyValuePair<string, object> value in constants)
-            // {
-            //     Debug.Log(value);
-            // }
         }
 
         public static T GetConstant<T>(string constantName)
