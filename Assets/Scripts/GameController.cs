@@ -4,9 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEditor;
 
-public class GameController : Singleton<GameController> {
+public class GameController : Singleton<GameController>
+{
 
-    protected GameController() {}
+    protected GameController() { }
 
     // Define lists used throughout the game
     // public enum Powers { noPower = 0, grow, extraLife, fly, fire, invincible }
@@ -26,14 +27,14 @@ public class GameController : Singleton<GameController> {
     // public enum Controls { Horizontal, Jump, GrabItem, Crouch, Fly}
 
     [Header("General Game Settings")]
-        // [SerializeField]
-        // public const float hurryUpMusicRate = 0.25f;
+    // [SerializeField]
+    // public const float hurryUpMusicRate = 0.25f;
 
     // Identify character
     [Header("Character")]
     // [SerializeField]
     // [Tooltip("How many lives the character starts with")]
-        // private int _initialLives = 0;
+    // private int _initialLives = 0;
     // private int _lives = 0;
     // private int _score = 0;
     // private int _coins = 0;
@@ -41,7 +42,7 @@ public class GameController : Singleton<GameController> {
     private Transform _character;
 
     void Start()
-    {        
+    {
         // Get prefab values for dynamic instation if needed
         // GameObject GameControllerPrefab = AssetDatabase.LoadAssetAtPath("Assets/General/Controllers/GameController.prefab", typeof(GameObject)) as GameObject;
         // if (GameControllerPrefab)
@@ -52,10 +53,10 @@ public class GameController : Singleton<GameController> {
         // {
         //     Debug.Log("GameController prefab not found");
         // }
-        
+
         // Define the LayerMasks that will be needed throughout the game
-        ground = 1 << LayerMask.NameToLayer(Layers.Ground.ToString()) | 
-                    1 << LayerMask.NameToLayer(Layers.Hitable.ToString()) | 
+        ground = 1 << LayerMask.NameToLayer(Layers.Ground.ToString()) |
+                    1 << LayerMask.NameToLayer(Layers.Hitable.ToString()) |
                      1 << LayerMask.NameToLayer(Layers.Pipes.ToString());
         player = 1 << LayerMask.NameToLayer(Layers.Player.ToString());
         notPlayer = ~(1 << LayerMask.NameToLayer(Layers.Player.ToString()));
@@ -63,31 +64,46 @@ public class GameController : Singleton<GameController> {
         // lives = initialLives;
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            if (Time.timeScale >= 1)
+            {
+                PauseGame();
+            }
+            else
+            {
+                UnPauseGame();
+            }
+        }
+    }
+
     // Game helper methods
     public void CheckRequiredFloat(string name, float f, float def = 0.2f, string objectName = "unknown")
     {
-		if (f <= 0f)
-		{
+        if (f <= 0f)
+        {
             f = def;
             Debug.LogWarning(objectName + " >> " + name + " was missing. Automatically adjusted to " + f);
-		}
+        }
     }
 
     public void CheckRequiredComponent(string name, Component c, string objectName = "unknown")
-	{
+    {
         if (!c)
-		{
+        {
             Debug.LogError(objectName + " >> " + name + " is required");
-		}
-	}
+        }
+    }
 
     public void CheckRequiredChild(string name, Transform t, string objectName = "unknown")
-	{
+    {
         if (!t)
-		{
+        {
             Debug.LogError(objectName + " >> " + name + " is required");
-		}
-	}
+        }
+    }
 
     public void CheckRequiredVector2(string name, Vector2 v, float x = 0.1f, float y = 0.1f, string objectName = "unknown")
     {
@@ -99,20 +115,20 @@ public class GameController : Singleton<GameController> {
         }
     }
 
-	public void CheckRequiredVector3(string name, Vector3 v, float x = 0.1f, float y = 0.1f, float z = 0.1f, string objectName = "unknown")
-	{
-		if (v.x <= 0 && v.y <= 0)
-		{
-			v.x = x;
-			v.y = y;
+    public void CheckRequiredVector3(string name, Vector3 v, float x = 0.1f, float y = 0.1f, float z = 0.1f, string objectName = "unknown")
+    {
+        if (v.x <= 0 && v.y <= 0)
+        {
+            v.x = x;
+            v.y = y;
             v.z = z;
-			Debug.LogWarning(objectName + " >> " + name + " was missing. Automatically adjusted to (" + v.x + ", " + v.y + ", " + v.z + ")");
-		}
-	}
+            Debug.LogWarning(objectName + " >> " + name + " was missing. Automatically adjusted to (" + v.x + ", " + v.y + ", " + v.z + ")");
+        }
+    }
 
     // Run Game methods
     // public void SpawnCharacter()
-	// {
+    // {
     //     GameObject[] checkPoints = GameObject.FindGameObjectsWithTag(Tags.CheckPoint.ToString());
     //     if (checkPoints.Length <= 0)
     //     {
@@ -124,8 +140,8 @@ public class GameController : Singleton<GameController> {
     //         _character = _characterPrefab.transform;
     //         Instantiate(character, spawnPosition.transform.position, spawnPosition.transform.rotation);
     //     }
-	// }
-    
+    // }
+
     // public void ScorePoints(int points)
     // {
     //     score += points;
@@ -207,6 +223,18 @@ public class GameController : Singleton<GameController> {
     //     get { return _coins; }
     //     set { _coins = value; /*ShowCoins();*/ }
     // }
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0;
+        CanvasController.instance.EnablePauseCanvas(true);
+    }
+
+    public void UnPauseGame()
+    {
+        Time.timeScale = 1;
+        CanvasController.instance.EnablePauseCanvas(false);
+    }
 
     public Transform character
     {

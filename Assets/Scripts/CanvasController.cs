@@ -18,6 +18,8 @@ public class CanvasController : Singleton<CanvasController>
     private GameObject _levelScreenCanvas;
     [SerializeField]
     private GameObject _gameOverScreenCanvas;
+    [SerializeField]
+    private GameObject _pauseMenuCanvas;
 
     [Header("Button types")]
     [SerializeField]
@@ -30,6 +32,8 @@ public class CanvasController : Singleton<CanvasController>
     private string _btnCreditsName = "btnCredits";
     [SerializeField]
     private string _btnQuitName = "btnQuit";
+    [SerializeField]
+    private string _btnPauseName = "btnPause";
 
 
     // ----- ELEMENTS THAT MAY EXIST ACROSS MULTIPLE CANVASES, DEPENDING ON SCENE
@@ -39,6 +43,7 @@ public class CanvasController : Singleton<CanvasController>
     private Button _btnOptions;
     private Button _btnCredits;
     private Button _btnQuit;
+    private Button _btnPause;
 
     public void EnableSceneCanvas()
     {
@@ -49,6 +54,7 @@ public class CanvasController : Singleton<CanvasController>
     private void ChooseCanvas()
     {
         // enable the appropriate canvas based on Scene type, or hide them all if the Scene type is not recognized
+
         switch (SceneController.instance.currentSceneType)
         {
             case SceneController.SceneTypes.Start:
@@ -59,6 +65,7 @@ public class CanvasController : Singleton<CanvasController>
                     _creditsScreenCanvas.SetActive(false);
                     _levelScreenCanvas.SetActive(false);
                     _gameOverScreenCanvas.SetActive(false);
+                    _pauseMenuCanvas.SetActive(false);
                     break;
                 }
             case SceneController.SceneTypes.Instructions:
@@ -69,6 +76,7 @@ public class CanvasController : Singleton<CanvasController>
                     _creditsScreenCanvas.SetActive(false);
                     _levelScreenCanvas.SetActive(false);
                     _gameOverScreenCanvas.SetActive(false);
+                    _pauseMenuCanvas.SetActive(false);
                     break;
                 }
             case SceneController.SceneTypes.Options:
@@ -79,6 +87,7 @@ public class CanvasController : Singleton<CanvasController>
                     _creditsScreenCanvas.SetActive(false);
                     _levelScreenCanvas.SetActive(false);
                     _gameOverScreenCanvas.SetActive(false);
+                    _pauseMenuCanvas.SetActive(false);
                     break;
                 }
             case SceneController.SceneTypes.Credits:
@@ -89,6 +98,7 @@ public class CanvasController : Singleton<CanvasController>
                     _creditsScreenCanvas.SetActive(true);
                     _levelScreenCanvas.SetActive(false);
                     _gameOverScreenCanvas.SetActive(false);
+                    _pauseMenuCanvas.SetActive(false);
                     break;
                 }
             case SceneController.SceneTypes.Level:
@@ -99,6 +109,7 @@ public class CanvasController : Singleton<CanvasController>
                     _creditsScreenCanvas.SetActive(false);
                     _levelScreenCanvas.SetActive(true);
                     _gameOverScreenCanvas.SetActive(false);
+                    _pauseMenuCanvas.SetActive(false);
                     break;
                 }
             case SceneController.SceneTypes.GameOver:
@@ -109,6 +120,7 @@ public class CanvasController : Singleton<CanvasController>
                     _creditsScreenCanvas.SetActive(false);
                     _levelScreenCanvas.SetActive(false);
                     _gameOverScreenCanvas.SetActive(true);
+                    _pauseMenuCanvas.SetActive(false);
                     break;
                 }
             default:
@@ -119,10 +131,15 @@ public class CanvasController : Singleton<CanvasController>
                     _creditsScreenCanvas.SetActive(false);
                     _levelScreenCanvas.SetActive(false);
                     _gameOverScreenCanvas.SetActive(false);
+                    _pauseMenuCanvas.SetActive(false);
                     break;
                 }
-
         }
+    }
+
+    public void EnablePauseCanvas(bool display)
+    {
+        _pauseMenuCanvas.SetActive(display);
     }
 
     private void LinkCanvasElements()
@@ -157,6 +174,11 @@ public class CanvasController : Singleton<CanvasController>
             {
                 _btnQuit = button;
                 _btnQuit.onClick.AddListener(SceneController.instance.QuitGame);
+            }
+            else if (button.name == _btnPauseName)
+            {
+                _btnPause = button;
+                _btnPause.onClick.AddListener(GameController.instance.PauseGame);
             }
             else
             {
