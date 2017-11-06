@@ -3,144 +3,165 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CanvasController : Singleton<CanvasController> {
+public class CanvasController : Singleton<CanvasController>
+{
+    [Header("Canvas Types")]
+    [SerializeField]
+    private GameObject _startScreenCanvas;
+    [SerializeField]
+    private GameObject _instructionsScreenCanvas;
+    [SerializeField]
+    private GameObject _optionsScreenCanvas;
+    [SerializeField]
+    private GameObject _creditsScreenCanvas;
+    [SerializeField]
+    private GameObject _levelScreenCanvas;
+    [SerializeField]
+    private GameObject _gameOverScreenCanvas;
 
-	protected CanvasController() {}
+    [Header("Button types")]
+    [SerializeField]
+    private string _btnStartName = "btnStart";
+    [SerializeField]
+    private string _btnInstructionsName = "btnInstructions";
+    [SerializeField]
+    private string _btnOptionsName = "btnOptions";
+    [SerializeField]
+    private string _btnCreditsName = "btnCredits";
+    [SerializeField]
+    private string _btnQuitName = "btnQuit";
 
-	[Header("Canvas Types")]
-	[SerializeField]
-	public GameObject startScreenCanvas;
-	[SerializeField]
-	private GameObject levelScreenCanvas;
-	[SerializeField]
-	private GameObject gameOverScreenCanvas;
 
-	public GameObject btnStart;
-	public GameObject btnQuit;
-	public GameObject btnPlayAgain;
-	public GameObject _txtCoins;
-	public GameObject _txtLives;
-	public GameObject _txtScore;
-	public GameObject _txtTimer;
+    // ----- ELEMENTS THAT MAY EXIST ACROSS MULTIPLE CANVASES, DEPENDING ON SCENE
+    // These will be dynamically binded as needed
+    private Button _btnStart;
+    private Button _btnInstructions;
+    private Button _btnOptions;
+    private Button _btnCredits;
+    private Button _btnQuit;
 
-	public void EnableSceneCanvas () 
-	{
-		//ChooseCanvas();
-		LinkCanvasElements();
-	}
+    public void EnableSceneCanvas()
+    {
+        ChooseCanvas();
+        LinkCanvasElements();
+    }
 
-	private void ChooseCanvas()
-	{
-		switch (SceneController.instance.currentSceneType)
-		{
-			case SceneController.SceneTypes.Start:
-			{
-				startScreenCanvas.SetActive(true);
-				levelScreenCanvas.SetActive(false);
-				gameOverScreenCanvas.SetActive(false);
-				break;
-			}
-			case SceneController.SceneTypes.GameOver:
-			{
-				startScreenCanvas.SetActive(false);
-				levelScreenCanvas.SetActive(false);
-				gameOverScreenCanvas.SetActive(true);
-				break;
-			}
-			case SceneController.SceneTypes.Level:
-			default:
-			{
-				startScreenCanvas.SetActive(false);
-				levelScreenCanvas.SetActive(true);
-				gameOverScreenCanvas.SetActive(false);
-				break;
-			}
-		}
-	}
+    private void ChooseCanvas()
+    {
+        // enable the appropriate canvas based on Scene type, or hide them all if the Scene type is not recognized
+        switch (SceneController.instance.currentSceneType)
+        {
+            case SceneController.SceneTypes.Start:
+                {
+                    _startScreenCanvas.SetActive(true);
+                    _instructionsScreenCanvas.SetActive(false);
+                    _optionsScreenCanvas.SetActive(false);
+                    _creditsScreenCanvas.SetActive(false);
+                    _levelScreenCanvas.SetActive(false);
+                    _gameOverScreenCanvas.SetActive(false);
+                    break;
+                }
+            case SceneController.SceneTypes.Instructions:
+                {
+                    _startScreenCanvas.SetActive(false);
+                    _instructionsScreenCanvas.SetActive(true);
+                    _optionsScreenCanvas.SetActive(false);
+                    _creditsScreenCanvas.SetActive(false);
+                    _levelScreenCanvas.SetActive(false);
+                    _gameOverScreenCanvas.SetActive(false);
+                    break;
+                }
+            case SceneController.SceneTypes.Options:
+                {
+                    _startScreenCanvas.SetActive(false);
+                    _instructionsScreenCanvas.SetActive(false);
+                    _optionsScreenCanvas.SetActive(true);
+                    _creditsScreenCanvas.SetActive(false);
+                    _levelScreenCanvas.SetActive(false);
+                    _gameOverScreenCanvas.SetActive(false);
+                    break;
+                }
+            case SceneController.SceneTypes.Credits:
+                {
+                    _startScreenCanvas.SetActive(false);
+                    _instructionsScreenCanvas.SetActive(false);
+                    _optionsScreenCanvas.SetActive(false);
+                    _creditsScreenCanvas.SetActive(true);
+                    _levelScreenCanvas.SetActive(false);
+                    _gameOverScreenCanvas.SetActive(false);
+                    break;
+                }
+            case SceneController.SceneTypes.Level:
+                {
+                    _startScreenCanvas.SetActive(false);
+                    _instructionsScreenCanvas.SetActive(false);
+                    _optionsScreenCanvas.SetActive(false);
+                    _creditsScreenCanvas.SetActive(false);
+                    _levelScreenCanvas.SetActive(true);
+                    _gameOverScreenCanvas.SetActive(false);
+                    break;
+                }
+            case SceneController.SceneTypes.GameOver:
+                {
+                    _startScreenCanvas.SetActive(false);
+                    _instructionsScreenCanvas.SetActive(false);
+                    _optionsScreenCanvas.SetActive(false);
+                    _creditsScreenCanvas.SetActive(false);
+                    _levelScreenCanvas.SetActive(false);
+                    _gameOverScreenCanvas.SetActive(true);
+                    break;
+                }
+            default:
+                {
+                    _startScreenCanvas.SetActive(false);
+                    _instructionsScreenCanvas.SetActive(false);
+                    _optionsScreenCanvas.SetActive(false);
+                    _creditsScreenCanvas.SetActive(false);
+                    _levelScreenCanvas.SetActive(false);
+                    _gameOverScreenCanvas.SetActive(false);
+                    break;
+                }
 
-	private void LinkCanvasElements()
-	{
-		btnStart = GameObject.Find("btnStart");
-		if (btnStart)
-		{
-			btnStart.GetComponent<Button>().onClick.AddListener(SceneController.instance.StartGame);
-		}
+        }
+    }
 
-		btnQuit = GameObject.Find("btnQuit");
-		if (btnQuit)
-		{
-			btnQuit.GetComponent<Button>().onClick.AddListener(SceneController.instance.QuitGame);
-		}
+    private void LinkCanvasElements()
+    {
+        // look for the Canvas elements and bind them, as needed
 
-		btnPlayAgain = GameObject.Find("btnPlayAgain");
-		if (btnPlayAgain)
-		{
-			btnPlayAgain.GetComponent<Button>().onClick.AddListener(SceneController.instance.RestartGame);
-		}
+        Button[] buttons = GameObject.FindObjectsOfType<Button>();
 
-		_txtCoins = GameObject.Find("txtCoins");
-		_txtLives = GameObject.Find("txtLives");
-		_txtScore = GameObject.Find("txtScore");
-		_txtTimer = GameObject.Find("txtTimer");
-	}
-
-	public Text txtCoins
-	{
-		get
-		{ 
-			if(_txtCoins)
-			{
-				return _txtCoins.GetComponent<Text>();
-			}
-			else
-			{
-				return null;
-			}
-		}
-	}
-
-	public Text txtLives
-	{
-		get
-		{
-			if (_txtLives)
-			{
-				return _txtLives.GetComponent<Text>();
-			}
-			else
-			{
-				return null;
-			}
-		}
-	}
-
-	public Text txtScore
-	{
-		get
-		{
-			if (_txtScore)
-			{
-				return _txtScore.GetComponent<Text>();
-			}
-			else
-			{
-				return null;
-			}
-		}
-	}
-
-	public Text txtTimer
-	{
-		get
-		{
-			if (_txtTimer)
-			{
-				return _txtTimer.GetComponent<Text>();
-			}
-			else
-			{
-				return null;
-			}
-		}
-	}
+        foreach (Button button in buttons)
+        {
+            if (button.name == _btnStartName)
+            {
+                _btnStart = button;
+                _btnStart.onClick.AddListener(SceneController.instance.StartGame);
+            }
+            else if (button.name == _btnInstructionsName)
+            {
+                _btnInstructions = button;
+                _btnInstructions.onClick.AddListener(SceneController.instance.ShowInstructionsScene);
+            }
+            else if (button.name == _btnOptionsName)
+            {
+                _btnOptions = button;
+                _btnOptions.onClick.AddListener(SceneController.instance.ShowOptionsScene);
+            }
+            else if (button.name == _btnCreditsName)
+            {
+                _btnCredits = button;
+                _btnCredits.onClick.AddListener(SceneController.instance.ShowCreditsScene);
+            }
+            else if (button.name == _btnQuitName)
+            {
+                _btnQuit = button;
+                _btnQuit.onClick.AddListener(SceneController.instance.QuitGame);
+            }
+            else
+            {
+                Debug.LogError(string.Format("Could not resolve button {0}", button));
+            }
+        }
+    }
 }
