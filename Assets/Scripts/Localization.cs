@@ -4,9 +4,7 @@ using UnityEngine;
 
 public static class Localization
 {
-    private const string ENGLISH_KEY = "ENGLISH";
-    private const string FRENCH_KEY = "FRENCH";
-    private const string PORTUGUESE_KEY = "PORTUGUESE";
+    private const string DEFAULT_LANGUAGE = "ENGLISH";
 
     static Dictionary<string, string> localizations;
 
@@ -21,7 +19,7 @@ public static class Localization
         //Get the system language
         SystemLanguage language = Application.systemLanguage;
 
-        //Default language to english
+        // initiliaze index to help find the csv column for the current language
         int currentLanguageIndex = -1;
 
         // break the csv into rows
@@ -37,6 +35,12 @@ public static class Localization
             {
                 currentLanguageIndex = i;
             }
+        }
+
+        // use default language if system language wasn't found
+        if (currentLanguageIndex == -1)
+        {
+            currentLanguageIndex = System.Array.IndexOf(languageIndex, DEFAULT_LANGUAGE.ToUpper());
         }
 
         for (int i = 1; i < rows.Length; i++)
