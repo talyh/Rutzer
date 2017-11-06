@@ -64,9 +64,9 @@ public static class Localization
 
     }
 
-    // //A fancy way to get the localization string, not necessary 
-    // public static string Localize(this string key)
-    // {
-
-    // }
+    //A fancy way to get the localization string, not necessary 
+    public static string Localize(this string key)
+    {
+        return Get(key);
+    }
 }

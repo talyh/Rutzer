@@ -10,6 +10,8 @@ public class TranslationElement : MonoBehaviour
     void Awake()
     {
         textArea = GetComponent<Text>();
-        textArea.text = Localization.Get(name);
+        // textArea.text = Localization.Get(name);
+
+        textArea.text = textArea.name.Localize();
     }
 }
