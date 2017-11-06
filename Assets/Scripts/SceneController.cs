@@ -6,9 +6,23 @@ using UnityEngine.UI;
 
 public class SceneController : Singleton<SceneController>
 {
-    private int _currentScene;
+    [SerializeField]
+    private string _startSceneName = "Welcome";
+    [SerializeField]
+    private string _instructionsSceneName = "Instructions";
+    [SerializeField]
+    private string _optionsSceneName = "Options";
+    [SerializeField]
+    private string _creditsSceneName = "Credits";
+    [SerializeField]
+    private string _gameOverSceneName = "Game Over";
+    [SerializeField]
+    private string _firstLevelName = "InfiniteRunner";
 
-    private int lastScene = 0;
+    private int _currentScene;
+    private string _currentSceneName;
+
+    private int _lastScene = 0;
 
     public enum SceneTypes { Start = 0, Instructions, Options, Credits, Level, GameOver }
 
@@ -32,19 +46,7 @@ public class SceneController : Singleton<SceneController>
 
     void Start()
     {
-        lastScene = SceneManager.sceneCountInBuildSettings - 1;
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            LoadPrevious();
-        }
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            LoadNext();
-        }
+        _lastScene = SceneManager.sceneCountInBuildSettings - 1;
     }
 
     public void LoadPrevious()
@@ -63,7 +65,7 @@ public class SceneController : Singleton<SceneController>
     public void LoadNext()
     {
         SetCurrentSceneIndex();
-        if (_currentScene < lastScene)
+        if (_currentScene < _lastScene)
         {
             SceneManager.LoadScene(_currentScene + 1);
         }
@@ -81,18 +83,18 @@ public class SceneController : Singleton<SceneController>
 
     public void StartGame()
     {
-        SceneManager.LoadScene(1); // assume 0 is the welcome screen
+        SceneManager.LoadScene(_firstLevelName); // assume 0 is the welcome screen
     }
 
     public void RestartGame()
     {
         // GameController.instance.ResetGameVariables();
-        SceneManager.LoadScene(1); // assume 0 is the welcome screen
+        SceneManager.LoadScene(_firstLevelName); // assume 0 is the welcome screen
     }
 
     public void GameOver()
     {
-        SceneManager.LoadScene(lastScene); //assume GameOver is the last scene
+        SceneManager.LoadScene(_lastScene); //assume GameOver is the last scene
     }
 
     public void QuitGame()
@@ -106,31 +108,44 @@ public class SceneController : Singleton<SceneController>
 
     public void ShowInstructionsScene()
     {
-        Debug.Log("Instructions");
+        SceneManager.LoadScene(_instructionsSceneName);
     }
 
     public void ShowOptionsScene()
     {
-        Debug.Log("Options");
+        SceneManager.LoadScene(_optionsSceneName);
     }
 
     public void ShowCreditsScene()
     {
-        Debug.Log("Credits");
+        SceneManager.LoadScene(_creditsSceneName);
     }
 
     public void SetCurrentSceneIndex()
     {
         _currentScene = SceneManager.GetActiveScene().buildIndex;
+        _currentSceneName = SceneManager.GetSceneByBuildIndex(_currentScene).name;
     }
 
     public void SetCurrentSceneType()
     {
-        if (_currentScene == 0)
+        if (_currentSceneName == _startSceneName)
         {
             _currentSceneType = SceneTypes.Start;
         }
-        else if (_currentScene == lastScene)
+        else if (_currentSceneName == _instructionsSceneName)
+        {
+            _currentSceneType = SceneTypes.Instructions;
+        }
+        else if (_currentSceneName == _optionsSceneName)
+        {
+            _currentSceneType = SceneTypes.Options;
+        }
+        else if (_currentSceneName == _creditsSceneName)
+        {
+            _currentSceneType = SceneTypes.Credits;
+        }
+        else if (_currentSceneName == _gameOverSceneName)
         {
             _currentSceneType = SceneTypes.GameOver;
         }
