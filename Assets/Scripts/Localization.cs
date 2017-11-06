@@ -44,23 +44,25 @@ public static class Localization
             //Parse the csv into the dictionary
             string[] columns = rows[i].Split(',');
 
-            string key = columns[0].Trim();
+            string key = columns[0].Trim().ToUpper();
             string value = columns[currentLanguageIndex].Trim();
 
             localizations.Add(key, value);
         }
     }
 
-    // //Get the localized string
-    // public static string Get(string key)
-    // {
-    //     //Make sure the CSV has been loaded
-    //     if ( == null)
+    //Get the localized string
+    public static string Get(string key)
+    {
+        //Make sure the CSV has been loaded
+        if (localizations == null)
+        {
+            Initialize();
+        }
 
+        return localizations[key.ToUpper()];
 
-    //         return
-
-    // }
+    }
 
     // //A fancy way to get the localization string, not necessary 
     // public static string Localize(this string key)
