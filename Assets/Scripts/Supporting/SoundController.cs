@@ -6,8 +6,8 @@ using UnityEngine.Audio;
 public class SoundController : Singleton<SoundController>
 {
 
-    private const float MAX_VOLUME = 0;
-    private const float MIN_VOLUME = -80;
+    public const float MAX_VOLUME = 0;
+    public const float MIN_VOLUME = -80;
 
     [Header("Audio Objects")]
     [SerializeField]
@@ -98,44 +98,41 @@ public class SoundController : Singleton<SoundController>
         }
     }
 
-    public void SetSFXVolume(float volume)
-    {
-        _masterMixer.SetFloat(Persistency.SFX_VOLUME_KEY, volume);
-    }
-
-    public void SetSFXVolume(bool volume)
-    {
-        _masterMixer.SetFloat(Persistency.SFX_VOLUME_KEY, volume ? MAX_VOLUME : MIN_VOLUME);
-    }
 
     public void SetMusicVolume(float volume)
     {
         _masterMixer.SetFloat(Persistency.MUSIC_VOLUME_KEY, volume);
     }
 
-    public void SetMusicVolume(bool volume)
+    public void SetMusicVolume(bool enabled)
     {
-        Debug.Log("setting music volume to: " + volume);
-        _masterMixer.SetFloat(Persistency.MUSIC_VOLUME_KEY, volume ? MAX_VOLUME : MIN_VOLUME);
+        _musicPlayer.mute = !enabled;
     }
 
-    public void OnSaveData()
+    public void SetSFXVolume(float volume)
     {
-        // float SFXVolume = 0;
-        // _masterMixer.GetFloat(Persistency.SFX_VOLUME_KEY, out SFXVolume);
-        // PlayerPrefs.SetFloat(Persistency.SFX_VOLUME_KEY, SFXVolume);
-
-        // float MusicVolume = 0;
-        // _masterMixer.GetFloat(Persistency.MUSIC_VOLUME_KEY, out MusicVolume);
-        // PlayerPrefs.SetFloat(Persistency.MUSIC_VOLUME_KEY, MusicVolume);
+        _masterMixer.SetFloat(Persistency.SFX_VOLUME_KEY, volume);
     }
 
-    public void SetFromSaveFile()
+    public void SetSFXVolume(bool enabled)
     {
-        // _SFXSlider.value = PlayerPrefs.GetFloat(Persistency.SFX_VOLUME_KEY, 0);
-        // _musicSlider.value = PlayerPrefs.GetFloat(Persistency.MUSIC_VOLUME_KEY, 0);
+        _sfxPlayer.mute = !enabled;
     }
 
+    public AudioMixer masterMixer
+    {
+        get { return _masterMixer; }
+    }
+
+    public bool musicMuted
+    {
+        get { return _musicPlayer.mute; }
+    }
+
+    public bool SFXMuted
+    {
+        get { return _sfxPlayer.mute; }
+    }
 
     public AudioClip sfxJump
     {

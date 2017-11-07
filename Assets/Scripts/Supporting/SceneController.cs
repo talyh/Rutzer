@@ -92,6 +92,7 @@ public class SceneController : Singleton<SceneController>
     public void Return()
     {
         SceneManager.LoadScene(_previousScene);
+        Persistency.SaveData(Persistency.DataGroups.Sound);
     }
 
     public void Reload()
@@ -185,7 +186,6 @@ public class SceneController : Singleton<SceneController>
 
     public SceneTypes currentSceneType
     {
-        // set { SetCurrentSceneType(); }
         get { return _currentSceneType; }
     }
 }

@@ -31,9 +31,9 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         // if the instance has been destroyed, return "null"
         if (applicationIsQuitting)
         {
-            Debug.LogWarning("[Singleton] instance '" + typeof(T) +
-            "' already destroyed on application quit." +
-            " Won't create again - returning null.");
+            // Debug.LogWarning("[Singleton] instance '" + typeof(T) +
+            // "' already destroyed on application quit." +
+            // " Won't create again - returning null.");
             return null;
         }
 
@@ -50,9 +50,9 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
                 // if we find one
                 if (FindObjectsOfType(typeof(T)).Length > 1)
                 {
-                    Debug.LogError("[Singleton] Something went really wrong " +
-                    " - there should never be more than 1 singleton!" +
-                    " Reopening the scene might fix it.");
+                    // Debug.LogError("[Singleton] Something went really wrong " +
+                    // " - there should never be more than 1 singleton!" +
+                    // " Reopening the scene might fix it.");
                     // return instance (if we didn't find any, instance would be null and we wouldn't
                     // want to return that)
                     return _instance;
@@ -71,15 +71,15 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
                     // add the newly created object to the DontDestroyOnLoad pile
                     // so it continues to live when changing from scene to scene
                     DontDestroyOnLoad(singleton);
-                    Debug.Log("[Singleton] An instance of " + typeof(T) +
-                    " is needed in the scene, so '" + singleton +
-                    "' was created with DontDestroyOnLoad.");
+                    // Debug.Log("[Singleton] An instance of " + typeof(T) +
+                    // " is needed in the scene, so '" + singleton +
+                    // "' was created with DontDestroyOnLoad.");
                 }
                 else // do nothing
                 {
                     DontDestroyOnLoad(_instance);
-                    Debug.Log("[Singleton] Using instance already created: " +
-                    _instance.gameObject.name);
+                    // Debug.Log("[Singleton] Using instance already created: " +
+                    // _instance.gameObject.name);
                 }
             }
 

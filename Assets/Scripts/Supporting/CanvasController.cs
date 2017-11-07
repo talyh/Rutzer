@@ -216,6 +216,7 @@ public class CanvasController : Singleton<CanvasController>
             {
                 _sldMusicVolume = slider;
                 _sldMusicVolume.onValueChanged.AddListener(delegate { SoundController.instance.SetMusicVolume(_sldMusicVolume.value); });
+
             }
             else if (slider.name == _sldSFXVolumeName)
             {
@@ -251,10 +252,7 @@ public class CanvasController : Singleton<CanvasController>
 
     private void LoadSavedData()
     {
-        if (SceneController.instance.currentSceneType == SceneController.SceneTypes.Options)
-        {
-            Persistency.LoadSavedData(Persistency.DataGroups.Sound);
-        }
+        Persistency.LoadSavedData(Persistency.DataGroups.Sound);
     }
 
     public Toggle optMusicVolume
