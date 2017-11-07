@@ -179,6 +179,7 @@ public class CanvasController : Singleton<CanvasController>
             {
                 _btnPause = button;
                 _btnPause.onClick.AddListener(GameController.instance.PauseGame);
+                Debug.Log("binding Pause");
             }
             else
             {

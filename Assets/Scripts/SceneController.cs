@@ -42,9 +42,10 @@ public class SceneController : Singleton<SceneController>
         instance.SetCurrentSceneType();
         CanvasController.instance.EnableSceneCanvas();
         // SoundController.instance.EnableSceneMusic();
+        Debug.Log("loading scene");
     }
 
-    void Start()
+    protected override void AdditionalAwakeTasks()
     {
         _lastScene = SceneManager.sceneCountInBuildSettings - 1;
     }
@@ -83,18 +84,18 @@ public class SceneController : Singleton<SceneController>
 
     public void StartGame()
     {
-        SceneManager.LoadScene(_firstLevelName); // assume 0 is the welcome screen
+        SceneManager.LoadScene(_firstLevelName);
     }
 
     public void RestartGame()
     {
         // GameController.instance.ResetGameVariables();
-        SceneManager.LoadScene(_firstLevelName); // assume 0 is the welcome screen
+        SceneManager.LoadScene(_firstLevelName);
     }
 
     public void GameOver()
     {
-        SceneManager.LoadScene(_lastScene); //assume GameOver is the last scene
+        SceneManager.LoadScene(_lastScene);
     }
 
     public void QuitGame()
@@ -152,20 +153,19 @@ public class SceneController : Singleton<SceneController>
         else
         {
             _currentSceneType = SceneTypes.Level;
+            Debug.Log("setting scene to level");
         }
     }
 
-    new void OnDestroy()
+    protected override void AdditionalDestroyTasks()
     {
-        applicationIsQuitting = true;
-
         // Remove the delegate when the object is destroyed
         SceneManager.sceneLoaded -= SceneLoaded;
     }
 
     public SceneTypes currentSceneType
     {
-        set { SetCurrentSceneType(); }
+        // set { SetCurrentSceneType(); }
         get { return _currentSceneType; }
     }
 }

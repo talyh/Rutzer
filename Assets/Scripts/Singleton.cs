@@ -6,7 +6,7 @@ using UnityEngine;
 // classes that need to be singleton (such as GameController, CameraContoller, et)
 public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
-    // this will be the actual instance, but will define a public getter of name "Instance"
+    // this will be the actual instance, but will define a public getter of name "instance"
     // to represent its interaction with the world
     private static T _instance;
 
@@ -15,82 +15,102 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 
     // to help determine whether we should return null in case a get is attempted
     // after the singleton instance is destroyed (which would only happen on ApplicationQuit)
-    protected static bool applicationIsQuitting = false;
+    private static bool applicationIsQuitting = false;
 
     // public getter for "_instance"
     public static T instance
     {
         get
         {
-            // if the instance has been destroyed, return "null"
-            if (applicationIsQuitting)
-            {
-                Debug.LogWarning("[Singleton] Instance '" + typeof(T) +
-                "' already destroyed on application quit." +
-                " Won't create again - returning null.");
-                return null;
-            }
+            return GetInstance();
+        }
+    }
 
-            // lock each get so multiple requests are queued
-            lock (_lock)
+    private static T GetInstance()
+    {
+        // if the instance has been destroyed, return "null"
+        if (applicationIsQuitting)
+        {
+            Debug.LogWarning("[Singleton] instance '" + typeof(T) +
+            "' already destroyed on application quit." +
+            " Won't create again - returning null.");
+            return null;
+        }
+
+        // lock each get so multiple requests are queued
+        lock (_lock)
+        {
+            // if a value hasn't been set for _instance yet
+            if (_instance == null)
             {
-                // if a value hasn't been set for _instance yet
-                if (_instance == null)
+                // set the instance as a  find of an object in the scene that is 
+                // of the type we're trying to get
+                _instance = (T)FindObjectOfType(typeof(T));
+
+                // if we find one
+                if (FindObjectsOfType(typeof(T)).Length > 1)
                 {
-                    // set the instance as a find of an object in the scene that is 
-                    // of the type we're trying to get
-                    _instance = (T)FindObjectOfType(typeof(T));
-
-                    // if we find more than one
-                    if (FindObjectsOfType(typeof(T)).Length > 1)
-                    {
-                        Debug.LogError("[Singleton] Something went really wrong " +
-                        " - there should never be more than 1 singleton!" +
-                        " Reopening the scene might fix it.");
-                        // return instance (if we didn't find any, instance would be null and we wouldn't
-                        // want to return that)
-                        return _instance;
-                    }
-
-                    // if we didn't find any object in the scene that is of the right type
-                    if (_instance == null)
-                    {
-                        // create a new object
-                        GameObject singleton = new GameObject();
-                        // add a component of the type we're referring to tha new object
-                        _instance = singleton.AddComponent<T>();
-                        // set the new object name
-                        singleton.name = "(singleton) " + typeof(T).ToString();
-
-                        Debug.Log("[Singleton] An instance of " + typeof(T) +
-                        " is needed in the scene, so '" + singleton +
-                        "' was created with DontDestroyOnLoad and id " + _instance.GetInstanceID());
-                    }
-                    else // do nothing
-                    {
-                        Debug.Log("[Singleton] Using instance already created: " +
-                        _instance.gameObject.name + " id: " + _instance.GetInstanceID());
-                    }
+                    // Debug.LogError("[Singleton] Something went really wrong " +
+                    // " - there should never be more than 1 singleton!" +
+                    // " Reopening the scene might fix it.");
+                    // return instance (if we didn't find any, instance would be null and we wouldn't
+                    // want to return that)
+                    return _instance;
                 }
 
-                // add the newly created object to the DontDestroyOnLoad pile
-                // so it continues lives when changing from scene to scene
-                DontDestroyOnLoad(_instance.gameObject);
+                // if we didn't find any object in the scene that is of the right type
+                if (_instance == null)
+                {
+                    // create a new object
+                    GameObject singleton = new GameObject();
+                    // add a component of the type we're referring to tha new object
+                    _instance = singleton.AddComponent<T>();
+                    // set the new object name
+                    singleton.name = "(singleton) " + typeof(T).ToString();
 
-                // return the instance
-                return _instance;
+                    // add the newly created object to the DontDestroyOnLoad pile
+                    // so it continues to live when changing from scene to scene
+                    DontDestroyOnLoad(singleton);
+                    // Debug.Log("[Singleton] An instance of " + typeof(T) +
+                    // " is needed in the scene, so '" + singleton +
+                    // "' was created with DontDestroyOnLoad.");
+                }
+                else // do nothing
+                {
+                    DontDestroyOnLoad(_instance);
+                    // Debug.Log("[Singleton] Using instance already created: " +
+                    // _instance.gameObject.name);
+                }
             }
+
+            // return the instance
+            return _instance;
         }
     }
 
     // turn on the applicationQuitting when the instance is destroyed
     public void OnDestroy()
     {
+        Supporting.Log(typeof(T) + " Singleton is being destroyed");
+        Debug.Break();
         applicationIsQuitting = true;
+
+        AdditionalDestroyTasks();
     }
+
+    protected virtual void AdditionalDestroyTasks()
+    { }
 
     public void Awake()
     {
         applicationIsQuitting = false;
+
+        // ensure the entity is added to the DontDestroyOnLoad pile, even if it's not referenced in the current scene
+        GetInstance();
+
+        AdditionalAwakeTasks();
     }
+
+    protected virtual void AdditionalAwakeTasks()
+    { }
 }

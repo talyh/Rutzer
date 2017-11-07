@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraController : MonoBehaviour {
+public class CameraController : MonoBehaviour
+{
 
     [Header("Camera Movement")]
     // [SerializeField] private float leftEdge = 1;
@@ -17,14 +18,14 @@ public class CameraController : MonoBehaviour {
     void Start()
     {
         // Find the player
-        _target = GameController.instance.character;
-        GameController.instance.CheckRequiredComponent("Target", _target, objectName: gameObject.name);
+        // _target = GameController.instance.character;
+        // GameController.instance.CheckRequiredComponent("Target", _target, objectName: gameObject.name);
 
         if (_target)
         {
             _offset = _target.position.x - transform.position.x;
         }
-	}
+    }
 
     void LateUpdate()
     {
