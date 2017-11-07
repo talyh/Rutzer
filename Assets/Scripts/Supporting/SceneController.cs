@@ -41,8 +41,7 @@ public class SceneController : Singleton<SceneController>
         instance.SetCurrentSceneIndex();
         instance.SetCurrentSceneType();
         CanvasController.instance.EnableSceneCanvas();
-        // SoundController.instance.EnableSceneMusic();
-        Debug.Log("loading scene");
+        SoundController.instance.EnableSceneMusic();
     }
 
     protected override void AdditionalAwakeTasks()

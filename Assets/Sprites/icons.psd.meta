@@ -1,10 +1,11 @@
 fileFormatVersion: 2
 guid: b20ae0e7845cc48c0b336f8f0b1910b7
-timeCreated: 1510065128
+timeCreated: 1510075845
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: btnPause
+    21300002: lblVolume
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -125,6 +126,20 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
+        y: 256
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 1, y: 1, z: 1, w: 1}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: lblVolume
+      rect:
+        serializedVersion: 2
+        x: 64
         y: 256
         width: 64
         height: 64

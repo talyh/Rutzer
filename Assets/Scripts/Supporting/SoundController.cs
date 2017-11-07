@@ -1,0 +1,159 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Audio;
+
+public class SoundController : Singleton<SoundController>
+{
+
+    private const float MAX_VOLUME = 0;
+    private const float MIN_VOLUME = -80;
+
+    [Header("Audio Objects")]
+    [SerializeField]
+    private AudioMixer _masterMixer;
+    [SerializeField]
+    private AudioSource _musicPlayer;
+    [SerializeField]
+    private AudioSource _sfxPlayer;
+
+    [Header("Music")]
+    [SerializeField]
+    private AudioClip _musicStart;
+    [SerializeField]
+    private AudioClip _musicLevel;
+    [SerializeField]
+    private AudioClip musicGameOver;
+
+    [Header("SFX")]
+    [SerializeField]
+    private AudioClip _sfxJump;
+    [SerializeField]
+    private AudioClip _sfxStretchPlatform;
+    [SerializeField]
+    private AudioClip _sfxMovePlatform;
+    [SerializeField]
+    private AudioClip _sfxDie;
+
+
+    private void Start()
+    {
+        // SetFromSaveFile();
+    }
+
+    public void PlaySFX(AudioClip clip)
+    {
+        AudioSource player;
+        if (!_sfxPlayer.isPlaying)
+        {
+            player = _sfxPlayer;
+        }
+        else
+        {
+            player = new AudioSource();
+        }
+
+        // assign the clip to the AudioSource
+        player.clip = clip;
+
+        // Play the AudioSource
+        player.Play();
+    }
+
+    public void PlayMusic(AudioClip clip)
+    {
+        // assign the clip to the AudioSource
+        _musicPlayer.clip = clip;
+
+        // Play the AudioSource
+        _musicPlayer.Play();
+    }
+
+    public void EnableSceneMusic()
+    {
+        switch (SceneController.instance.currentSceneType)
+        {
+            case SceneController.SceneTypes.Start:
+                {
+                    PlayMusic(_musicStart);
+                    break;
+                }
+            case SceneController.SceneTypes.GameOver:
+                {
+                    PlayMusic(musicGameOver);
+                    break;
+                }
+            case SceneController.SceneTypes.Instructions:
+            case SceneController.SceneTypes.Options:
+            case SceneController.SceneTypes.Credits:
+                {
+                    break;
+                }
+            case SceneController.SceneTypes.Level:
+            default:
+                {
+                    PlayMusic(_musicLevel);
+                    break;
+                }
+        }
+    }
+
+    public void SetSFXVolume(float volume)
+    {
+        _masterMixer.SetFloat(Persistency.SFX_VOLUME_KEY, volume);
+    }
+
+    public void SetSFXVolume(bool volume)
+    {
+        _masterMixer.SetFloat(Persistency.SFX_VOLUME_KEY, volume ? MAX_VOLUME : MIN_VOLUME);
+    }
+
+    public void SetMusicVolume(float volume)
+    {
+        _masterMixer.SetFloat(Persistency.MUSIC_VOLUME_KEY, volume);
+    }
+
+    public void SetMusicVolume(bool volume)
+    {
+        Debug.Log("setting music volume to: " + volume);
+        _masterMixer.SetFloat(Persistency.MUSIC_VOLUME_KEY, volume ? MAX_VOLUME : MIN_VOLUME);
+    }
+
+    public void OnSaveData()
+    {
+        // float SFXVolume = 0;
+        // _masterMixer.GetFloat(Persistency.SFX_VOLUME_KEY, out SFXVolume);
+        // PlayerPrefs.SetFloat(Persistency.SFX_VOLUME_KEY, SFXVolume);
+
+        // float MusicVolume = 0;
+        // _masterMixer.GetFloat(Persistency.MUSIC_VOLUME_KEY, out MusicVolume);
+        // PlayerPrefs.SetFloat(Persistency.MUSIC_VOLUME_KEY, MusicVolume);
+    }
+
+    public void SetFromSaveFile()
+    {
+        // _SFXSlider.value = PlayerPrefs.GetFloat(Persistency.SFX_VOLUME_KEY, 0);
+        // _musicSlider.value = PlayerPrefs.GetFloat(Persistency.MUSIC_VOLUME_KEY, 0);
+    }
+
+
+    public AudioClip sfxJump
+    {
+        get { return _sfxJump; }
+    }
+
+    public AudioClip sfxStretchPlatform
+    {
+        get { return _sfxStretchPlatform; }
+    }
+
+    public AudioClip sfxMovePlatform
+    {
+        get { return _sfxMovePlatform; }
+    }
+
+    public AudioClip sfxDie
+    {
+        get { return _sfxDie; }
+    }
+}

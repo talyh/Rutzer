@@ -34,6 +34,14 @@ public class CanvasController : Singleton<CanvasController>
     private string _btnQuitName = "btnQuit";
     [SerializeField]
     private string _btnPauseName = "btnPause";
+    [SerializeField]
+    private string _optMusicVolumeName = "optMusicVolume";
+    [SerializeField]
+    private string _sldMusicVolumeName = "sldMusicVolume";
+    [SerializeField]
+    private string _optSFXVolumeName = "optSFXVolume";
+    [SerializeField]
+    private string _sldSFXVolumeName = "sldSFXVolume";
 
 
     // ----- ELEMENTS THAT MAY EXIST ACROSS MULTIPLE CANVASES, DEPENDING ON SCENE
@@ -44,6 +52,10 @@ public class CanvasController : Singleton<CanvasController>
     private Button _btnCredits;
     private Button _btnQuit;
     private Button _btnPause;
+    private Toggle _optMusicVolume;
+    private Slider _sldMusicVolume;
+    private Toggle _optSFXVolume;
+    private Slider _sldSFXVolume;
 
     public void EnableSceneCanvas()
     {
@@ -184,7 +196,47 @@ public class CanvasController : Singleton<CanvasController>
             }
             else
             {
-                Debug.LogError(string.Format("Could not resolve button {0}", button));
+                Supporting.Log((string.Format("Could not resolve object {0} function", button)), 1);
+            }
+        }
+
+        Slider[] sliders = GameObject.FindObjectsOfType<Slider>();
+
+        foreach (Slider slider in sliders)
+        {
+            if (slider.name == _sldMusicVolumeName)
+            {
+                _sldMusicVolume = slider;
+                _sldMusicVolume.onValueChanged.AddListener(delegate { SoundController.instance.SetMusicVolume(_sldMusicVolume.value); });
+            }
+            else if (slider.name == _sldSFXVolumeName)
+            {
+                _sldSFXVolume = slider;
+                _sldSFXVolume.onValueChanged.AddListener(delegate { SoundController.instance.SetSFXVolume(_sldSFXVolume.value); });
+            }
+            else
+            {
+                Supporting.Log((string.Format("Could not resolve object {0} function", slider)), 1);
+            }
+        }
+
+        Toggle[] toggles = GameObject.FindObjectsOfType<Toggle>();
+
+        foreach (Toggle toggle in toggles)
+        {
+            if (toggle.name == _optMusicVolumeName)
+            {
+                _optMusicVolume = toggle;
+                _optMusicVolume.onValueChanged.AddListener(delegate { SoundController.instance.SetMusicVolume(_optMusicVolume.isOn); });
+            }
+            else if (toggle.name == _optSFXVolumeName)
+            {
+                _optSFXVolume = toggle;
+                _optSFXVolume.onValueChanged.AddListener(delegate { SoundController.instance.SetSFXVolume(_optSFXVolume.isOn); });
+            }
+            else
+            {
+                Supporting.Log((string.Format("Could not resolve object {0} function", toggle)), 1);
             }
         }
     }
