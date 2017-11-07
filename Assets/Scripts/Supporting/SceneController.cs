@@ -22,31 +22,43 @@ public class SceneController : Singleton<SceneController>
     private int _currentScene;
     private string _currentSceneName;
 
+    private int _previousScene = -1;
+
     private int _lastScene = 0;
 
     public enum SceneTypes { Start = 0, Instructions, Options, Credits, Level, GameOver }
 
     private SceneTypes _currentSceneType;
 
+
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     static void OnRuntimeMethodLoad()
     {
         // Add the delegate to be called when the scene is loaded, between Awake and Start.
         SceneManager.sceneLoaded += SceneLoaded;
+        SceneManager.sceneUnloaded += SceneUnLoaded;
+    }
+
+    static void SceneUnLoaded(Scene scene)
+    {
+        instance._previousScene = scene.buildIndex;
     }
 
     static void SceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
     {
-        //Debug.Log(System.String.Format("Scene{0} has been loaded ({1})", scene.name, loadSceneMode.ToString()));
         instance.SetCurrentSceneIndex();
         instance.SetCurrentSceneType();
         CanvasController.instance.EnableSceneCanvas();
-        SoundController.instance.EnableSceneMusic();
     }
 
     protected override void AdditionalAwakeTasks()
     {
         _lastScene = SceneManager.sceneCountInBuildSettings - 1;
+    }
+
+    void Start()
+    {
+        SoundController.instance.EnableSceneMusic();
     }
 
     public void LoadPrevious()
@@ -55,6 +67,7 @@ public class SceneController : Singleton<SceneController>
         if (_currentScene > 0)
         {
             SceneManager.LoadScene(_currentScene - 1);
+            SoundController.instance.EnableSceneMusic();
         }
         else
         {
@@ -68,11 +81,17 @@ public class SceneController : Singleton<SceneController>
         if (_currentScene < _lastScene)
         {
             SceneManager.LoadScene(_currentScene + 1);
+            SoundController.instance.EnableSceneMusic();
         }
         else
         {
             Debug.Log("Already on last scene");
         }
+    }
+
+    public void Return()
+    {
+        SceneManager.LoadScene(_previousScene);
     }
 
     public void Reload()
@@ -84,6 +103,7 @@ public class SceneController : Singleton<SceneController>
     public void StartGame()
     {
         SceneManager.LoadScene(_firstLevelName);
+        SoundController.instance.EnableSceneMusic();
     }
 
     public void RestartGame()
@@ -95,6 +115,7 @@ public class SceneController : Singleton<SceneController>
     public void GameOver()
     {
         SceneManager.LoadScene(_lastScene);
+        SoundController.instance.EnableSceneMusic();
     }
 
     public void QuitGame()
@@ -152,7 +173,6 @@ public class SceneController : Singleton<SceneController>
         else
         {
             _currentSceneType = SceneTypes.Level;
-            Debug.Log("setting scene to level");
         }
     }
 
@@ -160,6 +180,7 @@ public class SceneController : Singleton<SceneController>
     {
         // Remove the delegate when the object is destroyed
         SceneManager.sceneLoaded -= SceneLoaded;
+        SceneManager.sceneUnloaded -= SceneUnLoaded;
     }
 
     public SceneTypes currentSceneType

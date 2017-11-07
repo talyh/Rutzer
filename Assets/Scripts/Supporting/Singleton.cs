@@ -50,9 +50,9 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
                 // if we find one
                 if (FindObjectsOfType(typeof(T)).Length > 1)
                 {
-                    // Debug.LogError("[Singleton] Something went really wrong " +
-                    // " - there should never be more than 1 singleton!" +
-                    // " Reopening the scene might fix it.");
+                    Debug.LogError("[Singleton] Something went really wrong " +
+                    " - there should never be more than 1 singleton!" +
+                    " Reopening the scene might fix it.");
                     // return instance (if we didn't find any, instance would be null and we wouldn't
                     // want to return that)
                     return _instance;
@@ -71,15 +71,15 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
                     // add the newly created object to the DontDestroyOnLoad pile
                     // so it continues to live when changing from scene to scene
                     DontDestroyOnLoad(singleton);
-                    // Debug.Log("[Singleton] An instance of " + typeof(T) +
-                    // " is needed in the scene, so '" + singleton +
-                    // "' was created with DontDestroyOnLoad.");
+                    Debug.Log("[Singleton] An instance of " + typeof(T) +
+                    " is needed in the scene, so '" + singleton +
+                    "' was created with DontDestroyOnLoad.");
                 }
                 else // do nothing
                 {
                     DontDestroyOnLoad(_instance);
-                    // Debug.Log("[Singleton] Using instance already created: " +
-                    // _instance.gameObject.name);
+                    Debug.Log("[Singleton] Using instance already created: " +
+                    _instance.gameObject.name);
                 }
             }
 
@@ -87,6 +87,24 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
             return _instance;
         }
     }
+
+    public void Awake()
+    {
+        if (_instance)
+        {
+            Destroy(gameObject);
+        }
+
+        applicationIsQuitting = false;
+
+        // ensure the entity is added to the DontDestroyOnLoad pile, even if it's not referenced in the current scene
+        GetInstance();
+
+        AdditionalAwakeTasks();
+    }
+
+    protected virtual void AdditionalAwakeTasks()
+    { }
 
     // turn on the applicationQuitting when the instance is destroyed
     public void OnDestroy()
@@ -97,18 +115,5 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     }
 
     protected virtual void AdditionalDestroyTasks()
-    { }
-
-    public void Awake()
-    {
-        applicationIsQuitting = false;
-
-        // ensure the entity is added to the DontDestroyOnLoad pile, even if it's not referenced in the current scene
-        GetInstance();
-
-        AdditionalAwakeTasks();
-    }
-
-    protected virtual void AdditionalAwakeTasks()
     { }
 }

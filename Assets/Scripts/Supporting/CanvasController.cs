@@ -35,6 +35,8 @@ public class CanvasController : Singleton<CanvasController>
     [SerializeField]
     private string _btnPauseName = "btnPause";
     [SerializeField]
+    private string _btnReturnName = "btnReturn";
+    [SerializeField]
     private string _optMusicVolumeName = "optMusicVolume";
     [SerializeField]
     private string _sldMusicVolumeName = "sldMusicVolume";
@@ -52,6 +54,7 @@ public class CanvasController : Singleton<CanvasController>
     private Button _btnCredits;
     private Button _btnQuit;
     private Button _btnPause;
+    private Button _btnReturn;
     private Toggle _optMusicVolume;
     private Slider _sldMusicVolume;
     private Toggle _optSFXVolume;
@@ -61,6 +64,7 @@ public class CanvasController : Singleton<CanvasController>
     {
         ChooseCanvas();
         LinkCanvasElements();
+        LoadSavedData();
     }
 
     private void ChooseCanvas()
@@ -151,7 +155,6 @@ public class CanvasController : Singleton<CanvasController>
 
     public void EnablePauseCanvas(bool display)
     {
-        Supporting.Log("Enabling pause canvas " + display);
         _pauseMenuCanvas.SetActive(display);
         LinkCanvasElements();
     }
@@ -193,6 +196,11 @@ public class CanvasController : Singleton<CanvasController>
             {
                 _btnPause = button;
                 _btnPause.onClick.AddListener(GameController.instance.PauseGame);
+            }
+            else if (button.name == _btnReturnName)
+            {
+                _btnReturn = button;
+                _btnReturn.onClick.AddListener(SceneController.instance.Return);
             }
             else
             {
@@ -239,5 +247,33 @@ public class CanvasController : Singleton<CanvasController>
                 Supporting.Log((string.Format("Could not resolve object {0} function", toggle)), 1);
             }
         }
+    }
+
+    private void LoadSavedData()
+    {
+        if (SceneController.instance.currentSceneType == SceneController.SceneTypes.Options)
+        {
+            Persistency.LoadSavedData(Persistency.DataGroups.Sound);
+        }
+    }
+
+    public Toggle optMusicVolume
+    {
+        get { return _optMusicVolume; }
+    }
+
+    public Slider sldMusicVolume
+    {
+        get { return _sldMusicVolume; }
+    }
+
+    public Toggle optSFXVolume
+    {
+        get { return _optSFXVolume; }
+    }
+
+    public Slider sldSFXVolume
+    {
+        get { return _sldSFXVolume; }
     }
 }
