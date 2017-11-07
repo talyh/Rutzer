@@ -91,8 +91,6 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     // turn on the applicationQuitting when the instance is destroyed
     public void OnDestroy()
     {
-        Supporting.Log(typeof(T) + " Singleton is being destroyed");
-        Debug.Break();
         applicationIsQuitting = true;
 
         AdditionalDestroyTasks();

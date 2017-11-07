@@ -6,7 +6,6 @@ using UnityEditor;
 
 public class GameController : Singleton<GameController>
 {
-
     // // Define lists used throughout the game
     // // public enum Powers { noPower = 0, grow, extraLife, fly, fire, invincible }
     // public enum CharacterStates { small = 1, big, racoon }; // starting at 1 to keep it aligned with the animation layer index (where 0 = base layer)
@@ -207,19 +206,25 @@ public class GameController : Singleton<GameController>
     //     set { _coins = value; /*ShowCoins();*/ }
     // }
 
+
     public void PauseGame()
     {
-        Supporting.Log("Pausing");
-        CanvasController.instance.EnablePauseCanvas(true);
-        Time.timeScale = 0;
+        // if not yet puased, pause it
+        if (Time.timeScale >= 1)
+        {
+            Supporting.Log("Pausing");
+            CanvasController.instance.EnablePauseCanvas(true);
+            Time.timeScale = 0;
+        }
+        // else, unpause it
+        else
+        {
+            Supporting.Log("Unpausing");
+            CanvasController.instance.EnablePauseCanvas(false);
+            Time.timeScale = 1;
+        }
     }
 
-    public void UnPauseGame()
-    {
-        Supporting.Log("Unpausing");
-        CanvasController.instance.EnablePauseCanvas(false);
-        Time.timeScale = 1;
-    }
 
     // public Transform character
     // {
