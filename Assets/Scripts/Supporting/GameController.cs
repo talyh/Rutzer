@@ -23,20 +23,10 @@ public class GameController : Singleton<GameController>
     // // Define Controls used throughout the game
     // // public enum Controls { Horizontal, Jump, GrabItem, Crouch, Fly}
 
-    // [Header("General Game Settings")]
-    // // [SerializeField]
-    // // public const float hurryUpMusicRate = 0.25f;
-
-    // // Identify character
-    // [Header("Character")]
-    // // [SerializeField]
-    // // [Tooltip("How many lives the character starts with")]
-    // // private int _initialLives = 0;
-    // // private int _lives = 0;
-    // // private int _score = 0;
-    // // private int _coins = 0;
-    // [SerializeField]
-    // private Transform _character;
+    private const int INITIAL_SPEED = 20;
+    private int _speed;
+    private int _score = 0;
+    private int _highScore = 0;
 
     void Start()
     {
@@ -63,9 +53,17 @@ public class GameController : Singleton<GameController>
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            SceneController.instance.GameOver();
+            speed++;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            score++;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            highScore++;
         }
     }
 
@@ -137,14 +135,6 @@ public class GameController : Singleton<GameController>
     //     score += points;
     // }
 
-    // public void ShowScore()
-    // {
-    //     if (CanvasController.instance.txtScore)
-    //     {
-    //         CanvasController.instance.txtScore.text = score.ToString();
-    //     }
-    // }
-
     // public void ShowLives()
     // {
     //     if (CanvasController.instance.txtLives)
@@ -172,48 +162,29 @@ public class GameController : Singleton<GameController>
     //     ShowCoins();
     // }
 
-    // public void ResetGameVariables()
-    // {
-    //     lives = initialLives;
-    //     score = 0;
-    //     coins = 0;
-    // }
+    public void ResetGameVariables()
+    {
+        speed = INITIAL_SPEED;
+        score = 0;
+    }
 
-    // public int score
-    // {
-    //     get { return _score; }
-    //     set { _score = value; /*ShowScore();*/ }
-    // }
+    public int speed
+    {
+        get { return _speed; }
+        set { _speed = value; CanvasController.instance.ShowSpeed(speed); }
+    }
 
-    // public int initialLives
-    // {
-    //     get { return _initialLives; }
-    //     set { _initialLives = value; }
-    // }
+    public int score
+    {
+        get { return _score; }
+        set { _score = value; CanvasController.instance.ShowScore(score); }
+    }
 
-    // public int lives
-    // {
-    //     get { return _lives; }
-    //     set
-    //     { 
-    //         if (value > 0)
-    //         {
-    //             _lives = value; 
-    //         }
-    //         else
-    //         {
-    //             _lives = 0;
-    //         }
-    //         // ShowLives(); 
-    //     }
-    // }
-
-    // public int coins
-    // {
-    //     get { return _coins; }
-    //     set { _coins = value; /*ShowCoins();*/ }
-    // }
-
+    public int highScore
+    {
+        get { return _highScore; }
+        set { _highScore = value; CanvasController.instance.ShowHighScore(highScore); }
+    }
 
     public void PauseGame()
     {
@@ -239,3 +210,4 @@ public class GameController : Singleton<GameController>
     //     get { return _character; }
     // }
 }
+

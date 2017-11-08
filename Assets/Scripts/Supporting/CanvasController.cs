@@ -6,6 +6,8 @@ using UnityEngine.Events;
 
 public class CanvasController : Singleton<CanvasController>
 {
+    private const string TEXT_ELEMENTS_PREFIX = "txt";
+
     [Header("Canvas Types")]
     [SerializeField]
     private GameObject _startScreenCanvas;
@@ -23,6 +25,7 @@ public class CanvasController : Singleton<CanvasController>
     private GameObject _pauseMenuCanvas;
 
     [Header("UI Elements")]
+    [Header("Buttons")]
     [SerializeField]
     private string _btnStartName = "btnStart";
     [SerializeField]
@@ -39,14 +42,26 @@ public class CanvasController : Singleton<CanvasController>
     private string _btnReturnName = "btnReturn";
     [SerializeField]
     private string _btnPlayAgainName = "btnPlayAgain";
-    [SerializeField]
-    private string _optMusicVolumeName = "optMusicVolume";
+
+    [Header("Sliders")]
     [SerializeField]
     private string _sldMusicVolumeName = "sldMusicVolume";
     [SerializeField]
-    private string _optSFXVolumeName = "optSFXVolume";
-    [SerializeField]
     private string _sldSFXVolumeName = "sldSFXVolume";
+
+    [Header("Toggles")]
+    [SerializeField]
+    private string _optMusicVolumeName = "optMusicVolume";
+    [SerializeField]
+    private string _optSFXVolumeName = "optSFXVolume";
+
+    [Header("Texts")]
+    [SerializeField]
+    private string _txtSpeedName = "txtSpeed";
+    [SerializeField]
+    private string _txtScoreName = "txtScore";
+    [SerializeField]
+    private string _txtHighScoreName = "txtHighScore";
 
 
     // ----- ELEMENTS THAT MAY EXIST ACROSS MULTIPLE CANVASES, DEPENDING ON SCENE
@@ -63,6 +78,9 @@ public class CanvasController : Singleton<CanvasController>
     private Slider _sldMusicVolume;
     private Toggle _optSFXVolume;
     private Slider _sldSFXVolume;
+    private Text _txtSpeed;
+    private Text _txtScore;
+    private Text _txtHighScore;
 
     public void EnableSceneCanvas()
     {
@@ -270,25 +288,88 @@ public class CanvasController : Singleton<CanvasController>
                 Supporting.Log((string.Format("Could not resolve object {0} function", toggle)), 1);
             }
         }
+
+        Text[] texts = GameObject.FindObjectsOfType<Text>();
+        foreach (Text text in texts)
+        {
+            // only go through elemens that are TextAreas, as Unity's function will also return Text elements associated with
+            // and other elements
+            if (text.name.StartsWith(TEXT_ELEMENTS_PREFIX))
+            {
+
+                if (text.name == _txtSpeedName)
+                {
+                    _txtSpeed = text;
+                }
+                else if (text.name == _txtScoreName)
+                {
+                    _txtScore = text;
+                }
+                else if (text.name == _txtHighScoreName)
+                {
+                    _txtHighScore = text;
+                }
+                else
+                {
+                    Supporting.Log((string.Format("Could not resolve object {0} function", text)), 1);
+                }
+            }
+        }
     }
 
-    public Toggle optMusicVolume
+    public void ShowMusicVolume(float value)
     {
-        get { return _optMusicVolume; }
+        if (_sldMusicVolume)
+        {
+            _sldMusicVolume.value = value;
+        }
     }
 
-    public Slider sldMusicVolume
+    public void ShowSFXVolume(float value)
     {
-        get { return _sldMusicVolume; }
+        if (_sldSFXVolume)
+        {
+            _sldSFXVolume.value = value;
+        }
     }
 
-    public Toggle optSFXVolume
+    public void ToggleMusicVolume(bool enabled)
     {
-        get { return _optSFXVolume; }
+        if (_optMusicVolume)
+        {
+            _optMusicVolume.isOn = enabled;
+        }
     }
 
-    public Slider sldSFXVolume
+    public void ToggleSFXVolume(bool enabled)
     {
-        get { return _sldSFXVolume; }
+        if (_optSFXVolume)
+        {
+            _optSFXVolume.isOn = enabled;
+        }
+    }
+
+    public void ShowSpeed(int speed)
+    {
+        if (_txtSpeed)
+        {
+            _txtSpeed.text = speed.ToString();
+        }
+    }
+
+    public void ShowScore(int score)
+    {
+        if (_txtScore)
+        {
+            _txtScore.text = score.ToString();
+        }
+    }
+
+    public void ShowHighScore(int highScore)
+    {
+        if (_txtHighScore)
+        {
+            _txtHighScore.text = highScore.ToString();
+        }
     }
 }
