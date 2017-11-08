@@ -35,12 +35,6 @@ public class SoundController : Singleton<SoundController>
     [SerializeField]
     private AudioClip _sfxDie;
 
-
-    private void Start()
-    {
-        // SetFromSaveFile();
-    }
-
     public void PlaySFX(AudioClip clip)
     {
         AudioSource player;
@@ -71,6 +65,7 @@ public class SoundController : Singleton<SoundController>
 
     public void EnableSceneMusic()
     {
+        Debug.Log("current scene type: " + SceneController.instance.currentSceneType);
         switch (SceneController.instance.currentSceneType)
         {
             case SceneController.SceneTypes.Start:
@@ -103,6 +98,7 @@ public class SoundController : Singleton<SoundController>
     {
         if (_masterMixer)
         {
+            Supporting.Log("Adjusting music volume to " + volume);
             _masterMixer.SetFloat(Persistency.MUSIC_VOLUME_KEY, volume);
         }
         else

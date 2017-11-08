@@ -44,16 +44,12 @@ public class SceneController : Singleton<SceneController>
         instance.SetCurrentSceneIndex();
         instance.SetCurrentSceneType();
         CanvasController.instance.EnableSceneCanvas();
+        SoundController.instance.EnableSceneMusic();
     }
 
     protected override void AdditionalAwakeTasks()
     {
         _lastScene = SceneManager.sceneCountInBuildSettings - 1;
-    }
-
-    void Start()
-    {
-        SoundController.instance.EnableSceneMusic();
     }
 
     public void LoadPrevious()
@@ -62,7 +58,6 @@ public class SceneController : Singleton<SceneController>
         if (_currentScene > 0)
         {
             SceneManager.LoadScene(_currentScene - 1);
-            SoundController.instance.EnableSceneMusic();
         }
         else
         {
@@ -76,7 +71,7 @@ public class SceneController : Singleton<SceneController>
         if (_currentScene < _lastScene)
         {
             SceneManager.LoadScene(_currentScene + 1);
-            SoundController.instance.EnableSceneMusic();
+
         }
         else
         {
@@ -104,8 +99,6 @@ public class SceneController : Singleton<SceneController>
     public void StartGame()
     {
         SceneManager.LoadScene(_firstLevelName);
-        SoundController.instance.EnableSceneMusic();
-        Supporting.Log("Starting Game");
     }
 
     public void RestartGame()
@@ -117,7 +110,6 @@ public class SceneController : Singleton<SceneController>
     public void GameOver()
     {
         SceneManager.LoadScene(_lastScene);
-        // SoundController.instance.EnableSceneMusic();
     }
 
     public void QuitGame()
