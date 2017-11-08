@@ -65,7 +65,6 @@ public class SoundController : Singleton<SoundController>
 
     public void EnableSceneMusic()
     {
-        Debug.Log("current scene type: " + SceneController.instance.currentSceneType);
         switch (SceneController.instance.currentSceneType)
         {
             case SceneController.SceneTypes.Start:
@@ -98,7 +97,7 @@ public class SoundController : Singleton<SoundController>
     {
         if (_masterMixer)
         {
-            Supporting.Log("Adjusting music volume to " + volume);
+            // Supporting.Log("Adjusting music volume to " + volume);
             _masterMixer.SetFloat(Persistency.MUSIC_VOLUME_KEY, volume);
         }
         else

@@ -22,7 +22,7 @@ public class CanvasController : Singleton<CanvasController>
     [SerializeField]
     private GameObject _pauseMenuCanvas;
 
-    [Header("Button types")]
+    [Header("UI Elements")]
     [SerializeField]
     private string _btnStartName = "btnStart";
     [SerializeField]
@@ -37,6 +37,8 @@ public class CanvasController : Singleton<CanvasController>
     private string _btnPauseName = "btnPause";
     [SerializeField]
     private string _btnReturnName = "btnReturn";
+    [SerializeField]
+    private string _btnPlayAgainName = "btnPlayAgain";
     [SerializeField]
     private string _optMusicVolumeName = "optMusicVolume";
     [SerializeField]
@@ -56,6 +58,7 @@ public class CanvasController : Singleton<CanvasController>
     private Button _btnQuit;
     private Button _btnPause;
     private Button _btnReturn;
+    private Button _btnPlayAgain;
     private Toggle _optMusicVolume;
     private Slider _sldMusicVolume;
     private Toggle _optSFXVolume;
@@ -65,7 +68,7 @@ public class CanvasController : Singleton<CanvasController>
     {
         ChooseCanvas();
         LinkCanvasElements();
-        LoadSavedData();
+        Persistency.LoadSavedData(Persistency.DataGroups.Sound);
     }
 
     private void ChooseCanvas()
@@ -138,6 +141,7 @@ public class CanvasController : Singleton<CanvasController>
                     _levelScreenCanvas.SetActive(false);
                     _gameOverScreenCanvas.SetActive(true);
                     _pauseMenuCanvas.SetActive(false);
+                    Supporting.Log("Enabling game over canvas");
                     break;
                 }
             default:
@@ -210,6 +214,12 @@ public class CanvasController : Singleton<CanvasController>
                 _btnReturn.onClick.RemoveAllListeners();
                 _btnReturn.onClick.AddListener(SceneController.instance.Return);
             }
+            else if (button.name == _btnPlayAgainName)
+            {
+                _btnPlayAgain = button;
+                _btnPlayAgain.onClick.RemoveAllListeners();
+                _btnPlayAgain.onClick.AddListener(SceneController.instance.RestartGame);
+            }
             else
             {
                 Supporting.Log((string.Format("Could not resolve object {0} function", button)), 1);
@@ -260,11 +270,6 @@ public class CanvasController : Singleton<CanvasController>
                 Supporting.Log((string.Format("Could not resolve object {0} function", toggle)), 1);
             }
         }
-    }
-
-    private void LoadSavedData()
-    {
-        Persistency.LoadSavedData(Persistency.DataGroups.Sound);
     }
 
     public Toggle optMusicVolume

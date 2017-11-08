@@ -61,6 +61,14 @@ public class GameController : Singleton<GameController>
         // lives = initialLives;
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            SceneController.instance.GameOver();
+        }
+    }
+
     // Game helper methods
     // public void CheckRequiredFloat(string name, float f, float def = 0.2f, string objectName = "unknown")
     // {

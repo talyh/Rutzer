@@ -109,7 +109,7 @@ public class SceneController : Singleton<SceneController>
 
     public void GameOver()
     {
-        SceneManager.LoadScene(_lastScene);
+        SceneManager.LoadScene(_gameOverSceneName);
     }
 
     public void QuitGame()
