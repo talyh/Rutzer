@@ -101,7 +101,14 @@ public class SoundController : Singleton<SoundController>
 
     public void SetMusicVolume(float volume)
     {
-        _masterMixer.SetFloat(Persistency.MUSIC_VOLUME_KEY, volume);
+        if (_masterMixer)
+        {
+            _masterMixer.SetFloat(Persistency.MUSIC_VOLUME_KEY, volume);
+        }
+        else
+        {
+            Supporting.Log("Master Mixer not found", 2);
+        }
     }
 
     public void SetMusicVolume(bool enabled)

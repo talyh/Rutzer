@@ -22,7 +22,7 @@ public class SceneController : Singleton<SceneController>
     private int _currentScene;
     private string _currentSceneName;
 
-    private int _previousScene = -1;
+    private int _previousScene = 0;
 
     private int _lastScene = 0;
 
@@ -36,16 +36,11 @@ public class SceneController : Singleton<SceneController>
     {
         // Add the delegate to be called when the scene is loaded, between Awake and Start.
         SceneManager.sceneLoaded += SceneLoaded;
-        SceneManager.sceneUnloaded += SceneUnLoaded;
-    }
-
-    static void SceneUnLoaded(Scene scene)
-    {
-        instance._previousScene = scene.buildIndex;
     }
 
     static void SceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
     {
+        Supporting.Log(string.Format("Scene {0} loaded", scene.name));
         instance.SetCurrentSceneIndex();
         instance.SetCurrentSceneType();
         CanvasController.instance.EnableSceneCanvas();
@@ -93,6 +88,11 @@ public class SceneController : Singleton<SceneController>
     {
         SceneManager.LoadScene(_previousScene);
         Persistency.SaveData(Persistency.DataGroups.Sound);
+
+        if (instance._previousScene != SceneManager.GetActiveScene().buildIndex)
+        {
+            instance._previousScene = SceneManager.GetActiveScene().buildIndex;
+        }
     }
 
     public void Reload()
@@ -105,6 +105,7 @@ public class SceneController : Singleton<SceneController>
     {
         SceneManager.LoadScene(_firstLevelName);
         SoundController.instance.EnableSceneMusic();
+        Supporting.Log("Starting Game");
     }
 
     public void RestartGame()
@@ -116,7 +117,7 @@ public class SceneController : Singleton<SceneController>
     public void GameOver()
     {
         SceneManager.LoadScene(_lastScene);
-        SoundController.instance.EnableSceneMusic();
+        // SoundController.instance.EnableSceneMusic();
     }
 
     public void QuitGame()
@@ -180,8 +181,10 @@ public class SceneController : Singleton<SceneController>
     protected override void AdditionalDestroyTasks()
     {
         // Remove the delegate when the object is destroyed
-        SceneManager.sceneLoaded -= SceneLoaded;
-        SceneManager.sceneUnloaded -= SceneUnLoaded;
+        if (!instance)
+        {
+            SceneManager.sceneLoaded -= SceneLoaded;
+        }
     }
 
     public SceneTypes currentSceneType

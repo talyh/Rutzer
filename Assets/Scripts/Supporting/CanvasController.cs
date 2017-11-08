@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class CanvasController : Singleton<CanvasController>
 {
@@ -170,36 +171,43 @@ public class CanvasController : Singleton<CanvasController>
             if (button.name == _btnStartName)
             {
                 _btnStart = button;
+                _btnStart.onClick.RemoveAllListeners();
                 _btnStart.onClick.AddListener(SceneController.instance.StartGame);
             }
             else if (button.name == _btnInstructionsName)
             {
                 _btnInstructions = button;
+                _btnInstructions.onClick.RemoveAllListeners();
                 _btnInstructions.onClick.AddListener(SceneController.instance.ShowInstructionsScene);
             }
             else if (button.name == _btnOptionsName)
             {
                 _btnOptions = button;
+                _btnOptions.onClick.RemoveAllListeners();
                 _btnOptions.onClick.AddListener(SceneController.instance.ShowOptionsScene);
             }
             else if (button.name == _btnCreditsName)
             {
                 _btnCredits = button;
+                _btnCredits.onClick.RemoveAllListeners();
                 _btnCredits.onClick.AddListener(SceneController.instance.ShowCreditsScene);
             }
             else if (button.name == _btnQuitName)
             {
                 _btnQuit = button;
+                _btnQuit.onClick.RemoveAllListeners();
                 _btnQuit.onClick.AddListener(SceneController.instance.QuitGame);
             }
             else if (button.name == _btnPauseName)
             {
                 _btnPause = button;
+                _btnPause.onClick.RemoveAllListeners();
                 _btnPause.onClick.AddListener(GameController.instance.PauseGame);
             }
             else if (button.name == _btnReturnName)
             {
                 _btnReturn = button;
+                _btnReturn.onClick.RemoveAllListeners();
                 _btnReturn.onClick.AddListener(SceneController.instance.Return);
             }
             else
@@ -215,12 +223,14 @@ public class CanvasController : Singleton<CanvasController>
             if (slider.name == _sldMusicVolumeName)
             {
                 _sldMusicVolume = slider;
+                _sldMusicVolume.onValueChanged.RemoveAllListeners();
                 _sldMusicVolume.onValueChanged.AddListener(delegate { SoundController.instance.SetMusicVolume(_sldMusicVolume.value); });
 
             }
             else if (slider.name == _sldSFXVolumeName)
             {
                 _sldSFXVolume = slider;
+                _sldSFXVolume.onValueChanged.RemoveAllListeners();
                 _sldSFXVolume.onValueChanged.AddListener(delegate { SoundController.instance.SetSFXVolume(_sldSFXVolume.value); });
             }
             else
@@ -236,11 +246,13 @@ public class CanvasController : Singleton<CanvasController>
             if (toggle.name == _optMusicVolumeName)
             {
                 _optMusicVolume = toggle;
+                _optMusicVolume.onValueChanged.RemoveAllListeners();
                 _optMusicVolume.onValueChanged.AddListener(delegate { SoundController.instance.SetMusicVolume(_optMusicVolume.isOn); });
             }
             else if (toggle.name == _optSFXVolumeName)
             {
                 _optSFXVolume = toggle;
+                _optSFXVolume.onValueChanged.RemoveAllListeners();
                 _optSFXVolume.onValueChanged.AddListener(delegate { SoundController.instance.SetSFXVolume(_optSFXVolume.isOn); });
             }
             else
