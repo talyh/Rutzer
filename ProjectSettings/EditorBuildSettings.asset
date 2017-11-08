@@ -18,7 +18,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Options.unity
     guid: 544fbe7e0cec54195a8f95706500f840
   - enabled: 1
-    path: Assets/Scenes/InfiniteRunner.unity
+    path: Assets/Scenes/Game.unity
     guid: 1c184e9cfad1f46e7b5e9d0936e29c9c
   - enabled: 1
     path: Assets/Scenes/GameOver.unity
