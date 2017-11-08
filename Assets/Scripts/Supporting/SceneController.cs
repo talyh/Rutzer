@@ -103,7 +103,7 @@ public class SceneController : Singleton<SceneController>
 
     public void RestartGame()
     {
-        // GameController.instance.ResetGameVariables();
+        GameController.instance.ResetGameVariables();
         SceneManager.LoadScene(_firstLevelName);
     }
 

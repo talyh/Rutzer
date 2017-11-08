@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - GroundCheck
+  - HoldPoint
+  - PlayerSprite
   layers:
   - Default
   - TransparentFX
@@ -13,7 +16,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Ground
   - 
   - 
   - 
@@ -40,4 +43,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Foreground
+    uniqueID: 2880705679
+    locked: 0
+  - name: Midground
+    uniqueID: 3165686383
+    locked: 0
+  - name: Background
+    uniqueID: 2177190107
     locked: 0

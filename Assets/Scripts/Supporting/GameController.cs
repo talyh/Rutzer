@@ -12,8 +12,8 @@ public class GameController : Singleton<GameController>
 
     // // Define Layers and LayerMasks used throughout the game
     // // Additional LayerMasks may be defined in individual scripts if they're used only in that script
-    // public enum Layers { Ground = 8, Grabable, PowerUp, Hitable, Edges, Pipes, Player };
-    // internal LayerMask ground;
+    public enum Layers { Ground = 8 };
+    internal LayerMask ground;
     // internal LayerMask player;
     // internal LayerMask notPlayer;
 
@@ -23,12 +23,23 @@ public class GameController : Singleton<GameController>
     // // Define Controls used throughout the game
     // // public enum Controls { Horizontal, Jump, GrabItem, Crouch, Fly}
 
-    private const int INITIAL_SPEED = 20;
+    private const int INITIAL_SPEED = 15;
     private int _speed;
-    private int _score = 0;
-    private int _highScore = 0;
+    private int _score;
+    private float _rawScore;
+    private int _highScore;
 
-    void Start()
+    [SerializeField]
+    private int _pointsMultiplier = 10;
+
+    private bool _gameOver;
+
+    protected override void AdditionalAwakeTasks()
+    {
+        ResetGameVariables();
+    }
+
+    private void Start()
     {
         Persistency.LoadSavedData(Persistency.DataGroups.Score);
 
@@ -44,16 +55,16 @@ public class GameController : Singleton<GameController>
         // }
 
         // Define the LayerMasks that will be needed throughout the game
-        // ground = 1 << LayerMask.NameToLayer(Layers.Ground.ToString()) |
-        //             1 << LayerMask.NameToLayer(Layers.Hitable.ToString()) |
-        //              1 << LayerMask.NameToLayer(Layers.Pipes.ToString());
+        ground = 1 << LayerMask.NameToLayer(Layers.Ground.ToString());
+        // 1 << LayerMask.NameToLayer(Layers.Hitable.ToString()) |
+        //  1 << LayerMask.NameToLayer(Layers.Pipes.ToString());
         // player = 1 << LayerMask.NameToLayer(Layers.Player.ToString());
         // notPlayer = ~(1 << LayerMask.NameToLayer(Layers.Player.ToString()));
 
         // lives = initialLives;
     }
 
-    void Update()
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
@@ -71,78 +82,26 @@ public class GameController : Singleton<GameController>
         {
             GameOver();
         }
+
+        ScorePoints();
     }
 
-    // Game helper methods
-    // public void CheckRequiredFloat(string name, float f, float def = 0.2f, string objectName = "unknown")
-    // {
-    //     if (f <= 0f)
-    //     {
-    //         f = def;
-    //         Debug.LogWarning(objectName + " >> " + name + " was missing. Automatically adjusted to " + f);
-    //     }
-    // }
-
-    // public void CheckRequiredComponent(string name, Component c, string objectName = "unknown")
-    // {
-    //     if (!c)
-    //     {
-    //         Debug.LogError(objectName + " >> " + name + " is required");
-    //     }
-    // }
-
-    // public void CheckRequiredChild(string name, Transform t, string objectName = "unknown")
-    // {
-    //     if (!t)
-    //     {
-    //         Debug.LogError(objectName + " >> " + name + " is required");
-    //     }
-    // }
-
-    // public void CheckRequiredVector2(string name, Vector2 v, float x = 0.1f, float y = 0.1f, string objectName = "unknown")
-    // {
-    //     if (v.x <= 0 && v.y <= 0)
-    //     {
-    //         v.x = x;
-    //         v.y = x;
-    //         Debug.LogWarning(objectName + " >> " + name + " was missing. Automatically adjusted to (" + v.x + ", " + v.y + ")");
-    //     }
-    // }
-
-    // public void CheckRequiredVector3(string name, Vector3 v, float x = 0.1f, float y = 0.1f, float z = 0.1f, string objectName = "unknown")
-    // {
-    //     if (v.x <= 0 && v.y <= 0)
-    //     {
-    //         v.x = x;
-    //         v.y = y;
-    //         v.z = z;
-    //         Debug.LogWarning(objectName + " >> " + name + " was missing. Automatically adjusted to (" + v.x + ", " + v.y + ", " + v.z + ")");
-    //     }
-    // }
-
-    // Run Game methods
-    // public void SpawnCharacter()
-    // {
-    //     GameObject[] checkPoints = GameObject.FindGameObjectsWithTag(Tags.CheckPoint.ToString());
-    //     if (checkPoints.Length <= 0)
-    //     {
-    //         Debug.Log("Cannot find the last checkpoint to spawn character");
-    //     }
-    //     else
-    //     {
-    //         GameObject spawnPosition = checkPoints[0];
-    //         _character = _characterPrefab.transform;
-    //         Instantiate(character, spawnPosition.transform.position, spawnPosition.transform.rotation);
-    //     }
-    // }
-
-    public void ScorePoints(int points)
+    public void ScorePoints()
     {
-        score += points;
+        if (!_gameOver)
+        {
+            _rawScore += Time.deltaTime;
+            if (_rawScore >= 1)
+            {
+                _rawScore = 0;
+                score += _pointsMultiplier;
+            }
+        }
     }
 
     public void GameOver()
     {
+        _gameOver = true;
         if (_score > _highScore)
         {
             _highScore = _score;
@@ -166,24 +125,8 @@ public class GameController : Singleton<GameController>
     {
         speed = INITIAL_SPEED;
         score = 0;
-    }
-
-    public int speed
-    {
-        get { return _speed; }
-        set { _speed = value; CanvasController.instance.ShowSpeed(speed); }
-    }
-
-    public int score
-    {
-        get { return _score; }
-        set { _score = value; CanvasController.instance.ShowScore(score); }
-    }
-
-    public int highScore
-    {
-        get { return _highScore; }
-        set { _highScore = value; CanvasController.instance.ShowHighScore(highScore); }
+        _rawScore = 0;
+        _gameOver = false;
     }
 
     public void PauseGame()
@@ -204,6 +147,23 @@ public class GameController : Singleton<GameController>
         }
     }
 
+    public int speed
+    {
+        get { return _speed; }
+        set { _speed = value; CanvasController.instance.ShowSpeed(speed); }
+    }
+
+    public int score
+    {
+        get { return _score; }
+        set { _score = value; CanvasController.instance.ShowScore(score); }
+    }
+
+    public int highScore
+    {
+        get { return _highScore; }
+        set { _highScore = value; CanvasController.instance.ShowHighScore(highScore); }
+    }
 
     // public Transform character
     // {
