@@ -30,6 +30,8 @@ public class GameController : Singleton<GameController>
 
     void Start()
     {
+        Persistency.LoadSavedData(Persistency.DataGroups.Score);
+
         // Get prefab values for dynamic instation if needed
         // GameObject GameControllerPrefab = AssetDatabase.LoadAssetAtPath("Assets/General/Controllers/GameController.prefab", typeof(GameObject)) as GameObject;
         // if (GameControllerPrefab)
@@ -64,6 +66,10 @@ public class GameController : Singleton<GameController>
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             highScore++;
+        }
+        else if (Input.GetKeyDown(KeyCode.Space))
+        {
+            GameOver();
         }
     }
 
@@ -130,26 +136,20 @@ public class GameController : Singleton<GameController>
     //     }
     // }
 
-    // public void ScorePoints(int points)
-    // {
-    //     score += points;
-    // }
+    public void ScorePoints(int points)
+    {
+        score += points;
+    }
 
-    // public void ShowLives()
-    // {
-    //     if (CanvasController.instance.txtLives)
-    //     {
-    //         CanvasController.instance.txtLives.text = lives.ToString();
-    //     }
-    // }
-
-    // public void ShowCoins()
-    // {
-    //     if (CanvasController.instance.txtCoins)
-    //     {
-    //         CanvasController.instance.txtCoins.text = coins.ToString();
-    //     }
-    // }
+    public void GameOver()
+    {
+        if (_score > _highScore)
+        {
+            _highScore = _score;
+        }
+        Persistency.SaveData(Persistency.DataGroups.Score);
+        SceneController.instance.GameOver();
+    }
 
     // public void StartLevel()
     // {

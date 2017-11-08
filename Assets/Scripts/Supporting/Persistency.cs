@@ -10,6 +10,7 @@ public static class Persistency
     public const string MUSIC_MUTED_KEY = "MUSIC_MUTED";
     public const string SFX_VOLUME_KEY = "SFX_VOLUME";
     public const string SFX_MUTED_KEY = "SFX_MUTED";
+    public const string HIGHSCORE_KEY = "HIGHSCORE";
 
     public static void LoadSavedData(DataGroups dataGroup)
     {
@@ -35,6 +36,11 @@ public static class Persistency
                     // adjust Canvas elements
                     CanvasController.instance.ShowSFXVolume(SFXVolume);
                     CanvasController.instance.ToggleSFXVolume(!SFXMuted);
+                    break;
+                }
+            case DataGroups.Score:
+                {
+                    GameController.instance.highScore = PlayerPrefs.GetInt(HIGHSCORE_KEY, 0);
                     break;
                 }
             default:
@@ -63,6 +69,11 @@ public static class Persistency
                     // Supporting.Log(string.Format("Saved {0}: {1}", MUSIC_VOLUME_KEY, PlayerPrefs.GetFloat(SFX_VOLUME_KEY)));
                     PlayerPrefs.SetInt(SFX_MUTED_KEY, SoundController.instance.SFXMuted ? 1 : 0);
                     // Supporting.Log(string.Format("Saved {0}: {1}", SFX_MUTED_KEY, PlayerPrefs.GetFloat(SFX_MUTED_KEY)));
+                    break;
+                }
+            case DataGroups.Score:
+                {
+                    PlayerPrefs.SetInt(HIGHSCORE_KEY, GameController.instance.highScore);
                     break;
                 }
             default:

@@ -187,7 +187,6 @@ public class CanvasController : Singleton<CanvasController>
         // look for the Canvas elements and bind them, as needed
 
         Button[] buttons = GameObject.FindObjectsOfType<Button>();
-
         foreach (Button button in buttons)
         {
             if (button.name == _btnStartName)
@@ -245,7 +244,6 @@ public class CanvasController : Singleton<CanvasController>
         }
 
         Slider[] sliders = GameObject.FindObjectsOfType<Slider>();
-
         foreach (Slider slider in sliders)
         {
             if (slider.name == _sldMusicVolumeName)
@@ -268,7 +266,6 @@ public class CanvasController : Singleton<CanvasController>
         }
 
         Toggle[] toggles = GameObject.FindObjectsOfType<Toggle>();
-
         foreach (Toggle toggle in toggles)
         {
             if (toggle.name == _optMusicVolumeName)
@@ -296,18 +293,20 @@ public class CanvasController : Singleton<CanvasController>
             // and other elements
             if (text.name.StartsWith(TEXT_ELEMENTS_PREFIX))
             {
-
                 if (text.name == _txtSpeedName)
                 {
                     _txtSpeed = text;
+                    ShowSpeed(GameController.instance.speed);
                 }
                 else if (text.name == _txtScoreName)
                 {
                     _txtScore = text;
+                    ShowScore(GameController.instance.score);
                 }
                 else if (text.name == _txtHighScoreName)
                 {
                     _txtHighScore = text;
+                    ShowHighScore(GameController.instance.highScore);
                 }
                 else
                 {
