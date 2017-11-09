@@ -23,14 +23,13 @@ public class GameController : Singleton<GameController>
     // // Define Controls used throughout the game
     // // public enum Controls { Horizontal, Jump, GrabItem, Crouch, Fly}
 
-    private const int INITIAL_SPEED = 15;
-    private int _speed;
+    private const float INITIAL_SPEED = 2.5f;
+    private float _speed;
     private int _score;
     private float _rawScore;
     private int _highScore;
 
-    [SerializeField]
-    private int _pointsMultiplier = 10;
+    private const int POINTS_MULTIPLIER = 10;
 
     private bool _gameOver = true;
 
@@ -89,7 +88,7 @@ public class GameController : Singleton<GameController>
             if (_rawScore >= 1)
             {
                 _rawScore = 0;
-                score += _pointsMultiplier;
+                score += POINTS_MULTIPLIER;
             }
         }
     }
@@ -137,10 +136,10 @@ public class GameController : Singleton<GameController>
         }
     }
 
-    public int speed
+    public float speed
     {
         get { return _speed; }
-        set { _speed = value; CanvasController.instance.ShowSpeed(speed); }
+        set { _speed = value; CanvasController.instance.ShowSpeed((int)speed); }
     }
 
     public int score

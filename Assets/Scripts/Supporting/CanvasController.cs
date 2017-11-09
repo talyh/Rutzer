@@ -296,7 +296,7 @@ public class CanvasController : Singleton<CanvasController>
                 if (text.name == _txtSpeedName)
                 {
                     _txtSpeed = text;
-                    ShowSpeed(GameController.instance.speed);
+                    ShowSpeed((int)GameController.instance.speed);
                 }
                 else if (text.name == _txtScoreName)
                 {

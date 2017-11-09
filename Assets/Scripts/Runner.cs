@@ -16,14 +16,22 @@ public class Runner : MonoBehaviour
     [SerializeField]
     private Collider2D _jumpHighCheck;
     [SerializeField]
+    private Transform _groundCheck;
+    [SerializeField]
     private float _jumpForce;
 
+    private bool _grounded;
     private bool _gapAhead;
 
 
     private void Awake()
     {
         RunInitialChecks();
+        InitializeVariables();
+    }
+
+    private void Start()
+    {
     }
 
     private void Update()
@@ -32,13 +40,15 @@ public class Runner : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // Supporting.Log("Running at: " + _rb.velocity.x);
+        _grounded = Physics2D.OverlapCircle(_groundCheck.position, 0.2f, GameController.instance.ground);
+
+        Supporting.Log("grounded: " + _grounded);
 
         _gapAhead = !_gapCheck.IsTouchingLayers(GameController.instance.ground);
 
         if (!_gapAhead)
         {
-            _rb.velocity = Vector2.right * GameController.instance.speed * Time.deltaTime;
+            Run();
         }
         else
         {
@@ -46,9 +56,28 @@ public class Runner : MonoBehaviour
         }
     }
 
+    private void Run()
+    {
+        // Supporting.Log("Running");
+
+        if (_rb.velocity.x <= 0)
+        {
+            _rb.AddForce(Vector2.right * GameController.instance.speed, ForceMode2D.Impulse);
+        }
+        else
+        {
+            _rb.AddForce(Vector2.right * GameController.instance.speed * Time.deltaTime, ForceMode2D.Force);
+        }
+    }
+
     private void Jump()
     {
-        _rb.AddForce(new Vector2(0, _jumpForce), ForceMode2D.Impulse);
+        Supporting.Log("Jumping");
+
+        if (_grounded)
+        {
+            _rb.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
+        }
     }
 
     void RunInitialChecks()
@@ -57,5 +86,11 @@ public class Runner : MonoBehaviour
         Supporting.CheckRequiredProperty(gameObject, _gapCheck, "Gap Check");
         Supporting.CheckRequiredProperty(gameObject, _jumpLevelCheck, "Jump Level Check");
         Supporting.CheckRequiredProperty(gameObject, _jumpHighCheck, "Jump High Check");
+    }
+
+    void InitializeVariables()
+    {
+        _gapAhead = false;
+        _grounded = true;
     }
 }
