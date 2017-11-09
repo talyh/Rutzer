@@ -31,8 +31,6 @@ public class VerticalPlatform : MonoBehaviour
 
     public void Drop()
     {
-        Supporting.Log("Dropping platform");
-
         // only attempt dropping if it's the first time
         if (_activated)
         {
@@ -42,5 +40,7 @@ public class VerticalPlatform : MonoBehaviour
 
         // TODO - replace with proper physics drop based on joints
         _rb.gravityScale = DROPPING_GRAVITY;
+
+        // TODO - ensure platform doesn't get bumped up if player hits it from underneath
     }
 }

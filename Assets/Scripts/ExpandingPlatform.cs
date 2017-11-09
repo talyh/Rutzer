@@ -29,7 +29,7 @@ public class ExpandingPlatform : MonoBehaviour
         {
             _timeExpanded++;
 
-            if (_timeExpanded > 10)
+            if (_timeExpanded > 50)
             {
                 Shrink();
             }
@@ -38,8 +38,6 @@ public class ExpandingPlatform : MonoBehaviour
 
     public void Expand()
     {
-        Supporting.Log("Expanding platform");
-
         // only attempt expanding if it's the first time
         if (_activated)
         {

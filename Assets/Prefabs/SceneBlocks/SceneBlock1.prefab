@@ -496,6 +496,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4368764039233194}
   - component: {fileID: 114254029439375808}
+  - component: {fileID: 61113812135447094}
   m_Layer: 8
   m_Name: SceneBlock1
   m_TagString: SceneBlock
@@ -759,7 +760,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1788878072433144}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 18.4, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4539953226835722}
@@ -1199,6 +1200,31 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.8, y: 0.8}
   m_EdgeRadius: 0
+--- !u!61 &61113812135447094
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1788878072433144}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 18.4, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 10}
+  m_EdgeRadius: 0
 --- !u!61 &61115733745306480
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -1598,7 +1624,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2670f7d15c2b94bef89dfdc4243b8187, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bottomEdge: {fileID: 4564798729364632}
   _platform: {fileID: 4531912396010896}
 --- !u!212 &212027117741887454
 SpriteRenderer:

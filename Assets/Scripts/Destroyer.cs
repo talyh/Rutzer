@@ -11,5 +11,10 @@ public class Destroyer : MonoBehaviour
             GameController.instance.character.GetComponent<Runner>().Die();
             Supporting.Log("Player died from collision with: " + gameObject.name);
         }
+
+        if (coll.gameObject.tag == GameController.Tags.SceneBlock.ToString())
+        {
+            coll.gameObject.SetActive(false);
+        }
     }
 }

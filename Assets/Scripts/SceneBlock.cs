@@ -10,9 +10,14 @@ public class SceneBlock : MonoBehaviour
     [SerializeField]
     private ExpandingPlatform _expandingPlatform;
 
-    private bool _visible;
+    // private bool _visible;
     private float _elapsedTimeBetweenTouches;
     private bool _listenForTouches = true;
+
+    // private void OnEnable ()
+    // {
+    //     _visible = true;
+    // }
 
     private void Update()
     {
