@@ -24,6 +24,8 @@ public class Runner : MonoBehaviour
     private bool _gapAhead;
     private bool _floorAhead;
 
+    private bool _inSlope;
+
 
     private void Awake()
     {
@@ -33,14 +35,22 @@ public class Runner : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // determine whether the character is grounded or not, based on contact of its groundCheck with elements in the ground layer
-        _grounded = Physics2D.OverlapCircle(_groundCheck.position, 0.2f, GameController.instance.ground);
+        // determine whether the character's feet are touching the floor or not, based on contact of its groundCheck with elements in the ground layer
+        Collider2D _touchingFloor = Physics2D.OverlapCircle(_groundCheck.position, 0.2f, GameController.instance.ground);
+
+        // if it's touching the floor, we consider it grounded
+        _grounded = _touchingFloor;
+
+        // determine if in a slope
+        // TODO - add slope climbing code, based on the _touchingFloor collider
 
         // determine if there's a gap to be jumped, based on contact of the gapAhead collider with elements in the ground layer
         _gapAhead = !_gapCheck.IsTouchingLayers(GameController.instance.ground);
 
         // determine if there's an appropriate landing spot after a gap
         _floorAhead = _jumpLevelCheck.IsTouchingLayers(GameController.instance.ground);
+
+
 
         if (!_gapAhead)
         {

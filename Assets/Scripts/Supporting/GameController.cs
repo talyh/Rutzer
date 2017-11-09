@@ -12,7 +12,7 @@ public class GameController : Singleton<GameController>
     internal LayerMask ground;
 
     // // Define Tags used throughout the game
-    public enum Tags { Player };
+    public enum Tags { Player, SceneBlockPool };
 
     // // Define Controls used throughout the game
     // // public enum Controls { Horizontal, Jump, GrabItem, Crouch, Fly}
@@ -27,7 +27,9 @@ public class GameController : Singleton<GameController>
 
     private bool _gameOver = true;
 
-    public Transform _character;
+    private Transform _character;
+
+    private ObjectPool _sceneBlockPuller;
 
     private void Start()
     {
@@ -39,24 +41,20 @@ public class GameController : Singleton<GameController>
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            speed++;
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            score++;
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            highScore++;
-        }
-        else if (Input.GetKeyDown(KeyCode.Space))
-        {
-            GameOver();
+            PauseGame();
         }
 
         ScorePoints();
+
+        if (Time.frameCount % 100 == 0)
+        {
+            Debug.Log("here");
+            GameObject go = _sceneBlockPuller.GetPooledObject();
+            go.SetActive(true);
+            go.transform.position = character.transform.position + (Vector3.right * 5);
+        }
     }
 
     public void ScorePoints()
@@ -90,6 +88,7 @@ public class GameController : Singleton<GameController>
     {
         ResetGameVariables();
         FindCharacter();
+        FindSceneBlockPool();
     }
 
     private void ResetGameVariables()
@@ -106,6 +105,19 @@ public class GameController : Singleton<GameController>
         if (go)
         {
             _character = go.transform;
+        }
+    }
+
+    private void FindSceneBlockPool()
+    {
+        GameObject go = GameObject.FindGameObjectWithTag(Tags.SceneBlockPool.ToString());
+        if (go)
+        {
+            ObjectPool pool = go.GetComponent<ObjectPool>();
+            if (pool)
+            {
+                _sceneBlockPuller = pool;
+            }
         }
     }
 
