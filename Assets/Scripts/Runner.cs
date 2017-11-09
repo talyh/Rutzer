@@ -30,14 +30,6 @@ public class Runner : MonoBehaviour
         InitializeVariables();
     }
 
-    private void Start()
-    {
-    }
-
-    private void Update()
-    {
-    }
-
     private void FixedUpdate()
     {
         // determine whether the character is grounded or not, based on contact of its groundCheck with elements in the ground layer
@@ -70,12 +62,19 @@ public class Runner : MonoBehaviour
 
     private void Jump()
     {
-        Supporting.Log("Jumping");
-
         if (_grounded)
         {
             _rb.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
         }
+    }
+
+    public void Die()
+    {
+        // TODO - add animations, sounds, etc, making sure points stop counting right away, but scene is not transitioned until 
+        // finished
+
+
+        GameController.instance.GameOver();
     }
 
     void RunInitialChecks()

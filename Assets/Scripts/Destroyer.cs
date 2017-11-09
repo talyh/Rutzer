@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Destroyer : MonoBehaviour {
+public class Destroyer : MonoBehaviour
+{
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    private void OnTriggerEnter2D(Collider2D coll)
+    {
+        if (coll.gameObject.tag == GameController.Tags.Player.ToString())
+        {
+            GameController.instance.character.GetComponent<Runner>().Die();
+            Supporting.Log("Player died from collision with: " + gameObject.name);
+        }
+    }
 }
