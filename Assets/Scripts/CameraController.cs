@@ -4,24 +4,15 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-
-    [Header("Camera Movement")]
-    // [SerializeField] private float leftEdge = 1;
-    // [SerializeField] private float rightEdge = 100;
-    // [SerializeField] private float topEdge = 100;
-    // [SerializeField] private float bottomEdge = 0;
-    // [SerializeField] private float speed = 10;
     private Transform _target;
     private float _offset;
 
-    // Use this for initialization
-    void Start()
+    private void Start()
     {
         // Find the player
-        // _target = GameController.instance.character;
-        // GameController.instance.CheckRequiredComponent("Target", _target, objectName: gameObject.name);
+        _target = GameController.instance.character;
 
-        if (_target)
+        if (Supporting.CheckRequiredProperty(gameObject, _target, "Target"))
         {
             _offset = _target.position.x - transform.position.x;
         }

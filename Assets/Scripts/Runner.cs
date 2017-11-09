@@ -40,10 +40,10 @@ public class Runner : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // determine whether the character is grounded or not, based on contact of its groundCheck with elements in the ground layer
         _grounded = Physics2D.OverlapCircle(_groundCheck.position, 0.2f, GameController.instance.ground);
 
-        Supporting.Log("grounded: " + _grounded);
-
+        // determine if there's a gap to be jumped, based on contact of the gapAhead collider with elements in the ground layer
         _gapAhead = !_gapCheck.IsTouchingLayers(GameController.instance.ground);
 
         if (!_gapAhead)
@@ -58,8 +58,6 @@ public class Runner : MonoBehaviour
 
     private void Run()
     {
-        // Supporting.Log("Running");
-
         if (_rb.velocity.x <= 0)
         {
             _rb.AddForce(Vector2.right * GameController.instance.speed, ForceMode2D.Impulse);

@@ -6,19 +6,13 @@ using UnityEditor;
 
 public class GameController : Singleton<GameController>
 {
-    // // Define lists used throughout the game
-    // // public enum Powers { noPower = 0, grow, extraLife, fly, fire, invincible }
-    // public enum CharacterStates { small = 1, big, racoon }; // starting at 1 to keep it aligned with the animation layer index (where 0 = base layer)
-
-    // // Define Layers and LayerMasks used throughout the game
-    // // Additional LayerMasks may be defined in individual scripts if they're used only in that script
+    // Define Layers and LayerMasks used throughout the game
+    // Additional LayerMasks may be defined in individual scripts if they're used only in that script
     public enum Layers { Ground = 8 };
     internal LayerMask ground;
-    // internal LayerMask player;
-    // internal LayerMask notPlayer;
 
     // // Define Tags used throughout the game
-    // public enum Tags { BashfullnessRange, CheckPoint, DeathPit, Shell, Block, Item, GroundCheck, HoldPoint, ShotSpawnPoint, PlayerSprite, HitPoint };
+    public enum Tags { Player };
 
     // // Define Controls used throughout the game
     // // public enum Controls { Horizontal, Jump, GrabItem, Crouch, Fly}
@@ -33,29 +27,14 @@ public class GameController : Singleton<GameController>
 
     private bool _gameOver = true;
 
+    public Transform _character;
+
     private void Start()
     {
         Persistency.LoadSavedData(Persistency.DataGroups.Score);
 
-        // Get prefab values for dynamic instation if needed
-        // GameObject GameControllerPrefab = AssetDatabase.LoadAssetAtPath("Assets/General/Controllers/GameController.prefab", typeof(GameObject)) as GameObject;
-        // if (GameControllerPrefab)
-        // {
-        //     initialLives = GameControllerPrefab.GetComponent<GameController>().initialLives;
-        // }
-        // else
-        // {
-        //     Debug.Log("GameController prefab not found");
-        // }
-
         // Define the LayerMasks that will be needed throughout the game
         ground = 1 << LayerMask.NameToLayer(Layers.Ground.ToString());
-        // 1 << LayerMask.NameToLayer(Layers.Hitable.ToString()) |
-        //  1 << LayerMask.NameToLayer(Layers.Pipes.ToString());
-        // player = 1 << LayerMask.NameToLayer(Layers.Player.ToString());
-        // notPlayer = ~(1 << LayerMask.NameToLayer(Layers.Player.ToString()));
-
-        // lives = initialLives;
     }
 
     private void Update()
@@ -82,6 +61,8 @@ public class GameController : Singleton<GameController>
 
     public void ScorePoints()
     {
+        // if game is actually running, score points based on time the player stays alive
+        // points are rounded for better UI display and user interpretation
         if (!_gameOver)
         {
             _rawScore += Time.deltaTime;
@@ -95,27 +76,37 @@ public class GameController : Singleton<GameController>
 
     public void GameOver()
     {
+        // if game has ended, check for new highscores to be saved and load the Game Over Scene
         _gameOver = true;
         if (_score > _highScore)
         {
             _highScore = _score;
+            Persistency.SaveData(Persistency.DataGroups.Score);
         }
-        Persistency.SaveData(Persistency.DataGroups.Score);
         SceneController.instance.GameOver();
     }
 
     public void StartGame()
     {
         ResetGameVariables();
-        _gameOver = false;
+        FindCharacter();
     }
 
-    public void ResetGameVariables()
+    private void ResetGameVariables()
     {
         speed = INITIAL_SPEED;
         score = 0;
         _rawScore = 0;
         _gameOver = false;
+    }
+
+    private void FindCharacter()
+    {
+        GameObject go = GameObject.FindGameObjectWithTag(Tags.Player.ToString());
+        if (go)
+        {
+            _character = go.transform;
+        }
     }
 
     public void PauseGame()
@@ -154,9 +145,9 @@ public class GameController : Singleton<GameController>
         set { _highScore = value; CanvasController.instance.ShowHighScore(highScore); }
     }
 
-    // public Transform character
-    // {
-    //     get { return _character; }
-    // }
+    public Transform character
+    {
+        get { return _character; }
+    }
 }
 

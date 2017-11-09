@@ -45,6 +45,11 @@ public class SceneController : Singleton<SceneController>
         instance.SetCurrentSceneType();
         CanvasController.instance.EnableSceneCanvas();
         SoundController.instance.EnableSceneMusic();
+
+        if (instance._currentSceneType == SceneTypes.Level)
+        {
+            GameController.instance.StartGame();
+        }
     }
 
     protected override void AdditionalAwakeTasks()
@@ -99,13 +104,11 @@ public class SceneController : Singleton<SceneController>
     public void StartGame()
     {
         SceneManager.LoadScene(_firstLevelName);
-        GameController.instance.StartGame();
     }
 
     public void RestartGame()
     {
         SceneManager.LoadScene(_firstLevelName);
-        GameController.instance.StartGame();
     }
 
     public void GameOver()
