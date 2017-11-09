@@ -17,7 +17,7 @@ public class GameController : Singleton<GameController>
     // // Define Controls used throughout the game
     // // public enum Controls { Horizontal, Jump, GrabItem, Crouch, Fly}
 
-    private const float INITIAL_SPEED = 2.5f;
+    private const float INITIAL_SPEED = 1.5f;
     private float _speed;
     private int _score;
     private float _rawScore;
@@ -48,13 +48,12 @@ public class GameController : Singleton<GameController>
 
         ScorePoints();
 
-        if (Time.frameCount % 100 == 0)
-        {
-            Debug.Log("here");
-            GameObject go = _sceneBlockPuller.GetPooledObject();
-            go.SetActive(true);
-            go.transform.position = character.transform.position + (Vector3.right * 5);
-        }
+        // if (Time.frameCount % 100 == 0)
+        // {
+        //     GameObject go = _sceneBlockPuller.GetPooledObject();
+        //     go.SetActive(true);
+        //     go.transform.position = new Vector3(character.transform.position.x + 5, 0, 0);
+        // }
     }
 
     public void ScorePoints()
