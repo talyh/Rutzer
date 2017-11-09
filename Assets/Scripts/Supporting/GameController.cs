@@ -12,7 +12,7 @@ public class GameController : Singleton<GameController>
     internal LayerMask ground;
 
     // // Define Tags used throughout the game
-    public enum Tags { Player, SceneBlockPool };
+    public enum Tags { Player, SceneBlockPool, SceneBlock };
 
     // // Define Controls used throughout the game
     // // public enum Controls { Horizontal, Jump, GrabItem, Crouch, Fly}

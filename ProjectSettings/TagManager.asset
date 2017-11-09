@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - SceneBlockPool
+  - GroundCheck
+  - PlayerSprite
+  - SceneBlock
   layers:
   - Default
   - TransparentFX

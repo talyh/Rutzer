@@ -298,9 +298,10 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4927016795878438}
+  - component: {fileID: 114879962203656250}
   m_Layer: 8
   m_Name: SceneBlock0
-  m_TagString: Untagged
+  m_TagString: SceneBlock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1304,6 +1305,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.8, y: 0.8}
   m_EdgeRadius: 0
+--- !u!114 &114879962203656250
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1743981946251382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68caf85e785d1477d98599e1ec65bd1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _verticalPlatform: {fileID: 0}
+  _expandingPlatform: {fileID: 0}
 --- !u!212 &212042094278777650
 SpriteRenderer:
   m_ObjectHideFlags: 1

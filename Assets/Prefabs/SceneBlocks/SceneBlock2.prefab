@@ -19,9 +19,10 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4315454802274112}
+  - component: {fileID: 114496349672381304}
   m_Layer: 8
   m_Name: SceneBlock2
-  m_TagString: Untagged
+  m_TagString: SceneBlock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1452,6 +1453,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dde073ca120c44caa29aea13156c31d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _shrinked: {fileID: 4101961467009476}
+  _expanded: {fileID: 4448102437990180}
+--- !u!114 &114496349672381304
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1019972217062252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68caf85e785d1477d98599e1ec65bd1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _verticalPlatform: {fileID: 0}
+  _expandingPlatform: {fileID: 114153788343492792}
 --- !u!212 &212026602226009962
 SpriteRenderer:
   m_ObjectHideFlags: 1
