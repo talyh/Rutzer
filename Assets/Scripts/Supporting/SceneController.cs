@@ -99,12 +99,13 @@ public class SceneController : Singleton<SceneController>
     public void StartGame()
     {
         SceneManager.LoadScene(_firstLevelName);
+        GameController.instance.StartGame();
     }
 
     public void RestartGame()
     {
-        GameController.instance.ResetGameVariables();
         SceneManager.LoadScene(_firstLevelName);
+        GameController.instance.StartGame();
     }
 
     public void GameOver()

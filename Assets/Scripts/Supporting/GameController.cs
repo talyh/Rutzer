@@ -32,12 +32,7 @@ public class GameController : Singleton<GameController>
     [SerializeField]
     private int _pointsMultiplier = 10;
 
-    private bool _gameOver;
-
-    protected override void AdditionalAwakeTasks()
-    {
-        ResetGameVariables();
-    }
+    private bool _gameOver = true;
 
     private void Start()
     {
@@ -110,16 +105,11 @@ public class GameController : Singleton<GameController>
         SceneController.instance.GameOver();
     }
 
-    // public void StartLevel()
-    // {
-    //     // Find the character in scene (assume only one)
-    //     SpawnCharacter();
-    //     _character = FindObjectOfType<Character>().transform;
-    //     CheckRequiredComponent("Character", character, objectName:gameObject.name);
-    //     ShowScore();
-    //     ShowLives();
-    //     ShowCoins();
-    // }
+    public void StartGame()
+    {
+        ResetGameVariables();
+        _gameOver = false;
+    }
 
     public void ResetGameVariables()
     {
