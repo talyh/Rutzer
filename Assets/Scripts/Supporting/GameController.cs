@@ -74,11 +74,19 @@ public class GameController : Singleton<GameController>
     {
         // if game has ended, check for new highscores to be saved and load the Game Over Scene
         _gameOver = true;
+
         if (_score > _highScore)
         {
             _highScore = _score;
             Persistency.SaveData(Persistency.DataGroups.Score);
         }
+
+        StartCoroutine(WaitForPlayerDeathEffects());
+    }
+
+    private IEnumerator WaitForPlayerDeathEffects()
+    {
+        yield return new WaitUntil(() => _character.GetComponent<Runner>().readyToDie);
         SceneController.instance.GameOver();
     }
 

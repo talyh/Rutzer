@@ -26,6 +26,8 @@ public class Runner : MonoBehaviour
 
     private bool _inSlope;
 
+    private bool _readyToDie;
+
 
     private void Awake()
     {
@@ -98,9 +100,16 @@ public class Runner : MonoBehaviour
     {
         // TODO - add animations, sounds, etc, making sure points stop counting right away, but scene is not transitioned until 
         // finished
-
-        GameController.instance.GameOver();
         SoundController.instance.PlaySFX(SoundController.instance.sfxDie);
+        StartCoroutine(CheckIfReadyToEndGame());
+        GameController.instance.GameOver();
+    }
+
+    private IEnumerator CheckIfReadyToEndGame()
+    {
+        yield return new WaitForSeconds(SoundController.instance.sfxDie.length);
+        _readyToDie = true;
+
     }
 
     private void RunInitialChecks()
@@ -109,5 +118,10 @@ public class Runner : MonoBehaviour
         Supporting.CheckRequiredProperty(gameObject, _gapCheck, "Gap Check");
         Supporting.CheckRequiredProperty(gameObject, _jumpLevelCheck, "Jump Level Check");
         Supporting.CheckRequiredProperty(gameObject, _jumpHighCheck, "Jump High Check");
+    }
+
+    public bool readyToDie
+    {
+        get { return _readyToDie; }
     }
 }

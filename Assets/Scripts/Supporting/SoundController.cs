@@ -105,7 +105,6 @@ public class SoundController : Singleton<SoundController>
         }
     }
 
-
     public void SetMusicVolume(float volume)
     {
         if (_masterMixer)
