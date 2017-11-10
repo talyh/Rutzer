@@ -48,6 +48,8 @@ public class ExpandingPlatform : MonoBehaviour
         // TODO - replace with proper expansion and shrinking based on Physics Joint
         _shrinked.gameObject.SetActive(false);
         _expanded.gameObject.SetActive(true);
+
+        SoundController.instance.PlaySFX(SoundController.instance.sfxStretchPlatform);
     }
 
     private void Shrink()

@@ -29,11 +29,13 @@ public class SoundController : Singleton<SoundController>
     [SerializeField]
     private AudioClip _sfxJump;
     [SerializeField]
+    private AudioClip _sfxIncreaseSpeed;
+    [SerializeField]
+    private AudioClip _sfxDie;
+    [SerializeField]
     private AudioClip _sfxStretchPlatform;
     [SerializeField]
     private AudioClip _sfxMovePlatform;
-    [SerializeField]
-    private AudioClip _sfxDie;
 
     public void PlaySFX(AudioClip clip)
     {
@@ -41,10 +43,12 @@ public class SoundController : Singleton<SoundController>
         if (!_sfxPlayer.isPlaying)
         {
             player = _sfxPlayer;
+            Supporting.Log("Using existing audio source");
         }
         else
         {
             player = new AudioSource();
+            Supporting.Log("Creating new audio source");
         }
 
         // assign the clip to the AudioSource
@@ -141,6 +145,16 @@ public class SoundController : Singleton<SoundController>
         get { return _sfxJump; }
     }
 
+    public AudioClip sfxDie
+    {
+        get { return _sfxDie; }
+    }
+
+    public AudioClip sfxIncreaseSpeed
+    {
+        get { return _sfxIncreaseSpeed; }
+    }
+
     public AudioClip sfxStretchPlatform
     {
         get { return _sfxStretchPlatform; }
@@ -149,10 +163,5 @@ public class SoundController : Singleton<SoundController>
     public AudioClip sfxMovePlatform
     {
         get { return _sfxMovePlatform; }
-    }
-
-    public AudioClip sfxDie
-    {
-        get { return _sfxDie; }
     }
 }

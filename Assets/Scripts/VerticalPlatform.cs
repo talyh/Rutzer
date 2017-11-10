@@ -40,6 +40,7 @@ public class VerticalPlatform : MonoBehaviour
 
         // TODO - replace with proper physics drop based on joints
         _rb.gravityScale = DROPPING_GRAVITY;
+        SoundController.instance.PlaySFX(SoundController.instance.sfxMovePlatform);
 
         // TODO - ensure platform doesn't get bumped up if player hits it from underneath
     }
