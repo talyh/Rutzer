@@ -30,7 +30,6 @@ public class Runner : MonoBehaviour
     private void Awake()
     {
         RunInitialChecks();
-        InitializeVariables();
     }
 
     void Update()
@@ -76,17 +75,10 @@ public class Runner : MonoBehaviour
 
     private void Run()
     {
-        // Supporting.Log("horizontal velocity: " + _rb.velocity.x);
-
         if (_rb.velocity.x <= 0.1f)
         {
-            // Supporting.Log("Running with impulse");
+            Supporting.Log("Running with impulse");
             _rb.AddForce(Vector2.right * GameController.instance.speed, ForceMode2D.Impulse);
-        }
-        else
-        {
-            // Supporting.Log("Running without impulse");
-            _rb.AddForce(Vector2.right * GameController.instance.speed * Time.deltaTime, ForceMode2D.Force);
         }
     }
 
@@ -98,6 +90,12 @@ public class Runner : MonoBehaviour
         }
     }
 
+    public void IncreaseSpeed()
+    {
+        _rb.AddForce(Vector2.right, ForceMode2D.Impulse);
+        Supporting.Log("RB Velocity: " + _rb.velocity.x);
+    }
+
     public void Die()
     {
         // TODO - add animations, sounds, etc, making sure points stop counting right away, but scene is not transitioned until 
@@ -107,17 +105,11 @@ public class Runner : MonoBehaviour
         GameController.instance.GameOver();
     }
 
-    void RunInitialChecks()
+    private void RunInitialChecks()
     {
         Supporting.CheckRequiredProperty(gameObject, _rb, "Rigidboy");
         Supporting.CheckRequiredProperty(gameObject, _gapCheck, "Gap Check");
         Supporting.CheckRequiredProperty(gameObject, _jumpLevelCheck, "Jump Level Check");
         Supporting.CheckRequiredProperty(gameObject, _jumpHighCheck, "Jump High Check");
-    }
-
-    void InitializeVariables()
-    {
-        _gapAhead = false;
-        _grounded = true;
     }
 }

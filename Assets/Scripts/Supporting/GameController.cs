@@ -155,6 +155,7 @@ public class GameController : Singleton<GameController>
         if (_score > 0 && _score % POINTS_FOR_SPEED_INCREASE == 0)
         {
             speed++;
+            _character.GetComponent<Runner>().IncreaseSpeed();
         }
     }
 
