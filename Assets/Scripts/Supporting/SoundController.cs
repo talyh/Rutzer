@@ -42,6 +42,11 @@ public class SoundController : Singleton<SoundController>
 
     public void PlaySFX(AudioClip clip)
     {
+        if (_primarySFXPlayer.mute)
+        {
+            return;
+        }
+
         AudioSource player;
         if (!_primarySFXPlayer.isPlaying)
         {
@@ -69,6 +74,11 @@ public class SoundController : Singleton<SoundController>
 
     public void PlayMusic(AudioClip clip)
     {
+        if (_musicPlayer.mute)
+        {
+            return;
+        }
+
         // assign the clip to the AudioSource
         _musicPlayer.clip = clip;
 

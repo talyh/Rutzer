@@ -427,8 +427,8 @@ MonoBehaviour:
   _sfxJump: {fileID: 8300000, guid: 54b6898e8673a4714a46a9f5f23fe0ad, type: 3}
   _sfxIncreaseSpeed: {fileID: 8300000, guid: 48f829f92a7ff48fd989f9db7c651a70, type: 3}
   _sfxDie: {fileID: 8300000, guid: bb1995a07c8384e6997311ad066aae79, type: 3}
-  _sfxStretchPlatform: {fileID: 8300000, guid: 7d21c338f33d34d8cbd3f8dab54d5c01, type: 3}
-  _sfxMovePlatform: {fileID: 8300000, guid: bb1995a07c8384e6997311ad066aae79, type: 3}
+  _sfxStretchPlatform: {fileID: 8300000, guid: 094c2b9725ff34d4d8e5851a779e20d2, type: 3}
+  _sfxMovePlatform: {fileID: 8300000, guid: 7d21c338f33d34d8cbd3f8dab54d5c01, type: 3}
 --- !u!4 &1768482090
 Transform:
   m_ObjectHideFlags: 0

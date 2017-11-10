@@ -6,6 +6,9 @@ using UnityEditor;
 
 public class GameController : Singleton<GameController>
 {
+    public delegate void SpeedIncreased();
+    public static event SpeedIncreased speedIncreased;
+
     // Define Layers and LayerMasks used throughout the game
     // Additional LayerMasks may be defined in individual scripts if they're used only in that script
     public enum Layers { Ground = 8 };
@@ -164,6 +167,7 @@ public class GameController : Singleton<GameController>
         {
             speed++;
             _character.GetComponent<Runner>().IncreaseSpeed();
+            speedIncreased();
         }
     }
 
