@@ -9,13 +9,16 @@ public class SoundController : Singleton<SoundController>
     public const float MAX_VOLUME = 0;
     public const float MIN_VOLUME = -80;
 
+    private const string MIXER_SFX_CHANNEL = "SFX";
+
     [Header("Audio Objects")]
     [SerializeField]
     private AudioMixer _masterMixer;
     [SerializeField]
     private AudioSource _musicPlayer;
     [SerializeField]
-    private AudioSource _sfxPlayer;
+    private AudioSource _primarySFXPlayer;
+    private AudioSource _secondarySFXPlayer;
 
     [Header("Music")]
     [SerializeField]
@@ -40,15 +43,21 @@ public class SoundController : Singleton<SoundController>
     public void PlaySFX(AudioClip clip)
     {
         AudioSource player;
-        if (!_sfxPlayer.isPlaying)
+        if (!_primarySFXPlayer.isPlaying)
         {
-            player = _sfxPlayer;
-            Supporting.Log("Using existing audio source");
+            Supporting.Log("Using primary audio source to play: " + clip.name);
+            player = _primarySFXPlayer;
         }
         else
         {
-            player = new AudioSource();
-            Supporting.Log("Creating new audio source");
+            Supporting.Log("Using secondary audio source to play " + clip.name);
+            if (!_secondarySFXPlayer)
+            {
+                _secondarySFXPlayer = _primarySFXPlayer.gameObject.AddComponent<AudioSource>();
+                _secondarySFXPlayer.outputAudioMixerGroup = _masterMixer.FindMatchingGroups(MIXER_SFX_CHANNEL)[0];
+            }
+
+            player = _secondarySFXPlayer;
         }
 
         // assign the clip to the AudioSource
@@ -122,7 +131,7 @@ public class SoundController : Singleton<SoundController>
 
     public void SetSFXVolume(bool enabled)
     {
-        _sfxPlayer.mute = !enabled;
+        _primarySFXPlayer.mute = !enabled;
     }
 
     public AudioMixer masterMixer
@@ -137,7 +146,7 @@ public class SoundController : Singleton<SoundController>
 
     public bool SFXMuted
     {
-        get { return _sfxPlayer.mute; }
+        get { return _primarySFXPlayer.mute; }
     }
 
     public AudioClip sfxJump

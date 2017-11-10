@@ -374,7 +374,7 @@ MonoBehaviour:
   _jumpLevelCheck: {fileID: 61629543091522610}
   _jumpHighCheck: {fileID: 61323549846581876}
   _groundCheck: {fileID: 4660513150698466}
-  _jumpForce: 0.5
+  _jumpForce: 2
 --- !u!212 &212246903964796946
 SpriteRenderer:
   m_ObjectHideFlags: 1
