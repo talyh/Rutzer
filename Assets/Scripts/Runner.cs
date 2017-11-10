@@ -6,7 +6,6 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D))]
 public class Runner : MonoBehaviour
 {
-
     [SerializeField]
     private Rigidbody2D _rb;
     [SerializeField]
@@ -81,7 +80,7 @@ public class Runner : MonoBehaviour
         Supporting.Log("Jumping");
 
         // add vertical impulse to the character, based on its jumpForce
-        _rb.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
+        _rb.AddForce(Vector2.up * _jumpForce / GameController.instance.speed, ForceMode2D.Impulse);
         SoundController.instance.PlaySFX(SoundController.instance.sfxJump);
     }
 
