@@ -17,13 +17,16 @@ public class GameController : Singleton<GameController>
     // // Define Controls used throughout the game
     // // public enum Controls { Horizontal, Jump, GrabItem, Crouch, Fly}
 
-    private const float INITIAL_SPEED = 1.5f;
+    private const float INITIAL_SPEED = 2.5f;
+    private const float MAX_SPEED = 10;
+    private const int HUD_SPEED_MULTIPLIER = 10;
     private float _speed;
     private int _score;
     private float _rawScore;
     private int _highScore;
 
     private const int POINTS_MULTIPLIER = 10;
+    private const int POINTS_FOR_SPEED_INCREASE = 100;
 
     private bool _gameOver = true;
 
@@ -61,6 +64,8 @@ public class GameController : Singleton<GameController>
             {
                 _rawScore = 0;
                 score += POINTS_MULTIPLIER;
+
+                IncreaseSpeedBasaedOnPoints();
             }
         }
     }
@@ -140,10 +145,23 @@ public class GameController : Singleton<GameController>
         previousBlockScene.SetActive(false);
     }
 
+    private void IncreaseSpeedBasaedOnPoints()
+    {
+        if (_speed >= MAX_SPEED)
+        {
+            return;
+        }
+
+        if (_score > 0 && _score % POINTS_FOR_SPEED_INCREASE == 0)
+        {
+            speed++;
+        }
+    }
+
     public float speed
     {
         get { return _speed; }
-        set { _speed = value; CanvasController.instance.ShowSpeed((int)speed); }
+        set { _speed = value; CanvasController.instance.ShowSpeed((int)speed * HUD_SPEED_MULTIPLIER); }
     }
 
     public int score
