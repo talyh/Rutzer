@@ -30,6 +30,7 @@ public class GameController : Singleton<GameController>
     private Transform _character;
 
     private ObjectPool _sceneBlockPuller;
+    private const float BLOCK_SCENE_SIZE = 18.4f;
 
     private void Start()
     {
@@ -47,13 +48,6 @@ public class GameController : Singleton<GameController>
         }
 
         ScorePoints();
-
-        // if (Time.frameCount % 100 == 0)
-        // {
-        //     GameObject go = _sceneBlockPuller.GetPooledObject();
-        //     go.SetActive(true);
-        //     go.transform.position = new Vector3(character.transform.position.x + 5, 0, 0);
-        // }
     }
 
     public void ScorePoints()
@@ -136,6 +130,14 @@ public class GameController : Singleton<GameController>
             CanvasController.instance.EnablePauseCanvas(false);
             Time.timeScale = 1;
         }
+    }
+
+    public void SpawnNewBlockScene(GameObject previousBlockScene)
+    {
+        GameObject go = _sceneBlockPuller.GetPooledObject();
+        go.transform.position = new Vector3(previousBlockScene.transform.position.x + BLOCK_SCENE_SIZE * 2, 0, 0);
+        go.SetActive(true);
+        previousBlockScene.SetActive(false);
     }
 
     public float speed

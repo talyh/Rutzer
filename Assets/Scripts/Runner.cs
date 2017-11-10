@@ -33,6 +33,15 @@ public class Runner : MonoBehaviour
         InitializeVariables();
     }
 
+    void Update()
+    {
+        // TODO - remove after testing
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+
+        }
+    }
+
     private void FixedUpdate()
     {
         // determine whether the character's feet are touching the floor or not, based on contact of its groundCheck with elements in the ground layer
@@ -67,12 +76,16 @@ public class Runner : MonoBehaviour
 
     private void Run()
     {
-        if (_rb.velocity.x <= 0)
+        // Supporting.Log("horizontal velocity: " + _rb.velocity.x);
+
+        if (_rb.velocity.x <= 0.1f)
         {
+            // Supporting.Log("Running with impulse");
             _rb.AddForce(Vector2.right * GameController.instance.speed, ForceMode2D.Impulse);
         }
         else
         {
+            // Supporting.Log("Running without impulse");
             _rb.AddForce(Vector2.right * GameController.instance.speed * Time.deltaTime, ForceMode2D.Force);
         }
     }

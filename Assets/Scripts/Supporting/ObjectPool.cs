@@ -6,6 +6,8 @@ public class ObjectPool : MonoBehaviour
 {
     private List<GameObject> _pooledObjects;
     [SerializeField]
+    private GameObject[] _objectsInSceneToAddToPool;
+    [SerializeField]
     private GameObject[] _objectsToPool;
     [SerializeField]
     private int _amountToPoolInitially;
@@ -16,6 +18,12 @@ public class ObjectPool : MonoBehaviour
     private void Start()
     {
         _pooledObjects = new List<GameObject>();
+
+        // if there's any scene object to add, include those
+        for (int i = 0; i < _objectsInSceneToAddToPool.Length; i++)
+        {
+            _pooledObjects.Add(_objectsInSceneToAddToPool[i]);
+        }
 
         // spawn initial objects
         for (int i = 0; i < _amountToPoolInitially; i++)
@@ -42,11 +50,6 @@ public class ObjectPool : MonoBehaviour
             return SpawnObject();
         }
         return null;
-    }
-
-    public void SendObjectToSleep(GameObject go)
-    {
-        go.SetActive(false);
     }
 
     private GameObject SpawnObject()

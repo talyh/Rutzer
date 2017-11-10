@@ -8,13 +8,15 @@ public class Destroyer : MonoBehaviour
     {
         if (coll.gameObject.tag == GameController.Tags.Player.ToString())
         {
+            // Supporting.Log("Player died from collision with: " + gameObject.name);
             GameController.instance.character.GetComponent<Runner>().Die();
-            Supporting.Log("Player died from collision with: " + gameObject.name);
         }
 
         if (coll.gameObject.tag == GameController.Tags.SceneBlock.ToString())
         {
-            coll.gameObject.SetActive(false);
+            // as a SceneBlock is left behind the player, generate a new one
+            // Supporting.Log("Leaving " + coll.name + " behind");
+            GameController.instance.SpawnNewBlockScene(coll.gameObject);
         }
     }
 }
