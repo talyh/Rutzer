@@ -150,7 +150,7 @@ public class GameController : Singleton<GameController>
 
     public void SpawnNewBlockScene(GameObject previousBlockScene)
     {
-        GameObject go = _sceneBlockPuller.GetPooledObject();
+        GameObject go = _sceneBlockPuller.GetRandomPooledObject();
         go.transform.position = new Vector3(previousBlockScene.transform.position.x + BLOCK_SCENE_SIZE * 2, 0, 0);
         go.SetActive(true);
         previousBlockScene.SetActive(false);

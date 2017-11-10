@@ -299,8 +299,16 @@ MonoBehaviour:
   _objectsToPool:
   - {fileID: 1743981946251382, guid: 1fb29d2d727984c5fa97f2b7b47c27ff, type: 2}
   - {fileID: 1788878072433144, guid: 4c00fc00e04b345d191f252b2a0dc169, type: 2}
+  - {fileID: 1788878072433144, guid: 4c00fc00e04b345d191f252b2a0dc169, type: 2}
+  - {fileID: 1788878072433144, guid: 4c00fc00e04b345d191f252b2a0dc169, type: 2}
+  - {fileID: 1788878072433144, guid: 4c00fc00e04b345d191f252b2a0dc169, type: 2}
+  - {fileID: 1788878072433144, guid: 4c00fc00e04b345d191f252b2a0dc169, type: 2}
   - {fileID: 1019972217062252, guid: 44e99076d9e13462eaf2a0ab8e977adf, type: 2}
-  _amountToPoolInitially: 5
+  - {fileID: 1019972217062252, guid: 44e99076d9e13462eaf2a0ab8e977adf, type: 2}
+  - {fileID: 1019972217062252, guid: 44e99076d9e13462eaf2a0ab8e977adf, type: 2}
+  - {fileID: 1019972217062252, guid: 44e99076d9e13462eaf2a0ab8e977adf, type: 2}
+  - {fileID: 1019972217062252, guid: 44e99076d9e13462eaf2a0ab8e977adf, type: 2}
+  _amountToPoolInitially: 0
   _spawnAdditionalIfNeeded: 1
 --- !u!4 &842841719
 Transform:
