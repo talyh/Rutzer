@@ -151,7 +151,10 @@ PlayerSettings:
   resolutionScalingMode: 0
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
-  applicationIdentifier: {}
+  applicationIdentifier:
+    Android: com.TFS.InfiniteRunner
+    Standalone: com.TFS.InfiniteRunner
+    iOS: com.TFS.InfiniteRunner
   buildNumber: {}
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 16

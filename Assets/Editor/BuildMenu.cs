@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.SceneManagement;
 
 public class BuildMenu
 {
@@ -77,7 +78,12 @@ public class BuildMenu
         options.locationPathName = buildPath;
         options.options = devBuild ? BuildOptions.Development : BuildOptions.None;
         options.target = target;
-        options.scenes = new string[] { "Assets/Scenes/Game.unity" };
+        options.scenes = new string[EditorBuildSettings.scenes.Length];
+        for (int i = 0; i < EditorBuildSettings.scenes.Length; i++)
+        {
+            options.scenes[i] = EditorBuildSettings.scenes[i].path;
+            Debug.Log(options.scenes[i]);
+        }
 
         // trigger the build process
         Debug.Log(string.Format("Building to {0}", buildPath));
