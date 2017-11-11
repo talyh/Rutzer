@@ -40,6 +40,11 @@ public class SoundController : Singleton<SoundController>
     [SerializeField]
     private AudioClip _sfxMovePlatform;
 
+    private void Start()
+    {
+        Persistency.LoadSavedData(Persistency.DataGroups.Sound);
+    }
+
     public void PlaySFX(AudioClip clip)
     {
         if (_primarySFXPlayer.mute)

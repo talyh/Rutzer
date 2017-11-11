@@ -89,10 +89,10 @@ public class SceneController : Singleton<SceneController>
         SceneManager.LoadScene(_previousScene);
         Persistency.SaveData(Persistency.DataGroups.Sound);
 
-        if (instance._previousScene != SceneManager.GetActiveScene().buildIndex)
-        {
-            instance._previousScene = SceneManager.GetActiveScene().buildIndex;
-        }
+        // if (instance._previousScene != SceneManager.GetActiveScene().buildIndex)
+        // {
+        //     instance._previousScene = SceneManager.GetActiveScene().buildIndex;
+        // }
     }
 
     public void Reload()

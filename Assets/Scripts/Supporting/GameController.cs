@@ -41,8 +41,6 @@ public class GameController : Singleton<GameController>
 
     private void Start()
     {
-        Persistency.LoadSavedData(Persistency.DataGroups.Score);
-
         // Define the LayerMasks that will be needed throughout the game
         ground = 1 << LayerMask.NameToLayer(Layers.Ground.ToString());
     }
