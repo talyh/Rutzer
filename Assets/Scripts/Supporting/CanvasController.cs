@@ -62,6 +62,10 @@ public class CanvasController : Singleton<CanvasController>
     private string _txtScoreName = "txtScore";
     [SerializeField]
     private string _txtHighScoreName = "txtHighScore";
+    [SerializeField]
+    private string _txtWinName = "txtWin";
+    [SerializeField]
+    private string _txtLoseName = "txtLose";
 
 
     // ----- ELEMENTS THAT MAY EXIST ACROSS MULTIPLE CANVASES, DEPENDING ON SCENE
@@ -81,6 +85,8 @@ public class CanvasController : Singleton<CanvasController>
     private Text _txtSpeed;
     private Text _txtScore;
     private Text _txtHighScore;
+    private Text _txtWin;
+    private Text _txtLose;
 
     public void EnableSceneCanvas()
     {
@@ -159,7 +165,7 @@ public class CanvasController : Singleton<CanvasController>
                     _levelScreenCanvas.SetActive(false);
                     _gameOverScreenCanvas.SetActive(true);
                     _pauseMenuCanvas.SetActive(false);
-                    Supporting.Log("Enabling game over canvas");
+                    ShowGameOverResult(GameController.instance.newRecord);
                     break;
                 }
             default:
@@ -289,7 +295,7 @@ public class CanvasController : Singleton<CanvasController>
         Text[] texts = GameObject.FindObjectsOfType<Text>();
         foreach (Text text in texts)
         {
-            // only go through elemens that are TextAreas, as Unity's function will also return Text elements associated with
+            // only go through elements that are TextAreas, as Unity's function will also return Text elements associated with
             // and other elements
             if (text.name.StartsWith(TEXT_ELEMENTS_PREFIX))
             {
@@ -307,6 +313,14 @@ public class CanvasController : Singleton<CanvasController>
                 {
                     _txtHighScore = text;
                     ShowHighScore(GameController.instance.highScore);
+                }
+                else if (text.name == _txtWinName)
+                {
+                    _txtWin = text;
+                }
+                else if (text.name == _txtLoseName)
+                {
+                    _txtLose = text;
                 }
                 else
                 {
@@ -369,6 +383,27 @@ public class CanvasController : Singleton<CanvasController>
         if (_txtHighScore)
         {
             _txtHighScore.text = highScore.ToString();
+        }
+    }
+
+    private void ShowGameOverResult(bool newRecord = false)
+    {
+        // ensure binding, in case assynchronicty gets in the way
+        if ((newRecord && !_txtWin) || (!newRecord && !_txtLose))
+        {
+            LinkCanvasElements();
+        }
+
+        if (newRecord)
+        {
+            _txtWin.text += GameController.instance.highScore;
+            _txtWin.gameObject.SetActive(true);
+            _txtLose.gameObject.SetActive(false);
+        }
+        else
+        {
+            _txtWin.gameObject.SetActive(false);
+            _txtLose.gameObject.SetActive(true);
         }
     }
 }

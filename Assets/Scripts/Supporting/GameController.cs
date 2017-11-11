@@ -27,6 +27,8 @@ public class GameController : Singleton<GameController>
     private float _rawScore;
     private int _highScore;
 
+    private bool _newRecord;
+
     private const int POINTS_MULTIPLIER = 10;
     private const int POINTS_FOR_SPEED_INCREASE = 100;
 
@@ -81,6 +83,7 @@ public class GameController : Singleton<GameController>
         {
             _highScore = _score;
             Persistency.SaveData(Persistency.DataGroups.Score);
+            _newRecord = true;
         }
 
         StartCoroutine(WaitForPlayerDeathEffects());
@@ -105,6 +108,7 @@ public class GameController : Singleton<GameController>
         score = 0;
         _rawScore = 0;
         _gameOver = false;
+        _newRecord = false;
     }
 
     private void FindCharacter()
@@ -186,6 +190,11 @@ public class GameController : Singleton<GameController>
     {
         get { return _highScore; }
         set { _highScore = value; CanvasController.instance.ShowHighScore(highScore); }
+    }
+
+    public bool newRecord
+    {
+        get { return _newRecord; }
     }
 
     public Transform character
