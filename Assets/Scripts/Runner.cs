@@ -67,11 +67,9 @@ public class Runner : MonoBehaviour
     {
         if (_rb.velocity.x <= 0.1f)
         {
-            Supporting.Log("Running with impulse");
+            Supporting.Log("Running with impulse. RB Velocity: " + _rb.velocity.x);
 
             _rb.AddForce(Vector2.right * GameController.instance.speed, ForceMode2D.Impulse);
-
-            Supporting.Log("RB Velocity: " + _rb.velocity.x);
         }
     }
 

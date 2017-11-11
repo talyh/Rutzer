@@ -37,7 +37,7 @@ public class GameController : Singleton<GameController>
     private Transform _character;
 
     private ObjectPool _sceneBlockPuller;
-    private const float BLOCK_SCENE_SIZE = 18.4f;
+    private const float BLOCK_SCENE_SIZE = 17.6f;
 
     private void Start()
     {

@@ -34,6 +34,39 @@ public class ExpandingPlatform : MonoBehaviour
                 Shrink();
             }
         }
+#if UNITY_EDITOR
+        if (Input.GetMouseButtonDown(1))
+        {
+            Expand();
+        }
+#endif
+
+#if UNITY_ANDROID || UNITY_IOS
+        if (Input.touchCount == 2)
+        {
+
+            // identify each of the touches
+            Touch firstTouch = Input.GetTouch(0);
+            Touch secondTouch = Input.GetTouch(1);
+
+            // check the touch starting position, for each touch
+            Vector3 firstTouchPrevPos = firstTouch.position - firstTouch.deltaPosition;
+            Vector3 secondTouchPrevPos = secondTouch.position - secondTouch.deltaPosition;
+
+            // check the distance between the starting positions and ending positions, to help
+            // determine the direction of the pinch (in or out)
+            float previousTouchDeltaMagnitude = (firstTouchPrevPos - secondTouchPrevPos).magnitude;
+            float touchDeltaMagnitude = (firstTouch.position - secondTouch.position).magnitude;
+
+            // if pinching out, expand the platform
+            if (previousTouchDeltaMagnitude < touchDeltaMagnitude)
+            {
+                Expand();
+
+            }
+            // if pinching in, do nothing
+#endif
+        }
     }
 
     public void Expand()

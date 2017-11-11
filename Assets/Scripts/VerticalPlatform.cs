@@ -18,6 +18,25 @@ public class VerticalPlatform : MonoBehaviour
         RunInitialChecks();
     }
 
+    private void Update()
+    {
+#if UNITY_EDITOR
+        if (Input.GetMouseButtonDown(0))
+        {
+            Drop();
+        }
+#endif
+
+#if UNITY_ANDROID || UNITY_IOS
+        // if tapping, drop the vertical platform, if it's present
+        // stop listening for touches for a little while to avoid interference with the next action
+        if (Input.touchCount == 1)
+        {
+            Drop();
+        }
+#endif
+    }
+
     private void RunInitialChecks()
     {
         Supporting.CheckRequiredProperty(gameObject, _platform, "Platform");
