@@ -19,7 +19,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4315454802274112}
-  - component: {fileID: 114496349672381304}
   - component: {fileID: 61800397319083894}
   m_Layer: 0
   m_Name: SceneBlock2
@@ -1498,19 +1497,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.8, y: 0.8}
   m_EdgeRadius: 0
---- !u!114 &114496349672381304
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1019972217062252}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68caf85e785d1477d98599e1ec65bd1c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _verticalPlatform: {fileID: 0}
-  _expandingPlatform: {fileID: 114549262469522170}
 --- !u!114 &114549262469522170
 MonoBehaviour:
   m_ObjectHideFlags: 1

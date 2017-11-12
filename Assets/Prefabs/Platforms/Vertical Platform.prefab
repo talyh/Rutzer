@@ -51,7 +51,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4968453685532326}
-  - component: {fileID: 114801530869785534}
   m_Layer: 0
   m_Name: Vertical Platform
   m_TagString: Untagged
@@ -164,6 +163,7 @@ GameObject:
   - component: {fileID: 4334050444326744}
   - component: {fileID: 212102578091893418}
   - component: {fileID: 61282519194666684}
+  - component: {fileID: 50632550145685010}
   m_Layer: 0
   m_Name: Bottom Edge
   m_TagString: Untagged
@@ -229,6 +229,7 @@ GameObject:
   - component: {fileID: 4957652398671126}
   - component: {fileID: 212600599588762482}
   - component: {fileID: 61775470681113448}
+  - component: {fileID: 50043196295568252}
   m_Layer: 0
   m_Name: Top Edge
   m_TagString: Untagged
@@ -247,6 +248,8 @@ GameObject:
   - component: {fileID: 212644775107205110}
   - component: {fileID: 50088346984890536}
   - component: {fileID: 61186261898426990}
+  - component: {fileID: 234334527682115656}
+  - component: {fileID: 114602012449256794}
   m_Layer: 8
   m_Name: Platform
   m_TagString: Untagged
@@ -463,6 +466,26 @@ Transform:
   m_Father: {fileID: 4605972287901148}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &50043196295568252
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1829898056736918}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!50 &50088346984890536
 Rigidbody2D:
   serializedVersion: 4
@@ -474,15 +497,35 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.05
+  m_Mass: 2
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 1
-  m_SleepingMode: 2
+  m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 5
+--- !u!50 &50632550145685010
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1715340377049128}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!61 &61186261898426990
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -558,18 +601,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.8, y: 0.8}
   m_EdgeRadius: 0
---- !u!114 &114801530869785534
+--- !u!114 &114602012449256794
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1139058139093042}
+  m_GameObject: {fileID: 1865805253068236}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2670f7d15c2b94bef89dfdc4243b8187, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _platform: {fileID: 4779654800413722}
+  _topEdge: {fileID: 1829898056736918}
+  _bottomEdge: {fileID: 1715340377049128}
 --- !u!212 &212003192200091252
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -1142,3 +1186,28 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!234 &234334527682115656
+SliderJoint2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1865805253068236}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_EnableCollision: 1
+  m_ConnectedRigidBody: {fileID: 50632550145685010}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_AutoConfigureConnectedAnchor: 1
+  m_Anchor: {x: 0, y: 0}
+  m_ConnectedAnchor: {x: 0, y: 6.7199993}
+  m_AutoConfigureAngle: 1
+  m_Angle: -90
+  m_UseMotor: 0
+  m_Motor:
+    m_MotorSpeed: -3
+    m_MaximumMotorForce: 10000
+  m_UseLimits: 0
+  m_TranslationLimits:
+    m_LowerTranslation: -0.2
+    m_UpperTranslation: 6.2
