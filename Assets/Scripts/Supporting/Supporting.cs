@@ -56,6 +56,19 @@ public class Supporting
         }
     }
 
+    public static bool CheckRequiredProperty(GameObject parent, Object toBeChecked, string label = "an object")
+    {
+        if (toBeChecked)
+        {
+            return true;
+        }
+        else
+        {
+            Log(parent.name + " - could not find " + label, 1);
+            return false;
+        }
+    }
+
     public static int Modulus(int sideA, int sideB)
     {
         return sideB - sideA * Mathf.FloorToInt(sideA / sideB);
