@@ -22,15 +22,16 @@ public class GameController : Singleton<GameController>
     private const float INITIAL_SPEED = 2.5f;
     private const float MAX_SPEED = 10;
     private const int HUD_SPEED_MULTIPLIER = 10;
+
+    private const int POINTS_MULTIPLIER = 10;
+    private const int POINTS_FOR_SPEED_INCREASE = 100;
+
     private float _speed;
     private int _score;
     private float _rawScore;
     private int _highScore;
 
     private bool _newRecord;
-
-    private const int POINTS_MULTIPLIER = 10;
-    private const int POINTS_FOR_SPEED_INCREASE = 100;
 
     private bool _gameOver = true;
 

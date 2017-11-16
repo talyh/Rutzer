@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public static class Localization
 {
@@ -8,13 +9,27 @@ public static class Localization
 
     static Dictionary<string, string> localizations;
 
+    public static string FilePath
+    {
+        get
+        {
+            string persistentPath = Application.persistentDataPath;
+            string savePath = string.Format("{0}/Localization.csv", persistentPath);
+
+            return savePath;
+        }
+    }
+
     public static void Initialize()
     {
         // initialize Dictionary here to be sure it's initialized when we need it to
         localizations = new Dictionary<string, string>();
 
-        //Load the CSV
-        TextAsset csv = Resources.Load<TextAsset>("Localizations");
+        // fetch the data
+        GameData.Downloader.Initialize();
+
+        //Now load using System.IO File.
+        StreamReader csv = File.OpenText(FilePath);
 
         //Get the system language
         SystemLanguage language = Application.systemLanguage;
@@ -23,7 +38,7 @@ public static class Localization
         int currentLanguageIndex = -1;
 
         // break the csv into rows
-        string[] rows = csv.text.Split('\n');
+        string[] rows = csv.ReadToEnd().Split('\n');
 
         // use the first row headers, starting in column 2, to identify the languages
         string[] languageIndex = rows[0].Split(',');
