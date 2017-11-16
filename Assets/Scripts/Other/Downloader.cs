@@ -44,7 +44,7 @@ namespace GameData
                 Supporting.Log("NO DATA WAS RECEIVED", 1);
 
                 //Load the last cached values
-                // website. = File.ReadAllText(sr.text);
+                // File.ReadAllText(filePath);
             }
             else
             {

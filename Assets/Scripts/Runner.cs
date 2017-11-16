@@ -84,7 +84,7 @@ public class Runner : MonoBehaviour
 
     public void IncreaseSpeed()
     {
-        Supporting.Log("Inreasing speed");
+        Supporting.Log("Increasing speed");
 
         // adjust character's speed, based on new value set in GameController
         _rb.AddForce(Vector2.right, ForceMode2D.Impulse);

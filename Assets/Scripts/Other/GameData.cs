@@ -10,11 +10,15 @@ namespace GameData
         private const string INT_KEY = "int";
         private const string FLOAT_KEY = "float";
 
-        private static Dictionary<string, object> constants = new Dictionary<string, object>();
+        public enum constantKeywords { INITIAL_SPEED, MAX_SPEED, HUD_SPEED_MULTIPLIER, POINTS_MULTIPLIER, POINTS_FOR_SPEED_INCREASE }
+
+        private static Dictionary<string, object> _constants;
 
         public static void Initialize()
         {
-            Debug.Log("GameData.Constants is initializing");
+            Supporting.Log("GameData.Constants is initializing");
+
+            _constants = new Dictionary<string, object>();
 
             TextAsset data = Resources.Load<TextAsset>("Constants");
 
@@ -33,11 +37,11 @@ namespace GameData
                     int iValue;
                     if (int.TryParse(value, out iValue))
                     {
-                        constants.Add(key, iValue);
+                        _constants.Add(key, iValue);
                     }
                     else
                     {
-                        Debug.LogError(string.Format("Couldn't parse data for {0}", key));
+                        Supporting.Log(string.Format("Couldn't parse data for {0}", key), 1);
                     }
                 }
                 else if (type == FLOAT_KEY)
@@ -45,27 +49,32 @@ namespace GameData
                     float fValue;
                     if (float.TryParse(value, out fValue))
                     {
-                        constants.Add(key, fValue);
+                        _constants.Add(key, fValue);
                     }
                     else
                     {
-                        Debug.LogError(string.Format("Couldn't parse data for {0}", key));
+                        Supporting.Log(string.Format("Couldn't parse data for {0}", key), 1);
                     }
                 }
                 else if (type == STRING_KEY)
                 {
-                    constants.Add(key, value);
+                    _constants.Add(key, value);
                 }
                 else
                 {
-                    Debug.LogError(string.Format("Couldn't resolve constant type for {0}", key));
+                    Supporting.Log(string.Format("Couldn't resolve constant type for {0}", key), 1);
                 }
             }
         }
 
         public static T GetConstant<T>(string constantName)
         {
-            return (T)constants[constantName];
+            if (_constants == null)
+            {
+                Initialize();
+            }
+
+            return (T)_constants[constantName];
         }
     }
 }

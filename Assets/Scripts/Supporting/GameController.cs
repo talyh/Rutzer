@@ -16,16 +16,6 @@ public class GameController : Singleton<GameController>
     // // Define Tags used throughout the game
     public enum Tags { Player, SceneBlockPool, SceneBlock };
 
-    // // Define Controls used throughout the game
-    // // public enum Controls { Horizontal, Jump, GrabItem, Crouch, Fly}
-
-    private const float INITIAL_SPEED = 2.5f;
-    private const float MAX_SPEED = 10;
-    private const int HUD_SPEED_MULTIPLIER = 10;
-
-    private const int POINTS_MULTIPLIER = 10;
-    private const int POINTS_FOR_SPEED_INCREASE = 100;
-
     private float _speed;
     private int _score;
     private float _rawScore;
@@ -66,7 +56,7 @@ public class GameController : Singleton<GameController>
             if (_rawScore >= 1)
             {
                 _rawScore = 0;
-                score += POINTS_MULTIPLIER;
+                score += GameData.Constants.GetConstant<int>(GameData.Constants.constantKeywords.POINTS_MULTIPLIER.ToString());
 
                 IncreaseSpeedBasaedOnPoints();
             }
@@ -103,7 +93,7 @@ public class GameController : Singleton<GameController>
 
     private void ResetGameVariables()
     {
-        speed = INITIAL_SPEED;
+        speed = GameData.Constants.GetConstant<float>(GameData.Constants.constantKeywords.INITIAL_SPEED.ToString());
         score = 0;
         _rawScore = 0;
         _gameOver = false;
@@ -160,12 +150,12 @@ public class GameController : Singleton<GameController>
 
     private void IncreaseSpeedBasaedOnPoints()
     {
-        if (_speed >= MAX_SPEED)
+        if (_speed >= GameData.Constants.GetConstant<float>(GameData.Constants.constantKeywords.MAX_SPEED.ToString()))
         {
             return;
         }
 
-        if (_score > 0 && _score % POINTS_FOR_SPEED_INCREASE == 0)
+        if (_score > 0 && _score % GameData.Constants.GetConstant<int>(GameData.Constants.constantKeywords.POINTS_FOR_SPEED_INCREASE.ToString()) == 0)
         {
             speed++;
             _character.GetComponent<Runner>().IncreaseSpeed();
@@ -176,7 +166,7 @@ public class GameController : Singleton<GameController>
     public float speed
     {
         get { return _speed; }
-        set { _speed = value; CanvasController.instance.ShowSpeed((int)speed * HUD_SPEED_MULTIPLIER); }
+        set { _speed = value; CanvasController.instance.ShowSpeed((int)speed * GameData.Constants.GetConstant<int>(GameData.Constants.constantKeywords.HUD_SPEED_MULTIPLIER.ToString())); }
     }
 
     public int score

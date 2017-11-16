@@ -1,6 +1,6 @@
-Key,Type,Value
-speed,float ,50
-jumpForce, float, 50
-damage,int,50
-health, int ,500
-pointsPerSecond,int,10
+KEYWORD,TYPE,VALUE
+INITIAL_SPEED,float,2.5
+MAX_SPEED,float,10
+HUD_SPEED_MULTIPLIER,int,10
+POINTS_MULTIPLIER,int,10
+POINTS_FOR_SPEED_INCREASE,int,100
