@@ -34,7 +34,7 @@ namespace GameData
             _constants = new Dictionary<string, object>();
 
             // fetch the data
-            GameData.Downloader.Initialize();
+            GameData.Downloader.DownloadConstants();
 
             //Now load using System.IO File.
             StreamReader csv = File.OpenText(filePath);

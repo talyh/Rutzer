@@ -26,7 +26,7 @@ public static class Localization
         _localizations = new Dictionary<string, string>();
 
         // fetch the data
-        GameData.Downloader.Initialize();
+        GameData.Downloader.DonwloadLocalization();
 
         //Now load using System.IO File.
         StreamReader csv = File.OpenText(filePath);
