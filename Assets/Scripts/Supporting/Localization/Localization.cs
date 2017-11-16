@@ -7,9 +7,9 @@ public static class Localization
 {
     private const string DEFAULT_LANGUAGE = "ENGLISH";
 
-    static Dictionary<string, string> localizations;
+    static Dictionary<string, string> _localizations;
 
-    public static string FilePath
+    public static string filePath
     {
         get
         {
@@ -23,13 +23,13 @@ public static class Localization
     public static void Initialize()
     {
         // initialize Dictionary here to be sure it's initialized when we need it to
-        localizations = new Dictionary<string, string>();
+        _localizations = new Dictionary<string, string>();
 
         // fetch the data
         GameData.Downloader.Initialize();
 
         //Now load using System.IO File.
-        StreamReader csv = File.OpenText(FilePath);
+        StreamReader csv = File.OpenText(filePath);
 
         //Get the system language
         SystemLanguage language = Application.systemLanguage;
@@ -66,7 +66,7 @@ public static class Localization
             string key = columns[0].Trim().ToUpper();
             string value = columns[currentLanguageIndex].Trim();
 
-            localizations.Add(key, value);
+            _localizations.Add(key, value);
         }
     }
 
@@ -74,12 +74,12 @@ public static class Localization
     public static string Get(string key)
     {
         //Make sure the CSV has been loaded
-        if (localizations == null)
+        if (_localizations == null)
         {
             Initialize();
         }
 
-        return localizations[key.ToUpper()];
+        return _localizations[key.ToUpper()];
 
     }
 

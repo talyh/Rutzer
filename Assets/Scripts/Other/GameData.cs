@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 namespace GameData
 {
@@ -12,17 +13,34 @@ namespace GameData
 
         public enum constantKeywords { INITIAL_SPEED, MAX_SPEED, HUD_SPEED_MULTIPLIER, POINTS_MULTIPLIER, POINTS_FOR_SPEED_INCREASE }
 
+
+        public static string filePath
+        {
+            get
+            {
+                string persistentPath = Application.persistentDataPath;
+                string savePath = string.Format("{0}/Constants.csv", persistentPath);
+
+                return savePath;
+            }
+        }
+
         private static Dictionary<string, object> _constants;
 
         public static void Initialize()
         {
-            Supporting.Log("GameData.Constants is initializing");
+            // Supporting.Log("GameData.Constants is initializing");
 
             _constants = new Dictionary<string, object>();
 
-            TextAsset data = Resources.Load<TextAsset>("Constants");
+            // fetch the data
+            GameData.Downloader.Initialize();
 
-            string[] rows = data.text.Split('\n');
+            //Now load using System.IO File.
+            StreamReader csv = File.OpenText(filePath);
+
+            // break the csv into rows
+            string[] rows = csv.ReadToEnd().Split('\n');
 
             for (int i = 1; i < rows.Length; i++)
             {

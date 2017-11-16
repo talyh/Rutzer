@@ -19,9 +19,9 @@ namespace GameData
 
         public static void Initialize()
         {
-            DownloadCSV(LOCALIZATION_TAB_ID, Localization.FilePath);
+            DownloadCSV(LOCALIZATION_TAB_ID, Localization.filePath);
             // TODO - fix
-            DownloadCSV(CONSTANTS_TAB_ID, "Constants.csv");
+            DownloadCSV(CONSTANTS_TAB_ID, GameData.Constants.filePath);
         }
 
         private static void DownloadCSV(string tabID, string filePath)
