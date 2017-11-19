@@ -1,26 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
-[RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(BoxCollider2D))]
 public class ExpandingPlatform : MonoBehaviour
 {
-    // REMINDER -----------
-    // on pinch, the center object is replaced by the expanded image, and
-    // the box collider is resized to fit it, automatically pushing the corners
-    // the material on the collider should have bounciness
-    // on collision of the player with the center object should replace it with the squished image and resize it to small
+    [SerializeField]
+    private SpriteRenderer _shrinked;
+    [SerializeField]
+    private SpriteRenderer _expanded;
 
-    [SerializeField]
-    private Sprite _shrinked;
-    [SerializeField]
-    private Sprite _expanded;
-    private SpriteRenderer _renderer;
     private BoxCollider2D _collider;
+    [SerializeField]
+    private float _bounciness;
 
     private bool _activated;
+
     private void Awake()
     {
         RunInitialChecks();
@@ -31,9 +28,6 @@ public class ExpandingPlatform : MonoBehaviour
         Supporting.CheckRequiredProperty(gameObject, _shrinked, "Shrinked Sprite");
         Supporting.CheckRequiredProperty(gameObject, _expanded, "Expanded Sprite");
 
-        _renderer = GetComponent<SpriteRenderer>();
-        Supporting.CheckRequiredProperty(gameObject, _renderer, "Sprite Renderer");
-
         _collider = GetComponent<BoxCollider2D>();
         Supporting.CheckRequiredProperty(gameObject, _collider, "Collider");
     }
@@ -43,14 +37,20 @@ public class ExpandingPlatform : MonoBehaviour
 #if UNITY_EDITOR
         if (Input.GetMouseButtonDown(1))
         {
-            Expand();
+            if (!_activated)
+            {
+                Expand();
+            }
+            else
+            {
+                Shrink();
+            }
         }
 #endif
 
 #if UNITY_ANDROID || UNITY_IOS
         if (Input.touchCount == 2)
         {
-
             // identify each of the touches
             Touch firstTouch = Input.GetTouch(0);
             Touch secondTouch = Input.GetTouch(1);
@@ -67,7 +67,14 @@ public class ExpandingPlatform : MonoBehaviour
             // if pinching out, expand the platform
             if (previousTouchDeltaMagnitude < touchDeltaMagnitude)
             {
-                Expand();
+                if (!_activated)
+                {
+                    Expand();
+                }
+                else
+                {
+                    Shrink();
+                }
             }
             // if pinching in, do nothing
 #endif
@@ -84,22 +91,42 @@ public class ExpandingPlatform : MonoBehaviour
         _activated = true;
 
         // adjust the collider side, so the spring joint this object is attached to takes care of pushing the corners to the side
-        if (_renderer && _collider)
+        if (_collider)
         {
-            _renderer.sprite = _expanded;
-            _collider.size = new Vector2(2.4f, _collider.size.y);
-            // _collider.size = _renderer.sprite.bounds.size;
-            // _collider.size = new Vector2(3.2f, 0.8f);
-            // _collider.size = Vector2.Lerp(_collider.size, _renderer.sprite.bounds.size, Time.deltaTime);
+            float duration = 0.2f;
+            DOTween.To(() => _collider.size, x => _collider.size = x, (Vector2)_expanded.sprite.bounds.size, duration);
+            _shrinked.DOFade(0, 0);
+            _expanded.DOFade(100, duration);
+
         }
 
         SoundController.instance.PlaySFX(SoundController.instance.sfxStretchPlatform);
     }
 
-    // private void Shrink()
-    // {
-    //     // TODO - replace with proper expansion and shrinking based on Physics Joint
-    //     _shrinked.gameObject.SetActive(true);
-    //     _expanded.gameObject.SetActive(false);
-    // }
+    private void Shrink()
+    {
+        if (!_activated)
+        {
+            return;
+        }
+
+        _activated = false;
+
+        if (_collider)
+        {
+            float duration = 1;
+            DOTween.To(() => _collider.size, x => _collider.size = x, (Vector2)_shrinked.sprite.bounds.size, duration);
+            _shrinked.DOFade(100, duration * 200);
+            _expanded.DOFade(0, duration * 0.5f);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D coll)
+    {
+        if (coll.gameObject.tag == GameController.Tags.Player.ToString() && _activated)
+        {
+            Shrink();
+            coll.rigidbody.AddForce(Vector2.up * _bounciness, ForceMode2D.Impulse);
+        }
+    }
 }
