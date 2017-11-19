@@ -13,10 +13,7 @@ public static class Localization
     {
         get
         {
-            string persistentPath = Application.persistentDataPath;
-            string savePath = string.Format("{0}/Localization.csv", persistentPath);
-
-            return savePath;
+            return string.Format("{0}/Localization.csv", Application.persistentDataPath);
         }
     }
 
