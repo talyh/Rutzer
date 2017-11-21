@@ -77,8 +77,8 @@ public class ExpandingPlatform : MonoBehaviour
                 }
             }
             // if pinching in, do nothing
-#endif
         }
+#endif
     }
 
     public void Expand()

@@ -32,6 +32,9 @@ public class CameraController : MonoBehaviour
         {
             transform.position = new Vector3(_target.position.x - _offset, transform.position.y, transform.position.z);
         }
+
+        if (_target.GetComponent<Runner>().additionalLogging)
+            Supporting.Log("after camera movement: " + _target.GetComponent<Rigidbody2D>().velocity.x);
     }
 
     private void DetermineResolution()

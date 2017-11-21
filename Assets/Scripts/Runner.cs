@@ -27,10 +27,23 @@ public class Runner : MonoBehaviour
 
     private bool _readyToDie;
 
+    public bool additionalLogging = false;
+
 
     private void Awake()
     {
         RunInitialChecks();
+    }
+
+    private void Update()
+    {
+        if (additionalLogging)
+            Supporting.Log("update velocity: " + _rb.velocity.x);
+    }
+    private void LateUpdate()
+    {
+        if (additionalLogging)
+            Supporting.Log("late update velocity: " + _rb.velocity.x);
     }
 
     private void FixedUpdate()
@@ -67,9 +80,20 @@ public class Runner : MonoBehaviour
     {
         if (_rb.velocity.x <= 0.1f)
         {
-            Supporting.Log("Running with impulse. RB Velocity: " + _rb.velocity.x);
+            if (GameController.instance.speed == GameData.Constants.GetConstant<float>(GameData.Constants.constantKeywords.INITIAL_SPEED.ToString()))
+            {
+                Supporting.Log("Running with impulse. RB Velocity: " + _rb.velocity.x);
 
-            _rb.AddForce(Vector2.right * GameController.instance.speed, ForceMode2D.Impulse);
+                _rb.AddForce(Vector2.right * GameController.instance.speed, ForceMode2D.Impulse);
+
+                Supporting.Log("new velocity: " + _rb.velocity.x);
+            }
+            else
+            {
+                Supporting.Log("Manually nudging the character from " + transform.position + " to " + (transform.position + new Vector3(0.1f, 0.1f, 0)));
+                transform.position = transform.position + new Vector3(0.1f, 0, 0);
+                _rb.AddForce(Vector2.right * GameController.instance.speed, ForceMode2D.Impulse);
+            }
         }
     }
 
