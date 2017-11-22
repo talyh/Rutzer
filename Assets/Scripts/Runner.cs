@@ -27,23 +27,10 @@ public class Runner : MonoBehaviour
 
     private bool _readyToDie;
 
-    public bool additionalLogging = false;
-
 
     private void Awake()
     {
         RunInitialChecks();
-    }
-
-    private void Update()
-    {
-        if (additionalLogging)
-            Supporting.Log("update velocity: " + _rb.velocity.x);
-    }
-    private void LateUpdate()
-    {
-        if (additionalLogging)
-            Supporting.Log("late update velocity: " + _rb.velocity.x);
     }
 
     private void FixedUpdate()
@@ -139,6 +126,13 @@ public class Runner : MonoBehaviour
         Supporting.CheckRequiredProperty(gameObject, _gapCheck, "Gap Check");
         Supporting.CheckRequiredProperty(gameObject, _jumpLevelCheck, "Jump Level Check");
         Supporting.CheckRequiredProperty(gameObject, _jumpHighCheck, "Jump High Check");
+        Supporting.CheckRequiredProperty(gameObject, _particles, "Particles Transform");
+
+        if (_particles)
+        {
+            _particleSystem = _particles.GetComponent<ParticleSystem>();
+            Supporting.CheckRequiredProperty(gameObject, _particleSystem, "Particle System");
+        }
     }
 
     public bool readyToDie
