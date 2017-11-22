@@ -13,12 +13,14 @@ public class VerticalPlatform : MonoBehaviour
     private GameObject _bottomEdge;
     private SliderJoint2D _slider;
 
+    private float _originalY;
 
     private bool _activated;
 
     private void Awake()
     {
         RunInitialChecks();
+        _originalY = transform.position.y;
     }
 
     private void Update()
@@ -59,6 +61,12 @@ public class VerticalPlatform : MonoBehaviour
         SoundController.instance.PlaySFX(SoundController.instance.sfxMovePlatform);
     }
 
+    private void Deactivate()
+    {
+        _slider.useMotor = false;
+        _activated = false;
+    }
+
     private void ChangeDirection()
     {
         // change the direction of the motor
@@ -74,5 +82,17 @@ public class VerticalPlatform : MonoBehaviour
             // Supporting.Log("Vertical platform hit an edge");
             ChangeDirection();
         }
+    }
+
+    private void OnDisable()
+    {
+        // Supporting.Log("Vertical Platform disabled");
+        Reset();
+    }
+
+    private void Reset()
+    {
+        Deactivate();
+        transform.position = new Vector3(transform.position.x, _originalY, transform.position.z);
     }
 }
