@@ -124,6 +124,7 @@ public class Runner : MonoBehaviour
         StartCoroutine(_runnerAnimator.FlashRainbow(30));
         _runnerAnimator.ChangeColor((RunnerAnimator.AnimationLayers)(GameController.instance.speed -
             GameData.Constants.GetConstant<float>(GameData.Constants.constantKeywords.INITIAL_SPEED.ToString())));
+        _runnerAnimator.AdjustSpeed();
 
         // play the speed increase sfx
         SoundController.instance.PlaySFX(SoundController.instance.sfxIncreaseSpeed);
