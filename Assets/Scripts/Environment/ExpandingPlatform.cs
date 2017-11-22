@@ -129,4 +129,9 @@ public class ExpandingPlatform : MonoBehaviour
             coll.rigidbody.AddForce(Vector2.up * _bounciness, ForceMode2D.Impulse);
         }
     }
+
+    private void OnDisable()
+    {
+        Shrink();
+    }
 }
