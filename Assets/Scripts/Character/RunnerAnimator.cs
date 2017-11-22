@@ -5,7 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class RunnerAnimator : MonoBehaviour
 {
-    private enum AnimationParameters { Character_Rainbow };
+    private enum AnimationParameters { Dead };
+    private enum AnimationClips { Character_Rainbow };
     public enum AnimationLayers { Grey = 0, Red, Yellow, Green, Blue, Purple, Pink };
 
     [SerializeField]
@@ -46,9 +47,14 @@ public class RunnerAnimator : MonoBehaviour
     {
         for (int i = 0; i < times; i++)
         {
-            _animator.Play(AnimationParameters.Character_Rainbow.ToString());
+            _animator.Play(AnimationClips.Character_Rainbow.ToString());
             yield return null;
         }
+    }
+
+    public void Die()
+    {
+        _animator.SetTrigger(AnimationParameters.Dead.ToString());
     }
 
     private void RunInitialChecks()

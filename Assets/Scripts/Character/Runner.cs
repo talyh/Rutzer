@@ -46,11 +46,13 @@ public class Runner : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (GameController.instance.gameOver)
+        {
+            return;
+        }
+
         // determine whether the character's feet are touching the floor or not, based on contact of its groundCheck with elements in the ground layer
         _grounded = Physics2D.Raycast(_groundCheck.position, Vector2.down, Physics2D.defaultContactOffset, GameController.instance.ground);
-
-        // determine if in a slope
-        // TODO - add slope climbing code, based on the _touchingFloor collider
 
         // determine if there's a gap to be jumped, based on contact of the gapAhead collider with elements in the ground layer
         _gapAhead = !_gapCheck.IsTouchingLayers(GameController.instance.ground);
@@ -97,32 +99,47 @@ public class Runner : MonoBehaviour
 
     private void Jump()
     {
-        Supporting.Log("Jumping");
+        // Supporting.Log("Jumping");
 
         // add vertical impulse to the character, based on its jumpForce
         _rb.AddForce(Vector2.up * _jumpForce / GameController.instance.speed, ForceMode2D.Impulse);
+
+        // play the jumping sfx
         SoundController.instance.PlaySFX(SoundController.instance.sfxJump);
     }
 
     public void IncreaseSpeed()
     {
-        Supporting.Log("Increasing speed");
+        if (GameController.instance.gameOver)
+        {
+            return;
+        }
+
+        // Supporting.Log("Increasing speed");
 
         // adjust character's speed, based on new value set in GameController
         _rb.AddForce(Vector2.right, ForceMode2D.Impulse);
 
+        // play speed increase animation and then, change the color, based on the current speed
         StartCoroutine(_runnerAnimator.FlashRainbow(30));
-        _runnerAnimator.ChangeColor((RunnerAnimator.AnimationLayers)(GameController.instance.speed - GameData.Constants.GetConstant<float>(GameData.Constants.constantKeywords.INITIAL_SPEED.ToString())));
-        // _runnerAnimator.ChangeColor((RunnerAnimator.AnimationLayers)GameController.instance.speed);
+        _runnerAnimator.ChangeColor((RunnerAnimator.AnimationLayers)(GameController.instance.speed -
+            GameData.Constants.GetConstant<float>(GameData.Constants.constantKeywords.INITIAL_SPEED.ToString())));
+
+        // play the speed increase sfx
         SoundController.instance.PlaySFX(SoundController.instance.sfxIncreaseSpeed);
 
-        Supporting.Log("RB Velocity: " + _rb.velocity.x);
+        // Supporting.Log("RB Velocity: " + _rb.velocity.x);
     }
 
     public void Die()
     {
-        // TODO - add animations, sounds, etc, making sure points stop counting right away, but scene is not transitioned until 
-        // finished
+        if (GameController.instance.gameOver)
+        {
+            return;
+        }
+
+        _runnerAnimator.Die();
+        _rb.bodyType = RigidbodyType2D.Static;
         SoundController.instance.PlaySFX(SoundController.instance.sfxDie);
         StartCoroutine(CheckIfReadyToEndGame());
         GameController.instance.GameOver();
@@ -132,7 +149,6 @@ public class Runner : MonoBehaviour
     {
         yield return new WaitForSeconds(SoundController.instance.sfxDie.length);
         _readyToDie = true;
-
     }
 
     private void RunInitialChecks()

@@ -186,6 +186,11 @@ public class GameController : Singleton<GameController>
         get { return _newRecord; }
     }
 
+    public bool gameOver
+    {
+        get { return _gameOver; }
+    }
+
     public Transform character
     {
         get { return _character; }
