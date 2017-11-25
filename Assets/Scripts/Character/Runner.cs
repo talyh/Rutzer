@@ -26,6 +26,7 @@ public class Runner : MonoBehaviour
     private RunnerAnimator _runnerAnimator;
 
     private bool _grounded;
+    private bool _wait;
     private bool _gapAhead;
     private bool _floorAhead;
 
@@ -51,27 +52,39 @@ public class Runner : MonoBehaviour
             return;
         }
 
-        // determine whether the character's feet are touching the floor or not, based on contact of its groundCheck with elements in the ground layer
-        _grounded = Physics2D.Raycast(_groundCheck.position, Vector2.down, Physics2D.defaultContactOffset, GameController.instance.ground);
+        // determine whether the character is standing in an area where it should stop and wait
+        _wait = Physics2D.Raycast(_groundCheck.position, Vector2.down, Physics2D.defaultContactOffset, GameController.instance.waitLayer);
 
         // determine if there's a gap to be jumped, based on contact of the gapAhead collider with elements in the ground layer
-        _gapAhead = !_gapCheck.IsTouchingLayers(GameController.instance.ground);
+        _gapAhead = !_gapCheck.IsTouchingLayers(GameController.instance.groundLayer);
 
         // determine if there's an appropriate landing spot after a gap
-        _floorAhead = _jumpLevelCheck.IsTouchingLayers(GameController.instance.ground);
+        _floorAhead = _jumpLevelCheck.IsTouchingLayers(GameController.instance.groundLayer);
 
-        if (_grounded)
+        if (_wait)
         {
+            Stop();
+            Supporting.Log("gapAhead: " + _gapAhead);
+            Supporting.Log("floorAhead " + _floorAhead);
+        }
+        else
+        {
+            // determine whether the character's feet are touching the floor or not, based on contact of its groundCheck with elements in the ground layer
+            _grounded = Physics2D.Raycast(_groundCheck.position, Vector2.down, Physics2D.defaultContactOffset, GameController.instance.groundLayer);
+        }
+
+        if (_wait || _grounded)
+        {
+            // if no gapahead, run
+            // if there's a gap ahead, and a landing spot ahead of it, jump
+            // else, take a leap of faith
             if (!_gapAhead)
             {
                 Run();
             }
-            else
+            else if (_floorAhead)
             {
-                if (_floorAhead)
-                {
-                    Jump();
-                }
+                Jump();
             }
         }
     }
@@ -106,6 +119,11 @@ public class Runner : MonoBehaviour
 
         // play the jumping sfx
         SoundController.instance.PlaySFX(SoundController.instance.sfxJump);
+    }
+
+    private void Stop()
+    {
+        _rb.velocity = Vector2.zero;
     }
 
     public void IncreaseSpeed()

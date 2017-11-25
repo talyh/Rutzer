@@ -33,8 +33,6 @@ public class VerticalPlatform : MonoBehaviour
 #endif
 
 #if UNITY_ANDROID || UNITY_IOS
-        // if tapping, drop the vertical platform, if it's present
-        // stop listening for touches for a little while to avoid interference with the next action
         if (Input.touchCount == 1)
         {
             Activate();
