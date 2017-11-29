@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: a76c45c22990140b09d6e3aa01af9e1b
+timeCreated: 1511303725
+licenseType: Free
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: mago3
+  fontNames:
+  - mago3
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
