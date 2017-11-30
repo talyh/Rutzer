@@ -65,6 +65,13 @@ public class GameController : Singleton<GameController>
         }
     }
 
+    public void ScorePoints(int points)
+    {
+        score += points;
+
+        IncreaseSpeedBasaedOnPoints();
+    }
+
     public void GameOver()
     {
         // if game has ended, check for new highscores to be saved and load the Game Over Scene

@@ -5,7 +5,7 @@ using UnityEngine;
 public class DownloadableObjectPool : ObjectPool
 {
     [SerializeField]
-    private CoinPack _shell;
+    private DownloadableObject _shell;
 
     protected override void CreatePool()
     {
@@ -20,7 +20,7 @@ public class DownloadableObjectPool : ObjectPool
     protected override GameObject SpawnObject(bool initial = false, int index = 0)
     {
         // instantiate a new inactive object, adding it to the pool for later usage
-        CoinPack cp = Instantiate(_shell);
+        DownloadableObject cp = Instantiate(_shell);
         cp.gameObject.SetActive(false);
         _pooledObjects.Add(cp.gameObject);
         return cp.gameObject;
