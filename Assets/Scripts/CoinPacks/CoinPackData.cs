@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using System.Linq;
 
 namespace GameData
 {
@@ -39,18 +40,17 @@ namespace GameData
                 string key = columns[0].Trim().ToUpper();
                 int coins;
                 bool coinsPacse = int.TryParse(columns[1].Trim(), out coins);
-                int relativeProbability;
-                bool relativeProbabilityParse = int.TryParse(columns[2].Trim(), out relativeProbability);
+                int lifetime;
+                bool lifetimeParse = int.TryParse(columns[2].Trim(), out lifetime);
 
-                if (coinsPacse && relativeProbabilityParse)
+                if (coinsPacse && lifetimeParse)
                 {
-                    CoinPackData coinPack = new CoinPackData(coins, relativeProbability);
+                    CoinPackData coinPack = new CoinPackData(coins, lifetime);
                     _coinPacks.Add(key, coinPack);
                 }
             }
         }
 
-        //Get the localized string
         public static CoinPackData Get(string key)
         {
             if (_coinPacks == null)
@@ -59,6 +59,29 @@ namespace GameData
             }
 
             return _coinPacks[key.ToUpper()];
+        }
+
+        public static CoinPackData GetRandom()
+        {
+            if (_coinPacks == null)
+            {
+                Initialize();
+            }
+
+            int selected = Random.Range(0, _coinPacks.Count);
+            string[] keys = _coinPacks.Keys.ToArray();
+            string entry = "";
+
+            for (int i = 0; i < keys.Length; i++)
+            {
+                if (i == selected)
+                {
+                    entry = keys[i];
+                    break;
+                }
+            }
+
+            return _coinPacks[entry];
         }
 
         public static bool CheckKey(string key)
@@ -81,21 +104,21 @@ namespace GameData
             get { return _coins; }
         }
 
-        private int _relativeProbability;
-        public int relativeProbability
+        private int _lifetime;
+        public int lifetime
         {
-            get { return _relativeProbability; }
+            get { return _lifetime; }
         }
 
-        public CoinPackData(int coins, int relativeProbability)
+        public CoinPackData(int coins, int lifetime)
         {
             _coins = coins;
-            _relativeProbability = relativeProbability;
+            _lifetime = lifetime;
         }
 
         public override string ToString()
         {
-            return string.Format("coins: {0}", _coins);
+            return string.Format("coins: {0}, lifetime: {1}", _coins, _lifetime);
         }
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ObjectPool : MonoBehaviour
 {
-    private List<GameObject> _pooledObjects;
+    protected List<GameObject> _pooledObjects;
 
     [SerializeField]
     private GameObject[] _objectsInSceneToAddToPool;
@@ -13,7 +13,7 @@ public class ObjectPool : MonoBehaviour
     private GameObject[] _objectsToPool;
 
     [SerializeField]
-    private int _amountToPoolInitially;
+    protected int _amountToPoolInitially;
 
     [SerializeField]
     private bool _spawnAdditionalIfNeeded;
@@ -64,7 +64,7 @@ public class ObjectPool : MonoBehaviour
         }
     }
 
-    private void CreatePool()
+    protected virtual void CreatePool()
     {
         _pooledObjects = new List<GameObject>();
 
@@ -90,7 +90,7 @@ public class ObjectPool : MonoBehaviour
         }
     }
 
-    private GameObject SpawnObject(bool initial = false, int index = 0)
+    protected virtual GameObject SpawnObject(bool initial = false, int index = 0)
     {
         if (_objectsToPool.Length <= 0)
         {

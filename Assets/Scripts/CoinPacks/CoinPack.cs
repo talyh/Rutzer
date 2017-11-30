@@ -5,15 +5,11 @@ using GameData;
 
 public class CoinPack : MonoBehaviour
 {
-
     private CoinPackData _data;
 
-    private void Start()
+    private void OnEnable()
     {
-        if (_data == null)
-        {
-            _data = CoinPacksDataManager.Get("pack1");
-        }
+        _data = CoinPacksDataManager.GetRandom();
         Debug.Log(_data);
     }
 }
