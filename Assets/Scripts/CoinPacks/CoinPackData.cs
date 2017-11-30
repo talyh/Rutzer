@@ -5,9 +5,9 @@ using System.IO;
 
 namespace GameData
 {
-    public static class CoinPacksData
+    public static class CoinPacksDataManager
     {
-        private static Dictionary<string, CoinPack> _coinPacks;
+        private static Dictionary<string, CoinPackData> _coinPacks;
 
         public static string filePath
         {
@@ -20,7 +20,7 @@ namespace GameData
         public static void Initialize()
         {
             // initialize Dictionary here to be sure it's initialized when we need it to
-            _coinPacks = new Dictionary<string, CoinPack>();
+            _coinPacks = new Dictionary<string, CoinPackData>();
 
             // fetch the data
             GameData.Downloader.DownloadCoinPacksData();
@@ -44,14 +44,14 @@ namespace GameData
 
                 if (coinsPacse && relativeProbabilityParse)
                 {
-                    CoinPack coinPack = new CoinPack(coins, relativeProbability);
+                    CoinPackData coinPack = new CoinPackData(coins, relativeProbability);
                     _coinPacks.Add(key, coinPack);
                 }
             }
         }
 
         //Get the localized string
-        public static CoinPack Get(string key)
+        public static CoinPackData Get(string key)
         {
             if (_coinPacks == null)
             {
@@ -71,25 +71,31 @@ namespace GameData
             return _coinPacks.ContainsKey(key.ToUpper());
         }
     }
-}
 
-public class CoinPack
-{
-    private int _coins;
-    public int coins
-    {
-        get { return _coins; }
-    }
 
-    private int _relativeProbability;
-    public int relativeProbability
+    public class CoinPackData
     {
-        get { return _relativeProbability; }
-    }
+        private int _coins;
+        public int coins
+        {
+            get { return _coins; }
+        }
 
-    public CoinPack(int coins, int relativeProbability)
-    {
-        _coins = coins;
-        _relativeProbability = relativeProbability;
+        private int _relativeProbability;
+        public int relativeProbability
+        {
+            get { return _relativeProbability; }
+        }
+
+        public CoinPackData(int coins, int relativeProbability)
+        {
+            _coins = coins;
+            _relativeProbability = relativeProbability;
+        }
+
+        public override string ToString()
+        {
+            return string.Format("coins: {0}", _coins);
+        }
     }
 }

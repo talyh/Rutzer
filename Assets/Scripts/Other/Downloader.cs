@@ -25,7 +25,7 @@ namespace GameData
 
         public static void DownloadCoinPacksData()
         {
-            DownloadCSV(COIN_PACKS_TAB_ID, GameData.CoinPacksData.filePath);
+            DownloadCSV(COIN_PACKS_TAB_ID, GameData.CoinPacksDataManager.filePath);
         }
 
         private static void DownloadCSV(string tabID, string filePath)
