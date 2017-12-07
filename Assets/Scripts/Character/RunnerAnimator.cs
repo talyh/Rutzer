@@ -13,6 +13,20 @@ public class RunnerAnimator : MonoBehaviour
     private Animator _animator;
     [SerializeField]
     private ParticleSystem _particles;
+    [SerializeField]
+    private Color32 _grey;
+    [SerializeField]
+    private Color32 _red;
+    [SerializeField]
+    private Color32 _yellow;
+    [SerializeField]
+    private Color32 _green;
+    [SerializeField]
+    private Color32 _blue;
+    [SerializeField]
+    private Color32 _purple;
+    [SerializeField]
+    private Color32 _pink;
 
     private void Start()
     {
@@ -59,37 +73,37 @@ public class RunnerAnimator : MonoBehaviour
             case AnimationLayers.Grey:
             default:
                 {
-                    newColor = new Color32(118, 118, 118, 1);
+                    newColor = _grey;
                     break;
                 }
             case AnimationLayers.Red:
                 {
-                    newColor = new Color32(99, 0, 0, 1);
+                    newColor = _red;
                     break;
                 }
             case AnimationLayers.Yellow:
                 {
-                    newColor = new Color32(190, 193, 0, 1);
+                    newColor = _yellow;
                     break;
                 }
             case AnimationLayers.Green:
                 {
-                    newColor = new Color32(0, 137, 12, 1);
+                    newColor = _green;
                     break;
                 }
             case AnimationLayers.Blue:
                 {
-                    newColor = new Color32(0, 137, 168, 1);
+                    newColor = _blue;
                     break;
                 }
             case AnimationLayers.Purple:
                 {
-                    newColor = new Color32(82, 161, 168, 1);
+                    newColor = _purple;
                     break;
                 }
             case AnimationLayers.Pink:
                 {
-                    newColor = new Color32(176, 31, 128, 1);
+                    newColor = _pink;
                     break;
                 }
         }

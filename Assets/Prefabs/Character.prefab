@@ -403,6 +403,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 95406869494342476}
   _particles: {fileID: 198462297954828304}
+  _grey:
+    serializedVersion: 2
+    rgba: 4285953654
+  _red:
+    serializedVersion: 2
+    rgba: 4278190179
+  _yellow:
+    serializedVersion: 2
+    rgba: 4278239678
+  _green:
+    serializedVersion: 2
+    rgba: 4279011584
+  _blue:
+    serializedVersion: 2
+    rgba: 4289235200
+  _purple:
+    serializedVersion: 2
+    rgba: 4294934142
+  _pink:
+    serializedVersion: 2
+    rgba: 4286586800
 --- !u!114 &114876261494427450
 MonoBehaviour:
   m_ObjectHideFlags: 1

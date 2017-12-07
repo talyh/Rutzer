@@ -29,11 +29,8 @@ public class Runner : MonoBehaviour
     private bool _wait;
     private bool _gapAhead;
     private bool _floorAhead;
-
-    private bool _inSlope;
-
     private bool _readyToDie;
-
+    private bool _facinngLeft;
 
     private void Awake()
     {
@@ -43,6 +40,35 @@ public class Runner : MonoBehaviour
     private void Start()
     {
         _runnerAnimator.ChangeColor(RunnerAnimator.AnimationLayers.Grey);
+    }
+
+    private void Update()
+    {
+        // move the character outside of running game
+        if (SceneController.instance.currentSceneType != SceneController.SceneTypes.Level)
+        {
+            int direction = _facinngLeft ? -1 : 1;
+            float nexX = transform.position.x + Time.deltaTime * direction * GameData.Constants.GetConstant<float>(GameData.Constants.constantKeywords.INITIAL_SPEED.ToString());
+            transform.position = new Vector3(nexX, transform.position.y, transform.position.z);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D coll)
+    {
+        // flip the character outside of running game
+        if (GameController.instance.wallLayer == (GameController.instance.wallLayer | 1 << coll.gameObject.layer))
+        {
+            Flip();
+        }
+    }
+
+    private void Flip()
+    {
+        _facinngLeft = !_facinngLeft;
+
+        Vector3 newRotation = transform.rotation.eulerAngles;
+        newRotation.y += 180;
+        transform.rotation = Quaternion.Euler(newRotation);
     }
 
     private void FixedUpdate()

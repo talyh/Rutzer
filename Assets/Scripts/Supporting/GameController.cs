@@ -10,9 +10,10 @@ public class GameController : Singleton<GameController>
 
     // Define Layers and LayerMasks used throughout the game
     // Additional LayerMasks may be defined in individual scripts if they're used only in that script
-    public enum Layers { Ground = 8, Wait };
+    public enum Layers { Ground = 8, Wait, Wall };
     internal LayerMask groundLayer;
     internal LayerMask waitLayer;
+    internal LayerMask wallLayer;
 
     // // Define Tags used throughout the game
     public enum Tags { Player, SceneBlockPool, SceneBlock };
@@ -36,6 +37,7 @@ public class GameController : Singleton<GameController>
         // Define the LayerMasks that will be needed throughout the game
         groundLayer = 1 << LayerMask.NameToLayer(Layers.Ground.ToString());
         waitLayer = 1 << LayerMask.NameToLayer(Layers.Wait.ToString());
+        wallLayer = 1 << LayerMask.NameToLayer(Layers.Wall.ToString());
     }
 
     private void Update()

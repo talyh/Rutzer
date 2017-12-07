@@ -1,15 +1,11 @@
 fileFormatVersion: 2
-guid: d4b4def6bf06144079a5126c37e4ccbd
-timeCreated: 1510254296
+guid: 4c979496be08e47dea9bc9cb595acbcf
+timeCreated: 1512677499
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: VerticalPlatformEdge_0
-    21300002: VerticalPlatformEdge_1
-    21300004: VerticalPlatformEdge_2
-    21300006: VerticalPlatformEdge_3
-    21300008: VerticalPlatform
-    21300010: VerticalPlatformConnector
+    21300000: button_normal
+    21300002: button_pressed
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -92,16 +88,6 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-  - buildTarget: tvOS
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
   - buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -126,86 +112,30 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: VerticalPlatformEdge_0
+      name: button_normal
       rect:
         serializedVersion: 2
-        x: 4
-        y: 53
-        width: 16
+        x: 1
+        y: 0
+        width: 31
         height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 4, y: 5, z: 6, w: 5}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: VerticalPlatformEdge_1
+      name: button_pressed
       rect:
         serializedVersion: 2
-        x: 24
-        y: 53
-        width: 16
+        x: 39
+        y: 0
+        width: 31
         height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: VerticalPlatformEdge_2
-      rect:
-        serializedVersion: 2
-        x: 44
-        y: 53
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: VerticalPlatformEdge_3
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 53
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: VerticalPlatform
-      rect:
-        serializedVersion: 2
-        x: 14
-        y: 26
-        width: 48
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: VerticalPlatformConnector
-      rect:
-        serializedVersion: 2
-        x: 35
-        y: 3
-        width: 6
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 4, y: 5, z: 6, w: 5}
       outline: []
       physicsShape: []
       tessellationDetail: 0

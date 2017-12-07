@@ -4,14 +4,33 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    private const float INITIAL_X_FOR_1_3 = 5.4f;
-    private const float INITIAL_X_FOR_1_6 = 6.8f;
-    private const float INITIAL_X_FOR_1_7 = 7.6f;
+    private const float INITIAL_X_FOR_4_3 = 5.4f;
+    private const float INITIAL_X_FOR_16_10 = 6.8f;
+    private const float INITIAL_X_FOR_16_9 = 7.6f;
 
     private Transform _target;
     private float _offset;
 
     private float _resolution;
+    public enum Resolution { _16_9, _16_10, _4_3 }
+    public Resolution currentResolution
+    {
+        get
+        {
+            if (_resolution <= 1.4f)
+            {
+                return Resolution._4_3;
+            }
+            else if (_resolution <= 1.7f)
+            {
+                return Resolution._16_10;
+            }
+            else
+            {
+                return Resolution._16_9;
+            }
+        }
+    }
 
 
     private void Awake()
@@ -44,17 +63,24 @@ public class CameraController : MonoBehaviour
 
     private void AdjustInitialPositionBasedOnResolution()
     {
-        if (_resolution <= 1.4f)
+        switch (currentResolution)
         {
-            transform.position = new Vector3(INITIAL_X_FOR_1_3, transform.position.y, transform.position.z);
-        }
-        else if (_resolution >= 1.5f && _resolution <= 1.7f)
-        {
-            transform.position = new Vector3(INITIAL_X_FOR_1_6, transform.position.y, transform.position.z);
-        }
-        else
-        {
-            transform.position = new Vector3(INITIAL_X_FOR_1_7, transform.position.y, transform.position.z);
+            case Resolution._4_3:
+                {
+                    transform.position = new Vector3(INITIAL_X_FOR_4_3, transform.position.y, transform.position.z);
+                    break;
+                }
+            case Resolution._16_10:
+                {
+                    transform.position = new Vector3(INITIAL_X_FOR_16_10, transform.position.y, transform.position.z);
+                    break;
+                }
+            case Resolution._16_9:
+            default:
+                {
+                    transform.position = new Vector3(INITIAL_X_FOR_16_9, transform.position.y, transform.position.z);
+                    break;
+                }
         }
     }
 
