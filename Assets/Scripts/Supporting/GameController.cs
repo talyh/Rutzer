@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using GameData;
 
 public class GameController : Singleton<GameController>
 {
-    public delegate void SpeedIncreased();
-    public static event SpeedIncreased speedIncreased;
+    public delegate void HalfDay();
+    public static event HalfDay halfDay;
+    private float _timeSinceDayChange;
 
     // Define Layers and LayerMasks used throughout the game
     // Additional LayerMasks may be defined in individual scripts if they're used only in that script
@@ -48,9 +50,11 @@ public class GameController : Singleton<GameController>
         }
 
         ScorePoints();
+        ControlDay();
     }
 
-    public void ScorePoints()
+    // called from Update
+    private void ScorePoints()
     {
         // if game is actually running, score points based on time the player stays alive
         // points are rounded for better UI display and user interpretation
@@ -60,18 +64,38 @@ public class GameController : Singleton<GameController>
             if (_rawScore >= 1)
             {
                 _rawScore = 0;
-                score += GameData.Constants.GetConstant<int>(GameData.Constants.constantKeywords.POINTS_MULTIPLIER.ToString());
+                score += Constants.GetConstant<int>(Constants.constantKeywords.POINTS_MULTIPLIER.ToString());
 
                 IncreaseSpeedBasaedOnPoints();
             }
         }
     }
 
+    // called from coin collection
     public void ScorePoints(int points)
     {
         score += points;
 
         IncreaseSpeedBasaedOnPoints();
+    }
+
+    private void ControlDay()
+    {
+        if (gameOver)
+        {
+            return;
+        }
+
+        // capture elapsed time, to ensure day swaping is not called several times
+        _timeSinceDayChange += Time.deltaTime;
+
+        // swap the day at appropriate intervals and reset the day elapsed counter
+        if (Time.timeSinceLevelLoad % Constants.GetConstant<float>(Constants.constantKeywords.HALFDAY_DURATION.ToString()) <= 0.1f &&
+            _timeSinceDayChange >= 1)
+        {
+            halfDay();
+            _timeSinceDayChange = 0;
+        }
     }
 
     public void GameOver()
@@ -104,7 +128,7 @@ public class GameController : Singleton<GameController>
 
     private void ResetGameVariables()
     {
-        speed = GameData.Constants.GetConstant<float>(GameData.Constants.constantKeywords.INITIAL_SPEED.ToString());
+        speed = Constants.GetConstant<float>(Constants.constantKeywords.INITIAL_SPEED.ToString());
         score = 0;
         _rawScore = 0;
         _gameOver = false;
@@ -161,23 +185,22 @@ public class GameController : Singleton<GameController>
 
     private void IncreaseSpeedBasaedOnPoints()
     {
-        if (_speed >= GameData.Constants.GetConstant<float>(GameData.Constants.constantKeywords.MAX_SPEED.ToString()))
+        if (_speed >= Constants.GetConstant<float>(Constants.constantKeywords.MAX_SPEED.ToString()))
         {
             return;
         }
 
-        if (_score > 0 && _score % GameData.Constants.GetConstant<int>(GameData.Constants.constantKeywords.POINTS_FOR_SPEED_INCREASE.ToString()) == 0)
+        if (_score > 0 && _score % Constants.GetConstant<int>(Constants.constantKeywords.POINTS_FOR_SPEED_INCREASE.ToString()) == 0)
         {
             speed++;
             _character.GetComponent<Runner>().IncreaseSpeed();
-            speedIncreased();
         }
     }
 
     public float speed
     {
         get { return _speed; }
-        set { _speed = value; CanvasController.instance.ShowSpeed((int)speed * GameData.Constants.GetConstant<int>(GameData.Constants.constantKeywords.HUD_SPEED_MULTIPLIER.ToString())); }
+        set { _speed = value; CanvasController.instance.ShowSpeed((int)speed * Constants.GetConstant<int>(Constants.constantKeywords.HUD_SPEED_MULTIPLIER.ToString())); }
     }
 
     public int score

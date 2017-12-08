@@ -8,6 +8,8 @@ public class Environment : MonoBehaviour
     private Sprite _dayBackground;
     [SerializeField]
     private Sprite _nightBackground;
+    [SerializeField]
+    private ParticleSystem _wind;
 
     private SpriteRenderer _renderer;
 
@@ -15,7 +17,12 @@ public class Environment : MonoBehaviour
     {
         RunInitialChecks();
 
-        GameController.speedIncreased += SwapBackground;
+        GameController.halfDay += SwapBackground;
+    }
+
+    private void Start()
+    {
+        BlowWind(false);
     }
 
     public void SwapBackground()
@@ -23,10 +30,12 @@ public class Environment : MonoBehaviour
         if (_renderer.sprite == _dayBackground)
         {
             _renderer.sprite = _nightBackground;
+            BlowWind(true);
         }
         else if (_renderer.sprite == _nightBackground)
         {
             _renderer.sprite = _dayBackground;
+            BlowWind(false);
         }
     }
 
@@ -35,10 +44,16 @@ public class Environment : MonoBehaviour
         _renderer = GetComponent<SpriteRenderer>();
 
         Supporting.CheckRequiredProperty(gameObject, _renderer, "Spirte Renderer");
+        Supporting.CheckRequiredProperty(gameObject, _wind, "Wind");
+    }
+
+    private void BlowWind(bool active)
+    {
+        _wind.gameObject.SetActive(active);
     }
 
     private void OnDisable()
     {
-        GameController.speedIncreased -= SwapBackground;
+        GameController.halfDay -= SwapBackground;
     }
 }

@@ -25,8 +25,6 @@ public class CoinPack : DownloadableObject
             coin.transform.position = new Vector3(newX, transform.position.y, transform.position.z);
         }
 
-        Destroy(gameObject, _data.lifetime);
-
         // Supporting.Log("new children: " + transform.childCount);
     }
 

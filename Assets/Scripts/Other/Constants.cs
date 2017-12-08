@@ -11,7 +11,7 @@ namespace GameData
         private const string INT_KEY = "int";
         private const string FLOAT_KEY = "float";
 
-        public enum constantKeywords { INITIAL_SPEED, MAX_SPEED, HUD_SPEED_MULTIPLIER, POINTS_MULTIPLIER, POINTS_FOR_SPEED_INCREASE }
+        public enum constantKeywords { INITIAL_SPEED, MAX_SPEED, HUD_SPEED_MULTIPLIER, POINTS_MULTIPLIER, POINTS_FOR_SPEED_INCREASE, HALFDAY_DURATION }
 
 
         public static string filePath
