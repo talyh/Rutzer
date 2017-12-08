@@ -190,7 +190,8 @@ public class GameController : Singleton<GameController>
             return;
         }
 
-        if (_score > 0 && _score % Constants.GetConstant<int>(Constants.constantKeywords.POINTS_FOR_SPEED_INCREASE.ToString()) == 0)
+        // check if current score is a factor of the multiplying constant, discarding coin fractions
+        if (_score > 0 && (int)(_score / 10) % (int)(Constants.GetConstant<int>(Constants.constantKeywords.POINTS_FOR_SPEED_INCREASE.ToString()) / 10) == 0)
         {
             speed++;
             _character.GetComponent<Runner>().IncreaseSpeed();
