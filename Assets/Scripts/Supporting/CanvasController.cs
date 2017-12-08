@@ -154,6 +154,7 @@ public class CanvasController : Singleton<CanvasController>
                     _levelScreenCanvas.SetActive(true);
                     _gameOverScreenCanvas.SetActive(false);
                     _pauseMenuCanvas.SetActive(false);
+                    Persistency.LoadSavedData(Persistency.DataGroups.Score);
                     break;
                 }
             case SceneController.SceneTypes.GameOver:

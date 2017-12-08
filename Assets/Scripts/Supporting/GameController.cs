@@ -194,6 +194,7 @@ public class GameController : Singleton<GameController>
         {
             speed++;
             _character.GetComponent<Runner>().IncreaseSpeed();
+            Supporting.Log("Speed Changed");
         }
     }
 

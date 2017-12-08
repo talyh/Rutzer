@@ -273,53 +273,40 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4927016795878438, guid: 1fb29d2d727984c5fa97f2b7b47c27ff, type: 2}
+    - target: {fileID: 4422603338700276, guid: df53c2628b97f4cadb4ac9ef82456ef6, type: 2}
       propertyPath: m_LocalPosition.x
       value: 17.6
       objectReference: {fileID: 0}
-    - target: {fileID: 4927016795878438, guid: 1fb29d2d727984c5fa97f2b7b47c27ff, type: 2}
+    - target: {fileID: 4422603338700276, guid: df53c2628b97f4cadb4ac9ef82456ef6, type: 2}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4927016795878438, guid: 1fb29d2d727984c5fa97f2b7b47c27ff, type: 2}
+    - target: {fileID: 4422603338700276, guid: df53c2628b97f4cadb4ac9ef82456ef6, type: 2}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4927016795878438, guid: 1fb29d2d727984c5fa97f2b7b47c27ff, type: 2}
+    - target: {fileID: 4422603338700276, guid: df53c2628b97f4cadb4ac9ef82456ef6, type: 2}
       propertyPath: m_LocalRotation.x
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 4927016795878438, guid: 1fb29d2d727984c5fa97f2b7b47c27ff, type: 2}
+    - target: {fileID: 4422603338700276, guid: df53c2628b97f4cadb4ac9ef82456ef6, type: 2}
       propertyPath: m_LocalRotation.y
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 4927016795878438, guid: 1fb29d2d727984c5fa97f2b7b47c27ff, type: 2}
+    - target: {fileID: 4422603338700276, guid: df53c2628b97f4cadb4ac9ef82456ef6, type: 2}
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 4927016795878438, guid: 1fb29d2d727984c5fa97f2b7b47c27ff, type: 2}
+    - target: {fileID: 4422603338700276, guid: df53c2628b97f4cadb4ac9ef82456ef6, type: 2}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4927016795878438, guid: 1fb29d2d727984c5fa97f2b7b47c27ff, type: 2}
+    - target: {fileID: 4422603338700276, guid: df53c2628b97f4cadb4ac9ef82456ef6, type: 2}
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 1743981946251382, guid: 1fb29d2d727984c5fa97f2b7b47c27ff, type: 2}
-      propertyPath: m_Name
-      value: SceneBlock0 (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 212748993870270572, guid: 1fb29d2d727984c5fa97f2b7b47c27ff,
-        type: 2}
-      propertyPath: m_SortingOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1743981946251382, guid: 1fb29d2d727984c5fa97f2b7b47c27ff, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 1fb29d2d727984c5fa97f2b7b47c27ff, type: 2}
+  m_ParentPrefab: {fileID: 100100000, guid: df53c2628b97f4cadb4ac9ef82456ef6, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &842841717
 GameObject:
@@ -353,7 +340,11 @@ MonoBehaviour:
   - {fileID: 1818396630}
   _objectsToPool:
   - {fileID: 1788878072433144, guid: 4c00fc00e04b345d191f252b2a0dc169, type: 2}
-  - {fileID: 1019972217062252, guid: 44e99076d9e13462eaf2a0ab8e977adf, type: 2}
+  - {fileID: 1788878072433144, guid: 4c00fc00e04b345d191f252b2a0dc169, type: 2}
+  - {fileID: 1788878072433144, guid: 4c00fc00e04b345d191f252b2a0dc169, type: 2}
+  - {fileID: 1788878072433144, guid: 4c00fc00e04b345d191f252b2a0dc169, type: 2}
+  - {fileID: 1788878072433144, guid: 4c00fc00e04b345d191f252b2a0dc169, type: 2}
+  - {fileID: 1788878072433144, guid: 4c00fc00e04b345d191f252b2a0dc169, type: 2}
   _amountToPoolInitially: 0
   _spawnAdditionalIfNeeded: 1
 --- !u!4 &842841719
@@ -588,7 +579,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
 --- !u!1 &1818396630 stripped
 GameObject:
-  m_PrefabParentObject: {fileID: 1743981946251382, guid: 1fb29d2d727984c5fa97f2b7b47c27ff,
+  m_PrefabParentObject: {fileID: 1671072736733304, guid: df53c2628b97f4cadb4ac9ef82456ef6,
     type: 2}
   m_PrefabInternal: {fileID: 645321928}
 --- !u!1 &1881007509
@@ -655,7 +646,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2117777189
   m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 585d8d73e36f842ddb15a34da60e6a3d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

@@ -1,12 +1,12 @@
 fileFormatVersion: 2
 guid: b20ae0e7845cc48c0b336f8f0b1910b7
-timeCreated: 1510636904
+timeCreated: 1512756415
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: btnPause
     21300002: lblVolume
-    21300004: icons_0
+    21300004: btnPause_highlight
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -151,7 +151,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: icons_0
+      name: btnPause_highlight
       rect:
         serializedVersion: 2
         x: 0
@@ -159,7 +159,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 1, y: 1, z: 1, w: 1}
       outline: []
       physicsShape: []
