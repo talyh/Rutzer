@@ -1,0 +1,119 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: GamePlayAssets
+  m_EditorData:
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - m_BuildTarget: iPhone
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: 56
+      m_TextureCompression: 1
+      m_CompressionQuality: 100
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 1
+      m_AndroidETC2FallbackOverride: 0
+    packingParameters:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: bdf53ac7ddb174b2f9bae7dab3943edb, type: 3}
+    - {fileID: 102900000, guid: 5b144e662f6ee42eb9c1d8515e16a2ae, type: 3}
+    - {fileID: 102900000, guid: 2d40cde1d04dc414fab3352ffde32669, type: 3}
+    - {fileID: 102900000, guid: 1a0629255d7b348cb928d8e7ba743d3e, type: 3}
+    - {fileID: 102900000, guid: 952b89c5f94a5455dab071eb1290b0dc, type: 3}
+    bindAsDefault: 1
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 3c0cd25b9130a4f41bf275711c2b7392, type: 3}
+  - {fileID: 21300000, guid: b1d6a88d123a146dea62e6b579510288, type: 3}
+  - {fileID: 21300000, guid: 585d8d73e36f842ddb15a34da60e6a3d, type: 3}
+  - {fileID: 21300000, guid: 03a843cfda95f4c8b98d02de1f985f1e, type: 3}
+  - {fileID: 21300000, guid: 00bb2a89958804b6a8b8129f4c5a8ec4, type: 3}
+  - {fileID: 21300000, guid: fadc58a78e76d4800bfe2a168c992d1d, type: 3}
+  - {fileID: 21300000, guid: a686e6ce32c454f40805448777b09e9f, type: 3}
+  - {fileID: 21300000, guid: ab7a29785f1914b3f94063fd4444a96b, type: 3}
+  - {fileID: 21300000, guid: 6b19aa07c39db454983973edf3830ea4, type: 3}
+  - {fileID: 21300000, guid: f2ad65190f6cf49839d6af380ebc94a7, type: 3}
+  - {fileID: 21300002, guid: a67f81380c8c14ccbb0c8b66a3f4a5f0, type: 3}
+  - {fileID: 21300004, guid: 973624d66b27f435fa05279c80a6372b, type: 3}
+  - {fileID: 21300006, guid: 973624d66b27f435fa05279c80a6372b, type: 3}
+  - {fileID: 21300026, guid: 973624d66b27f435fa05279c80a6372b, type: 3}
+  - {fileID: 21300024, guid: 973624d66b27f435fa05279c80a6372b, type: 3}
+  - {fileID: 21300028, guid: 973624d66b27f435fa05279c80a6372b, type: 3}
+  - {fileID: 21300016, guid: 973624d66b27f435fa05279c80a6372b, type: 3}
+  - {fileID: 21300018, guid: 973624d66b27f435fa05279c80a6372b, type: 3}
+  - {fileID: 21300010, guid: 973624d66b27f435fa05279c80a6372b, type: 3}
+  - {fileID: 21300008, guid: 973624d66b27f435fa05279c80a6372b, type: 3}
+  - {fileID: 21300012, guid: 973624d66b27f435fa05279c80a6372b, type: 3}
+  - {fileID: 21300014, guid: 973624d66b27f435fa05279c80a6372b, type: 3}
+  - {fileID: 21300020, guid: 973624d66b27f435fa05279c80a6372b, type: 3}
+  - {fileID: 21300022, guid: 973624d66b27f435fa05279c80a6372b, type: 3}
+  - {fileID: 21300002, guid: 973624d66b27f435fa05279c80a6372b, type: 3}
+  - {fileID: 21300000, guid: 973624d66b27f435fa05279c80a6372b, type: 3}
+  - {fileID: 21300000, guid: a67f81380c8c14ccbb0c8b66a3f4a5f0, type: 3}
+  - {fileID: 21300004, guid: a67f81380c8c14ccbb0c8b66a3f4a5f0, type: 3}
+  - {fileID: 21300008, guid: cffc6b59bab804cbfa54c3d7738ccee9, type: 3}
+  - {fileID: 21300000, guid: cffc6b59bab804cbfa54c3d7738ccee9, type: 3}
+  - {fileID: 21300006, guid: cffc6b59bab804cbfa54c3d7738ccee9, type: 3}
+  - {fileID: 21300002, guid: cffc6b59bab804cbfa54c3d7738ccee9, type: 3}
+  - {fileID: 21300004, guid: cffc6b59bab804cbfa54c3d7738ccee9, type: 3}
+  - {fileID: 21300000, guid: 3568cd95a9fb24e718fbdfba55784619, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - Night
+  - Mountains
+  - Day
+  - Wind
+  - ExpandPlatformTutorial
+  - VerticalPlatformTutorial
+  - 14
+  - 10
+  - 6
+  - 8
+  - ExpandingPlatform_Expanded
+  - character_yellow_0
+  - character_yellow_1
+  - character_grey_1
+  - character_grey_0
+  - character_dead
+  - character_purple_0
+  - character_purple_1
+  - character_green_1
+  - character_green_0
+  - character_blue_0
+  - character_blue_1
+  - character_pink_0
+  - character_pink_1
+  - character_red_1
+  - character_red_0
+  - ExpandingPlatform_Squished
+  - ExpandingPlatform_Corner
+  - coins_4
+  - coins_0
+  - coins_3
+  - coins_1
+  - coins_2
+  - connector
+  m_Tag: GamePlayAssets
+  m_IsVariant: 0
