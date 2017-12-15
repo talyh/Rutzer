@@ -25,7 +25,7 @@ public class Environment : MonoBehaviour
         BlowWind(false);
     }
 
-    public void SwapBackground()
+    private void SwapBackground()
     {
         if (_renderer.sprite == _dayBackground)
         {

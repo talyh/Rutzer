@@ -55,12 +55,12 @@ public class SoundController : Singleton<SoundController>
         AudioSource player;
         if (!_primarySFXPlayer.isPlaying)
         {
-            Supporting.Log("Using primary audio source to play: " + clip.name);
+            // Supporting.Log("Using primary audio source to play: " + clip.name);
             player = _primarySFXPlayer;
         }
         else
         {
-            Supporting.Log("Using secondary audio source to play " + clip.name);
+            // Supporting.Log("Using secondary audio source to play " + clip.name);
             if (!_secondarySFXPlayer)
             {
                 _secondarySFXPlayer = _primarySFXPlayer.gameObject.AddComponent<AudioSource>();

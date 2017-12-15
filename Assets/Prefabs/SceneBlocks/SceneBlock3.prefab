@@ -52,7 +52,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4079970680759176}
   - component: {fileID: 212984501973342088}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Block2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -383,7 +383,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4823699673217306}
   - component: {fileID: 212493592541998964}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Block3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1111,7 +1111,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4768329714730346}
   - component: {fileID: 61527924304205714}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: SceneBlock3
   m_TagString: SceneBlock
   m_Icon: {fileID: 0}
@@ -3020,7 +3020,7 @@ GameObject:
   - component: {fileID: 61501165422485338}
   - component: {fileID: 234604023068701338}
   - component: {fileID: 114193822770479692}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3068,7 +3068,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4143403654663158}
   - component: {fileID: 212203897533595844}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Block1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5341,7 +5341,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1957869699878132}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.98, z: 0}
+  m_LocalPosition: {x: 0, y: -1.71, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4143403654663158}
@@ -16097,7 +16097,7 @@ SliderJoint2D:
   m_Angle: 90
   m_UseMotor: 0
   m_Motor:
-    m_MotorSpeed: -3
+    m_MotorSpeed: 3
     m_MaximumMotorForce: 10000
   m_UseLimits: 0
   m_TranslationLimits:

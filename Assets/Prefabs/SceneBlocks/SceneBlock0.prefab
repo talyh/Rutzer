@@ -2242,7 +2242,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4927016795878438}
   - component: {fileID: 61969430641228574}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: SceneBlock0
   m_TagString: SceneBlock
   m_Icon: {fileID: 0}

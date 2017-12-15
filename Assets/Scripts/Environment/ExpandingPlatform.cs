@@ -34,7 +34,7 @@ public class ExpandingPlatform : MonoBehaviour
 
     private void Update()
     {
-#if UNITY_EDITOR
+#if UNITY_EDITOR || UNITY_STANDALONE
         if (Input.GetMouseButtonDown(1))
         {
             if (!_activated)

@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4134627590923880}
   - component: {fileID: 61768660682883988}
   m_Layer: 0
-  m_Name: gap
+  m_Name: gapCheck
   m_TagString: Untagged
   m_Icon: {fileID: 571167235653111936, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -37,7 +37,7 @@ GameObject:
   - component: {fileID: 4656273328548828}
   - component: {fileID: 61629543091522610}
   m_Layer: 0
-  m_Name: jumpLevelCheck
+  m_Name: floorCheck
   m_TagString: Untagged
   m_Icon: {fileID: 571167235653111936, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -53,7 +53,7 @@ GameObject:
   - component: {fileID: 4110736836750062}
   - component: {fileID: 61323549846581876}
   m_Layer: 0
-  m_Name: jumpHighCheck
+  m_Name: landingCheck
   m_TagString: Untagged
   m_Icon: {fileID: 571167235653111936, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 95406869494342476}
   - component: {fileID: 114876261494427450}
   - component: {fileID: 114060933233700008}
+  - component: {fileID: 114487706664641362}
   m_Layer: 0
   m_Name: Character
   m_TagString: Player
@@ -149,7 +150,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1151054956404596}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.6, y: 0.8, z: 0}
+  m_LocalPosition: {x: 2.8, y: 0.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4465808372572564}
@@ -296,7 +297,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.4, y: 1.6}
+  m_Size: {x: 3.2, y: 1.5}
   m_EdgeRadius: 0
 --- !u!61 &61629543091522610
 BoxCollider2D:
@@ -424,6 +425,17 @@ MonoBehaviour:
   _pink:
     serializedVersion: 2
     rgba: 4286586800
+--- !u!114 &114487706664641362
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1886108999103310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5b31e840f3b4432d840509ffd5b0345, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114876261494427450
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -437,8 +449,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rb: {fileID: 50861861738925384}
   _gapCheck: {fileID: 61768660682883988}
-  _jumpLevelCheck: {fileID: 61629543091522610}
-  _jumpHighCheck: {fileID: 61323549846581876}
+  _floorCheck: {fileID: 61629543091522610}
+  _landingCheck: {fileID: 61323549846581876}
   _groundCheck: {fileID: 4660513150698466}
   _jumpForce: 4
   _runnerAnimator: {fileID: 114060933233700008}

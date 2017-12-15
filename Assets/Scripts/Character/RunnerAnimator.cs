@@ -42,7 +42,7 @@ public class RunnerAnimator : MonoBehaviour
         if ((int)color >= possibleColors)
         {
             color = (AnimationLayers)Random.Range(1, possibleColors);
-            Supporting.Log("using random color: " + color.ToString(), 2);
+            // Supporting.Log("using random color: " + color.ToString(), 2);
         }
 
         // loop through animation layers activating the one that corresponded to the current powerUp and deactivating the rest

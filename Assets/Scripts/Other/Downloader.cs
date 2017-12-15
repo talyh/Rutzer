@@ -33,7 +33,7 @@ namespace GameData
             //Get the formatted URL
             string downloadUrl = string.Format(URL_FORMAT, SPREADSHEET_ID, tabID);
 
-            Supporting.Log(string.Format("Downloading {0} to {1}", tabID, filePath));
+            // Supporting.Log(string.Format("Downloading {0} to {1}", tabID, filePath));
 
             //Download the data
             WWW website = new WWW(downloadUrl);
@@ -48,7 +48,7 @@ namespace GameData
                 Supporting.Log(website.error, 1);
 
                 // cached values are automatically pulled by the clients, based on what was last writen to the filepath
-                Supporting.Log("Using cached values instead");
+                // Supporting.Log("Using cached values instead");
             }
             else
             {

@@ -2019,7 +2019,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4422603338700276}
   - component: {fileID: 61835971827269632}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: SceneBlock1
   m_TagString: SceneBlock
   m_Icon: {fileID: 0}

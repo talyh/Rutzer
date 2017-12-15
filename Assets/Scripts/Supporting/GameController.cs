@@ -15,6 +15,7 @@ public class GameController : Singleton<GameController>
     public enum Layers { Ground = 8, Wait, Wall };
     internal LayerMask groundLayer;
     internal LayerMask waitLayer;
+    internal LayerMask floorLayer;
     internal LayerMask wallLayer;
 
     // // Define Tags used throughout the game
@@ -32,13 +33,14 @@ public class GameController : Singleton<GameController>
     private Transform _character;
 
     private ObjectPool _sceneBlockPuller;
-    private const float BLOCK_SCENE_SIZE = 17.6f;
+    private const float BLOCK_SCENE_SIZE = 20;
 
     private void Start()
     {
         // Define the LayerMasks that will be needed throughout the game
         groundLayer = 1 << LayerMask.NameToLayer(Layers.Ground.ToString());
         waitLayer = 1 << LayerMask.NameToLayer(Layers.Wait.ToString());
+        floorLayer = 1 << LayerMask.NameToLayer(Layers.Ground.ToString()) | 1 << LayerMask.NameToLayer(Layers.Wait.ToString());
         wallLayer = 1 << LayerMask.NameToLayer(Layers.Wall.ToString());
     }
 
@@ -162,14 +164,14 @@ public class GameController : Singleton<GameController>
         // if not yet puased, pause it
         if (Time.timeScale >= 1)
         {
-            Supporting.Log("Pausing");
+            // Supporting.Log("Pausing");
             CanvasController.instance.EnablePauseCanvas(true);
             Time.timeScale = 0;
         }
         // else, unpause it
         else
         {
-            Supporting.Log("Unpausing");
+            // Supporting.Log("Unpausing");
             CanvasController.instance.EnablePauseCanvas(false);
             Time.timeScale = 1;
         }
@@ -181,6 +183,8 @@ public class GameController : Singleton<GameController>
         go.transform.position = new Vector3(previousBlockScene.transform.position.x + BLOCK_SCENE_SIZE * 2, 0, 0);
         go.SetActive(true);
         previousBlockScene.SetActive(false);
+
+        // Supporting.Log("Spawned " + go.name + " at " + go.transform.position.x + ". Previous block was at " + previousBlockScene.transform.position.x);
     }
 
     private void IncreaseSpeedBasaedOnPoints()
@@ -195,7 +199,7 @@ public class GameController : Singleton<GameController>
         {
             speed++;
             _character.GetComponent<Runner>().IncreaseSpeed();
-            Supporting.Log("Speed Changed");
+            // Supporting.Log("Speed Changed");
         }
     }
 

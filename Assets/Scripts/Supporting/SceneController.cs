@@ -40,7 +40,7 @@ public class SceneController : Singleton<SceneController>
 
     static void SceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
     {
-        Supporting.Log(string.Format("Scene {0} loaded", scene.name));
+        // Supporting.Log(string.Format("Scene {0} loaded", scene.name));
         instance.SetCurrentSceneIndex();
         instance.SetCurrentSceneType();
         CanvasController.instance.EnableSceneCanvas();

@@ -13,9 +13,9 @@ public class Runner : MonoBehaviour
     [SerializeField]
     private Collider2D _gapCheck;
     [SerializeField]
-    private Collider2D _jumpLevelCheck;
+    private Collider2D _floorCheck;
     [SerializeField]
-    private Collider2D _jumpHighCheck;
+    private Collider2D _landingCheck;
     [SerializeField]
     private Transform _groundCheck;
     [SerializeField]
@@ -82,16 +82,15 @@ public class Runner : MonoBehaviour
         _wait = Physics2D.Raycast(_groundCheck.position, Vector2.down, Physics2D.defaultContactOffset, GameController.instance.waitLayer);
 
         // determine if there's a gap to be jumped, based on contact of the gapAhead collider with elements in the ground layer
-        _gapAhead = !_gapCheck.IsTouchingLayers(GameController.instance.groundLayer);
+        _gapAhead = !_gapCheck.IsTouchingLayers(GameController.instance.floorLayer);
 
         // determine if there's an appropriate landing spot after a gap
-        _floorAhead = _jumpLevelCheck.IsTouchingLayers(GameController.instance.groundLayer);
+        _floorAhead = _floorCheck.IsTouchingLayers(GameController.instance.floorLayer) && !_landingCheck.IsTouchingLayers(GameController.instance.groundLayer);
 
-        if (_wait)
+        if (_wait && _gapAhead)
         {
             Stop();
-            Supporting.Log("gapAhead: " + _gapAhead);
-            Supporting.Log("floorAhead " + _floorAhead);
+            // Supporting.Log("Florr Ahead: " + _floorCheck.IsTouchingLayers(GameController.instance.groundLayer) + " / " + !_landingCheck.IsTouchingLayers(GameController.instance.groundLayer));
         }
         else
         {
@@ -121,15 +120,14 @@ public class Runner : MonoBehaviour
         {
             if (GameController.instance.speed == GameData.Constants.GetConstant<float>(GameData.Constants.constantKeywords.INITIAL_SPEED.ToString()))
             {
-                Supporting.Log("Running with impulse. RB Velocity: " + _rb.velocity.x);
-
+                // Supporting.Log("Running with impulse. RB Velocity: " + _rb.velocity.x);
                 _rb.AddForce(Vector2.right * GameController.instance.speed, ForceMode2D.Impulse);
 
-                Supporting.Log("new velocity: " + _rb.velocity.x);
+                // Supporting.Log("new velocity: " + _rb.velocity.x);
             }
             else
             {
-                Supporting.Log("Manually nudging the character from " + transform.position + " to " + (transform.position + new Vector3(0.1f, 0.1f, 0)));
+                // Supporting.Log("Manually nudging the character from " + transform.position + " to " + (transform.position + new Vector3(0.1f, 0.1f, 0)));
                 transform.position = transform.position + new Vector3(0.1f, 0, 0);
                 _rb.AddForce(Vector2.right * GameController.instance.speed, ForceMode2D.Impulse);
             }
@@ -140,8 +138,17 @@ public class Runner : MonoBehaviour
     {
         // Supporting.Log("Jumping");
 
+        float verticalImpulse = _jumpForce / GameController.instance.speed;
+
+        if (_rb.velocity.x > 0)
         // add vertical impulse to the character, based on its jumpForce
-        _rb.AddForce(Vector2.up * _jumpForce / GameController.instance.speed, ForceMode2D.Impulse);
+        {
+            _rb.AddForce(Vector2.up * verticalImpulse, ForceMode2D.Impulse);
+        }
+        else
+        {
+            _rb.AddForce(new Vector2(verticalImpulse, GameController.instance.speed), ForceMode2D.Impulse);
+        }
 
         // play the jumping sfx
         SoundController.instance.PlaySFX(SoundController.instance.sfxJump);
@@ -150,6 +157,7 @@ public class Runner : MonoBehaviour
     private void Stop()
     {
         _rb.velocity = Vector2.zero;
+        _rb.Sleep();
     }
 
     public void IncreaseSpeed()
@@ -163,6 +171,7 @@ public class Runner : MonoBehaviour
 
         // adjust character's speed, based on new value set in GameController
         _rb.AddForce(Vector2.right, ForceMode2D.Impulse);
+        _rb.gravityScale *= (1 + GameController.instance.speed / 100);
 
         // play speed increase animation and then, change the color, based on the current speed
         StartCoroutine(_runnerAnimator.FlashRainbow(30));
@@ -192,7 +201,7 @@ public class Runner : MonoBehaviour
 
     private IEnumerator CheckIfReadyToEndGame()
     {
-        yield return new WaitForSeconds(SoundController.instance.sfxDie.length);
+        yield return new WaitForSeconds(1.5f);
         _readyToDie = true;
     }
 
@@ -200,8 +209,8 @@ public class Runner : MonoBehaviour
     {
         Supporting.CheckRequiredProperty(gameObject, _rb, "Rigidboy");
         Supporting.CheckRequiredProperty(gameObject, _gapCheck, "Gap Check");
-        Supporting.CheckRequiredProperty(gameObject, _jumpLevelCheck, "Jump Level Check");
-        Supporting.CheckRequiredProperty(gameObject, _jumpHighCheck, "Jump High Check");
+        Supporting.CheckRequiredProperty(gameObject, _floorCheck, "Jump Level Check");
+        Supporting.CheckRequiredProperty(gameObject, _landingCheck, "Jump High Check");
         Supporting.CheckRequiredProperty(gameObject, _runnerAnimator, "Runner Animator");
     }
 

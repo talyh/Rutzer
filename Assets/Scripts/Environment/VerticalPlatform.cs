@@ -25,7 +25,7 @@ public class VerticalPlatform : MonoBehaviour
 
     private void Update()
     {
-#if UNITY_EDITOR
+#if UNITY_EDITOR || UNITY_STANDALONE
         if (Input.GetMouseButtonDown(0))
         {
             Activate();
